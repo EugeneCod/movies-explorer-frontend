@@ -1,9 +1,16 @@
-import React from 'react'
+import { Promo, NavTab, AboutProject, Techs, AboutMe, Portfolio } from '../';
 
 function Main() {
   return (
-    <div>О проекте</div>
-  )
+    <section className="main">
+      <Promo />
+      <NavTab />
+      <AboutProject />
+      <Techs />
+      <AboutMe />
+      <Portfolio />
+    </section>
+  );
 }
 
-export default Main
+export default Main;

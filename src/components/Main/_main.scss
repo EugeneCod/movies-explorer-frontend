@@ -1,0 +1,8 @@
+@import '../../scss/variables';
+
+.main {
+  &__container-top {
+    background-color: $promo-bg;
+    padding: 0 70px 0;
+  }
+}

@@ -1,6 +1,7 @@
 export { default as AboutMe } from './AboutMe/AboutMe.jsx';
 export { default as AboutProject } from './AboutProject/AboutProject.jsx';
 export { default as App } from './App/App.jsx';
+export { default as ErrorPage } from './ErrorPage/ErrorPage.jsx';
 export { default as FilterCheckbox } from './FilterCheckbox/FilterCheckbox.jsx';
 export { default as Footer } from './Footer/Footer.jsx';
 export { default as Header } from './Header/Header.jsx';
@@ -18,4 +19,4 @@ export { default as Promo } from './Promo/Promo.jsx';
 export { default as Register } from './Register/Register.jsx';
 export { default as SavedMovies } from './SavedMovies/SavedMovies.jsx';
 export { default as SearchForm } from './SearchForm/SearchForm.jsx';
-export { default as Tech } from './Tech/Tech.jsx';
+export { default as Techs } from './Techs/Techs.jsx';

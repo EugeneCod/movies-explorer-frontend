@@ -1,20 +1,44 @@
-import { Routes, Route } from 'react-router-dom';
-import { Main, Movies, SavedMovies, Profile, Register, Login, Header, Footer } from '../';
+import { useEffect, useState } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import {
+  ErrorPage,
+  Header,
+  Main,
+  Movies,
+  SavedMovies,
+  Profile,
+  Register,
+  Login,
+  Footer,
+} from '../';
 
 function App() {
+  const location = useLocation();
+  const [withHeaderAndFooter, setWithHeaderAndFooter] = useState(true);
+
+  useEffect(() => {
+    const pathsToTheMainPages = ['/', '/movies', 'saved-movies'];
+    if (pathsToTheMainPages.includes(location.pathname)) {
+      setWithHeaderAndFooter(true);
+      return;
+    }
+    setWithHeaderAndFooter(false);
+  }, [location]);
+  console.log(withHeaderAndFooter);
   return (
-    <>
-      <Header />
+    <div className="app">
+      {withHeaderAndFooter && <Header />}
       <Routes>
-        <Route path={'/'} exact element={<Main />} />
-        <Route path={'/movies'} exact element={<Movies />} />
-        <Route path={'/saved-movies'} exact element={<SavedMovies />} />
-        <Route path={'/profile'} exact element={<Profile />} />
-        <Route path={'/signup'} exact element={<Register />} />
-        <Route path={'/signin'} exact element={<Login />} />
+        <Route path="/" exact element={<Main />} />
+        <Route path="/movies" element={<Movies />} />
+        <Route path="/saved-movies" element={<SavedMovies />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/signup" element={<Register />} />
+        <Route path="/signin" element={<Login />} />
+        <Route path="*" element={<ErrorPage />}></Route>
       </Routes>
-      <Footer />
-    </>
+      {withHeaderAndFooter && <Footer />}
+    </div>
   );
 }
 

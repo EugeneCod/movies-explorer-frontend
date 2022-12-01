@@ -1,0 +1,9 @@
+@import '../../scss/variables';
+
+.app {
+  background-color: $main-bg;
+  max-width: 1280px;
+  min-width: 320px;
+  width: 100%;
+  box-sizing: border-box;
+}

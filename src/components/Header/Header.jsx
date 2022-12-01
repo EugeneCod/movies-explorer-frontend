@@ -1,19 +1,23 @@
-import { Link } from 'react-router-dom';
-import logoSvg from '../../images/header__logo.svg';
+import { Link, useLocation } from 'react-router-dom';
+import classNames from 'classnames';
+import { Navigation } from '../';
+
 
 function Header() {
+  const location = useLocation().pathname;
+
   return (
-    <div className="header">
+    <header
+      className={classNames('header', {
+        header_main: location === '/',
+        header_movies: location === '/movies',
+      })}>
       <Link to="/">
-        <div className="header__logo-container">
-          <img src={logoSvg} alt="Логотип" />
+        <div className="header__logo">
         </div>
       </Link>
-      <div>
-        <h1>Заголовок</h1>
-        <p>Подзаголовок</p>
-      </div>
-    </div>
+      < Navigation className="header__navigation"/>
+    </header>
   );
 }
 
