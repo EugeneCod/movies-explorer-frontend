@@ -1,22 +1,13 @@
 @import '../../scss/variables';
 
 .header {
-  padding: 18px 70px 18px;
-  // display: grid;
-  // grid-template-columns: repeat(3, 1fr);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  
 
   &_main {
     background-color: $promo-bg;
   }
 
-  &__logo {
-    background-image: url(../../images/header__logo.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 38px;
-    height: 38px;
+  &__container {
+    padding: 18px 70px 18px;
   }
 }
