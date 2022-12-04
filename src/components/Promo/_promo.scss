@@ -1,0 +1,26 @@
+@import '../../scss/variables';
+
+.promo {
+  font-family: $app-font-family;
+  background-color: $promo-bg;
+  
+  &__container {
+    min-height: 524px;
+    background-image: url(../../images/promo__image-bg.svg);
+    background-size: 320px 320px;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__title {
+    color: $main-font-color;
+    margin: 0;
+    max-width: 730px;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 1.16;
+    text-align: center;
+  }
+}

@@ -1,7 +1,8 @@
 @import '../../scss/variables';
 
 .header {
-  
+  display: flex;
+  justify-content: center;
 
   &_main {
     background-color: $promo-bg;
@@ -9,5 +10,8 @@
 
   &__container {
     padding: 18px 70px 18px;
+    max-width: 1280px;
+    box-sizing: border-box;
+    flex: 1 1 auto;
   }
 }

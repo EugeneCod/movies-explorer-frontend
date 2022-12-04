@@ -105,7 +105,7 @@ function Navigation() {
                 </NavLink>
               </li>
               <li className="navigation__list-item">
-                <NavLink to="/saved-movies" className="navigation__link navigation__link_movies">
+                <NavLink to="/saved-movies" className="navigation__link navigation__link_movies navigation__link_saved-movies">
                   Сохранённые фильмы
                 </NavLink>
               </li>

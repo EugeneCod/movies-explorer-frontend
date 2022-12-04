@@ -17,7 +17,7 @@ function App() {
   const [withHeaderAndFooter, setWithHeaderAndFooter] = useState(true);
 
   useEffect(() => {
-    const pathsToTheMainPages = ['/', '/movies', 'saved-movies'];
+    const pathsToTheMainPages = ['/', '/movies', '/saved-movies'];
     if (pathsToTheMainPages.includes(location.pathname)) {
       setWithHeaderAndFooter(true);
       return;

@@ -1,0 +1,30 @@
+@import '../../scss/variables';
+
+.nav-tab {
+  font-family: $app-font-family;
+  background-color: $secondary-bg;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 66px;
+
+  &__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 40px;
+  }
+  &__list-item {
+    font-size: 0;
+  }
+  &__link {
+    color: $main-font-color;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 1.2307;
+    text-decoration: none;
+    border-bottom: 1px solid $main-font-color;
+  }
+}
