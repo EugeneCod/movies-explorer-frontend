@@ -1,0 +1,70 @@
+@import '../../scss/variables';
+
+.about-me {
+  background-color: $main-bg;
+  font-family: $app-font-family;
+  color: $main-font-color;
+  display: flex;
+  justify-content: center;
+
+  &__container {
+    padding: 110px 70px 101px;
+    box-sizing: border-box;
+    max-width: 1280px;
+    flex: 1 1 auto;
+  }
+  &__content {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: auto min-content;
+    column-gap: 49px;
+  }
+  &__description {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.5714;
+    margin: 0 0 99px;
+  }
+  &__github {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.0587;
+    color: $main-font-color;
+    text-decoration: none;
+
+  }
+  &__info {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.1111;
+    margin: 0 0 26px;
+  }
+  &__name {
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 1.16;
+    letter-spacing: -0.04em;
+    margin: 0 0 18px;
+  }
+  &__photo {
+    width: 270px;
+    height: 327px;
+    border-radius: 10px;
+    object-fit: cover;
+    grid-column: 2/3;
+  }
+  &__text-block {
+    max-width: 600px;
+    grid-column: 1/2;
+  }
+  &__title {
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.2104;
+    letter-spacing: -0.04em;
+    margin: 0 0 66px;
+    padding-bottom: 23px;
+    border-bottom: 1px solid $light-line-color;
+    align-self: stretch;
+  }
+}

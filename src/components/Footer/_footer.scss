@@ -1,0 +1,52 @@
+@import '../../scss/variables';
+
+.footer {
+  background-color: $main-bg;
+  font-family: $app-font-family;
+  color: $main-font-color;
+  display: flex;
+  justify-content: center;
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__container {
+    padding: 79px 70px 20px;
+    box-sizing: border-box;
+    max-width: 1280px;
+    flex: 1 1 auto;
+  }
+  &__copyright {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.21;
+    margin: 0;
+  }
+  &__description {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.21;
+    color: $secondary-font-color;
+    text-align: center;
+    margin: 0 0 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid $dark-line-color;
+  }
+  &__item {
+    font-size: 0;
+  }
+  &__link {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.21;
+    color: $main-font-color;
+  }
+  &__links {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 20px;
+  }
+}
