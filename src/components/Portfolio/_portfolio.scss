@@ -11,6 +11,9 @@
     box-sizing: border-box;
     max-width: 1280px;
     flex: 1 1 auto;
+    @media (max-width: 768px) {
+      padding: 0 50px ;
+    }
   }
   &__item {
     font-size: 0;
@@ -27,6 +30,9 @@
     border-bottom: 1px solid $dark-line-color;
     display: block;
     position: relative;
+    @media (max-width: 768px) {
+      letter-spacing: -0.08em;
+    }
     &::after {
       content: '';
       position: absolute;

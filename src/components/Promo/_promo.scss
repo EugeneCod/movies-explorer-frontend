@@ -4,8 +4,13 @@
   font-family: $app-font-family;
   background-color: $promo-bg;
   padding-bottom: 40px;
+  @media (max-width: 768px) {
+    padding-bottom: 16px;
+  }
   
   &__container {
+    padding-right: 15px;
+    padding-left: 15px;
     min-height: 485px;
     background-image: url(../../images/promo__image-bg.svg);
     background-size: 320px 320px;
@@ -14,6 +19,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    @media (max-width: 768px) {
+      min-height: 769px;
+    }
   }
   &__title {
     color: $main-font-color;

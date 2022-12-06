@@ -15,6 +15,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    @media (max-width: 768px) {
+      padding: 90px 50px;
+    }
   }
   &__description {
     font-weight: 400;
@@ -24,6 +27,10 @@
     margin: 0 0 100px;
     max-width: 460px;
     text-align: center;
+    @media (max-width: 768px) {
+      font-size: 12px;
+      margin-bottom: 84px;
+    }
   }
   &__heading {
     font-weight: 400;
@@ -33,6 +40,9 @@
     margin: 0 0 26px;
     max-width: 600px;
     text-align: center;
+    @media (max-width: 768px) {
+      margin-bottom: 23px;
+    }
   }
   &__list {
     display: grid;
@@ -43,6 +53,9 @@
     list-style: none;
     width: 100%;
     justify-content: center;
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(auto-fit, 84px);
+    }
 
   }
   &__list-item {
@@ -57,6 +70,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    @media (max-width: 768px) {
+      font-size: 12px;
+      height: 57px;
+    }
   }
   &__title {
     font-weight: 400;
@@ -67,5 +84,9 @@
     padding-bottom: 23px;
     border-bottom: 1px solid $light-line-color;
     align-self: stretch;
+    @media (max-width: 768px) {
+      padding-bottom: 21px;
+      margin-bottom: 80px;
+    }
   }
 }
