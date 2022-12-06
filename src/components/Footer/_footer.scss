@@ -6,10 +6,21 @@
   color: $main-font-color;
   display: flex;
   justify-content: center;
+
   &__bottom {
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: auto auto;
     justify-content: space-between;
+    @media (max-width: 420px) {
+      grid-auto-flow: row;
+      grid-template-columns: auto;
+      justify-content: center;
+      justify-items: center;
+      row-gap: 31px;
+    }
   }
+
   &__container {
     padding: 60px 70px 20px;
     box-sizing: border-box;
@@ -20,13 +31,24 @@
       padding-left: 30px;
       padding-right: 30px;
     }
+    @media (max-width: 420px) {
+      padding-top: 128px;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
   }
+
   &__copyright {
     font-weight: 400;
     font-size: 13px;
     line-height: 1.21;
     margin: 0;
+    @media (max-width: 420px) {
+      font-size: 12px;
+      grid-row: 2/3;
+    }
   }
+
   &__description {
     font-weight: 400;
     font-size: 13px;
@@ -36,10 +58,17 @@
     margin: 0 0 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid $dark-line-color;
+    @media (max-width: 420px) {
+      font-size: 12px;
+      padding-bottom: 22px;
+      margin-bottom: 32px;
+    }
   }
+
   &__item {
     font-size: 0;
   }
+
   &__link {
     @extend %link-effects;
     font-weight: 400;
@@ -47,7 +76,11 @@
     line-height: 1.21;
     color: $main-font-color;
     text-decoration: none;
+    @media (max-width: 420px) {
+      font-size: 12px;
+    }
   }
+
   &__links {
     padding: 0;
     margin: 0;
@@ -55,5 +88,12 @@
     display: grid;
     grid-auto-flow: column;
     column-gap: 20px;
+    @media (max-width: 420px) {
+      grid-auto-flow: row;
+      justify-items: center;
+      row-gap: 11px;
+    }
   }
+  
+
 }

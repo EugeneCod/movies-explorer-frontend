@@ -15,6 +15,9 @@
     @media (max-width: 768px) {
       padding: 90px 50px;
     }
+    @media (max-width: 420px) {
+      padding: 70px 14px;
+    }
   }
   &__content {
     display: grid;
@@ -23,6 +26,10 @@
     column-gap: 49px;
     @media (max-width: 768px) {
       column-gap: 57px;
+    }
+    @media (max-width: 600px) {
+      column-gap: 0;
+      row-gap: 40px;
     }
   }
   &__description {
@@ -34,6 +41,10 @@
       font-size: 12px;
       line-height: 1.5;
       margin-bottom: 86px;
+    }
+    @media (max-width: 420px) {
+      font-size: 11px;
+      margin-bottom: 35px;
     }
   }
   &__github {
@@ -54,6 +65,9 @@
       font-size: 12px;
       margin-bottom: 22px;
     }
+    @media (max-width: 420px) {
+      font-size: 11px;
+    }
   }
   &__name {
     font-weight: 400;
@@ -65,6 +79,10 @@
       font-size: 40px;
       margin-bottom: 12px;
     }
+    @media (max-width: 420px) {
+      font-size: 30px;
+      margin-bottom: 22px;
+    }
   }
   &__photo {
     width: 270px;
@@ -74,7 +92,14 @@
     grid-column: 2/3;
     @media (max-width: 768px) {
       width: 255px;
-    height: 307px
+      height: 307px;
+    }
+    @media (max-width: 600px) {
+      grid-column: 1/2;
+    }
+    @media (max-width: 420px) {
+      width: 292px;
+      height: 352px;
     }
   }
   &__text-block {
@@ -90,5 +115,10 @@
     padding-bottom: 23px;
     border-bottom: 1px solid $light-line-color;
     align-self: stretch;
+    @media (max-width: 420px) {
+      font-size: 18px;
+      padding-bottom: 27px;
+      margin-bottom: 62px;
+    }
   }
 }

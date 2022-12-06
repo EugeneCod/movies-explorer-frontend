@@ -15,6 +15,9 @@
     @media (max-width: 768px) {
       padding: 92px 50px;
     }
+    @media (max-width: 420px) {
+      padding: 70px 18px;
+    }
   }
   &__content {
     display: grid;
@@ -27,6 +30,12 @@
       gap: 21px 32px;
       margin-bottom: 96px;
     }
+    @media (max-width: 420px) {
+      grid-auto-flow: row;
+      grid-template-columns: 1fr;
+      row-gap: 18px;
+      margin-bottom: 60px;
+    }
   }
   &__description {
     font-weight: 400;
@@ -36,6 +45,13 @@
     @media (max-width: 768px) {
       font-size: 12px;
     }
+    @media (max-width: 420px) {
+      margin-bottom: 38px;
+      font-size: 11px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
   }
   &__heading {
     font-weight: 400;
@@ -43,6 +59,9 @@
     line-height: 1.21;
     letter-spacing: -0.04em;
     margin: 0;
+    @media (max-width: 420px) {
+      font-size: 18px;
+    }
   }
   &__task {
     font-weight: 500;
@@ -50,6 +69,12 @@
     line-height: 1.2142;
     color: $secondary-font-color;
     margin: 0;
+    @media (max-width: 600px) {
+      font-size: 12px;
+    }
+    @media (max-width: 420px) {
+      font-size: 11px;
+    }
   }
   &__term {
     font-weight: 400;
@@ -57,6 +82,14 @@
     line-height: 1.21;
     padding: 9px 14px;
     margin: 0;
+    @media (max-width: 600px) {
+      font-size: 12px;
+    }
+    @media (max-width: 420px) {
+      font-size: 11px;
+      padding-top: 11px;
+      padding-bottom: 11px;
+    }
     &_column_one {
       color: $dark-font-color;
       background-color: $green;
@@ -74,6 +107,13 @@
     grid-auto-flow: column;
     text-align: center;
     row-gap: 14px;
+    @media (max-width: 600px) {
+      grid-template-columns: 30% 70%;
+    }
+    @media (max-width: 420px) {
+      grid-template-columns: 35% 65%;
+      row-gap: 8px;
+    }
   }
   &__title {
     font-weight: 400;
@@ -83,5 +123,10 @@
     margin: 0 0 70px;
     padding-bottom: 23px;
     border-bottom: 1px solid $light-line-color;
+    @media (max-width: 420px) {
+      font-size: 18px;
+      padding-bottom: 27px;
+      margin-bottom: 60px;
+    }
   }
 }

@@ -12,9 +12,20 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    display: grid;
-    grid-auto-flow: column;
-    column-gap: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px 40px ;
+    padding-right: 70px;
+    padding-left: 70px;
+    @media (max-width: 768px) {
+      padding-right: 50px;
+      padding-left: 50px;
+    }
+    @media (max-width: 420px) {
+      gap: 12px 24px ;
+      padding-right: 18px;
+      padding-left: 18px;
+    }
   }
   &__list-item {
     font-size: 0;
@@ -27,5 +38,8 @@
     line-height: 1.2307;
     text-decoration: none;
     border-bottom: 1px solid $main-font-color;
+    @media (max-width: 420px) {
+      font-size: 11px;
+    }
   }
 }

@@ -74,13 +74,14 @@
     padding: 0;
     display: grid;
     grid-auto-flow: column;
-
     &_auth {
       column-gap: 30px;
       grid-column: 3/4;
       justify-self: end;
+      @media (max-width: 420px) {
+        column-gap: 15px;
+      }
     }
-
     &_movies {
       column-gap: 16px;
       justify-self: center;
@@ -102,12 +103,13 @@
     font-weight: 500;
     color: $main-font-color;
     text-decoration: none;
-
     &_auth {
       font-size: 12px;
       line-height: 1.3333;
+      @media (max-width: 420px) {
+        font-size: 10px;
+      }
     }
-
     &_movies {
       position: relative;
       font-size: 13px;
@@ -126,22 +128,22 @@
         }
       }
     }
-
     &_saved-movies {
       font-weight: 400;
     }
-
     &_profile {
       justify-self: end;
       display: flex;
       align-items: center;
     }
-
     &_with-bg {
       color: $dark-font-color;
       background-color: $green;
       padding: 8px 20px;
       border-radius: 3px;
+      @media (max-width: 420px) {
+        padding: 7px 12px;
+      }
     }
   }
 
