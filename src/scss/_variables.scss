@@ -13,8 +13,21 @@ $cover-color: #000;
 $red: #ee3465;
 $green: #3ddc84;
 
-//font-size
+//font-sizes
 $enlarged: 18px;
 
-//font-family
+//font-families
 $app-font-family: 'Inter', Arial, Helvetica, sans-serif;
+
+//templetes
+%link-effects{
+  transition: opacity .3s;
+  &:hover {
+    opacity: .7;
+  }
+  &:active {
+    opacity: .4;
+  }
+}
+
+// @extend %link-effects;

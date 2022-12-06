@@ -60,6 +60,7 @@
   }
 
   &__logo {
+    @extend %link-effects;
     background-image: url(../../images/header__logo.svg);
     background-position: center;
     background-repeat: no-repeat;
@@ -97,6 +98,7 @@
   }
 
   &__link {
+    @extend %link-effects;
     font-weight: 500;
     color: $main-font-color;
     text-decoration: none;

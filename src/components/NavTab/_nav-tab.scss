@@ -20,6 +20,7 @@
     font-size: 0;
   }
   &__link {
+    @extend %link-effects;
     color: $main-font-color;
     font-weight: 500;
     font-size: 13px;

@@ -26,6 +26,7 @@
     margin: 0 0 99px;
   }
   &__github {
+    @extend %link-effects;
     font-weight: 500;
     font-size: 14px;
     line-height: 1.0587;
