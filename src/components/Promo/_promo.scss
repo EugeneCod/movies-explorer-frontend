@@ -3,9 +3,10 @@
 .promo {
   font-family: $app-font-family;
   background-color: $promo-bg;
+  padding-bottom: 40px;
   
   &__container {
-    min-height: 524px;
+    min-height: 485px;
     background-image: url(../../images/promo__image-bg.svg);
     background-size: 320px 320px;
     background-repeat: no-repeat;
@@ -19,7 +20,7 @@
     margin: 0;
     max-width: 730px;
     font-weight: 400;
-    font-size: 50px;
+    font-size: 47px;
     line-height: 1.16;
     text-align: center;
   }
