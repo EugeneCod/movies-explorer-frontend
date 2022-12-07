@@ -1,9 +1,15 @@
-import React from 'react'
+import { useState } from 'react';
+import { SearchForm, MoviesCardList } from '../';
 
 function Movies() {
+  const [isLoading, setIsLoading] = useState(false);
+
   return (
-    <div>Movies</div>
-  )
+    <section className="movies">
+      <SearchForm />
+      <MoviesCardList isLoading={isLoading} />
+    </section>
+  );
 }
 
-export default Movies
+export default Movies;

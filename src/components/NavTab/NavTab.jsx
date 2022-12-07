@@ -19,6 +19,4 @@ function NavTab() {
   )
 }
 
-//<a name="top">
-
 export default NavTab

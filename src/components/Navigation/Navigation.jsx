@@ -45,9 +45,7 @@ function Navigation() {
       })}>
       {location === '/' ? (
         <>
-          <NavLink to="/">
-            <div className="navigation__logo"></div>
-          </NavLink>
+          <NavLink to="/" className="navigation__logo" />
           <ul className="navigation__list navigation__list_auth">
             <li className="navigation__list-item">
               <NavLink to="/signup" className="navigation__link navigation__link_auth">
@@ -66,9 +64,7 @@ function Navigation() {
       ) : (
         <>
           {isMenu && (
-            <NavLink to="/">
-              <div className="navigation__logo"></div>
-            </NavLink>
+            <NavLink to="/" className="navigation__logo" />
           )}
           <div
             onClick={toggleMenuOpen}
@@ -87,9 +83,7 @@ function Navigation() {
               'navigation__menu_is-open': isMenuOpen,
             })}>
             {!isMenu && (
-              <NavLink to="/">
-                <div className="navigation__logo"></div>
-              </NavLink>
+              <NavLink to="/" className="navigation__logo" />
             )}
             <ul className="navigation__list navigation__list_movies">
               {isMenu && (
