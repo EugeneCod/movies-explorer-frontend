@@ -1,0 +1,45 @@
+@import '../../scss/variables';
+
+.movies-card-list {
+  background-color: $main-bg;
+  font-family: $app-font-family;
+  flex: 1 1 auto;
+  padding-top: 70px;
+  border-top: 1px solid $dark-line-color;
+
+  &__list {
+    display: grid;
+    row-gap: 40px;
+    padding: 0;
+    margin: 0 0 80px;
+    list-style: none;
+  }
+
+  &__button-more {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.21;
+    color: $main-font-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0;
+    background-color: initial;
+    border: 1px solid $dark-line-color;
+    border-radius: 10px;
+    width: 320px;
+    height: 36px;
+    cursor: pointer;
+    transition: 
+      opacity 0.3s ease,
+      box-shadow 0.3s linear;
+    &:hover {
+      box-shadow: 0px 0px 4px 0px;
+    }
+    &:active {
+      opacity: 0.7;
+      box-shadow: 0px 0px 2px 0px;
+    }
+  }
+}

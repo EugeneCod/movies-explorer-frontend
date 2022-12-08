@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function SearchForm() {
+function SearchForm({ className }) {
   const [value, setValue] = useState('');
 
   function handleSubmit(evt) {
@@ -8,7 +8,7 @@ function SearchForm() {
   }
 
   return (
-    <form className="search-form" name="search" id="search" method="get" onSubmit={handleSubmit}>
+    <form className={`search-form ${className}`} name="search" id="search" method="get" onSubmit={handleSubmit}>
       <fieldset className="search-form__fieldset" form="search">
         <input
           className="search-form__input"
@@ -19,9 +19,10 @@ function SearchForm() {
           onChange={(evt) => {
             setValue(evt.value);
           }}
-          
         />
-        <button type="submit" className="search-form__button">Найти</button>
+        <button type="submit" className="search-form__button">
+          Найти
+        </button>
       </fieldset>
     </form>
   );

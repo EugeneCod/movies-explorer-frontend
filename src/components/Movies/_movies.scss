@@ -1,0 +1,16 @@
+.movies {
+  display: flex;
+  justify-content: center;
+  &__container {
+    padding: 80px 30px;
+    box-sizing: border-box;
+    max-width: 1280px;
+    flex: 1 1 auto;
+  }
+  &__filter-checkbox {
+    margin-bottom: 50px;
+  }
+  &__search-form {
+    margin-bottom: 41px;
+  }
+}

@@ -4,7 +4,6 @@
   font-family: $app-font-family;
   display: flex;
   justify-content: center;
-  padding-top: 60px;
 
   &__button {
     grid-area: 1/1/2/2;
@@ -36,15 +35,14 @@
   }
 
   &__fieldset {
-    box-sizing: border-box;
-    max-width: 1280px;
     flex: 1 1 auto;
-    padding: 0 70px;
+    padding: 0;
     border: none;
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: auto;
     align-items: center;
+    margin: 0;
   }
 
 }

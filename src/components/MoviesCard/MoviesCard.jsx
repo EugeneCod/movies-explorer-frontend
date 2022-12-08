@@ -1,9 +1,52 @@
-import React from 'react'
+import { useState, useEffect } from 'react';
+import classNames from 'classnames';
 
-function MoviesCard() {
+function MoviesCard({ wasSaved, movie, onMovieRemove, onMovieLike }) {
+  const [isLiked, setIsLiked] = useState(false);
+  const [resDuration, setResDuration] = useState('');
+
+  useEffect(() => {
+    function calculateDuration() {
+      let hours = Math.trunc(movie.duration / 60);
+      let minutes = movie.duration % 60;
+      return `${hours}ч ${minutes}м`;
+    }
+
+    setResDuration(calculateDuration());
+  }, [movie.duration]);
+
+  function handleLikeClick() {
+    console.log('click');
+    setIsLiked(!isLiked);
+  }
+
+  function handleRemoveClick() {
+    return;
+  }
+
   return (
-    <div>MoviesCard</div>
-  )
+    <li className="movies-card">
+      <div
+        className="movies-card__image-container"
+        style={{ backgroundImage: `url(${movie.image.url})` }}
+      />
+      <div className="movies-card__text-container">
+        <p className="movies-card__name">{movie.nameRU}</p>
+        <p className="movies-card__duration">{resDuration}</p>
+        {wasSaved ? (
+          <button type="button" className="movies-card__remove" onClick={handleRemoveClick} />
+        ) : (
+          <button
+            type="button"
+            className={classNames('movies-card__like', {
+              'movies-card__like_active': isLiked,
+            })}
+            onClick={handleLikeClick}
+          />
+        )}
+      </div>
+    </li>
+  );
 }
 
-export default MoviesCard
+export default MoviesCard;
