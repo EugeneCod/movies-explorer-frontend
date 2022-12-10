@@ -33,6 +33,11 @@ function Navigation() {
     }
   }, [windowWidth, isMenu, isMenuOpen]);
 
+  useEffect(() => {
+    let bodyStyle = document.body.style;
+    isMenuOpen ? (bodyStyle.overflow = 'hidden') : (bodyStyle.overflow = 'initial');
+  }, [isMenuOpen]);
+
   function toggleMenuOpen() {
     setIsMenuOpen(!isMenuOpen);
   }
@@ -40,7 +45,7 @@ function Navigation() {
   return (
     <nav
       className={classNames('navigation', {
-        'navigation_main': location === '/',
+        navigation_main: location === '/',
         'navigation_is-menu-open': isMenuOpen,
       })}>
       {location === '/' ? (
@@ -63,9 +68,7 @@ function Navigation() {
         </>
       ) : (
         <>
-          {isMenu && (
-            <NavLink to="/" className="navigation__logo" />
-          )}
+          {isMenu && <NavLink to="/" className="navigation__logo" />}
           <div
             onClick={toggleMenuOpen}
             className={`
@@ -82,9 +85,7 @@ function Navigation() {
             className={classNames('navigation__menu', {
               'navigation__menu_is-open': isMenuOpen,
             })}>
-            {!isMenu && (
-              <NavLink to="/" className="navigation__logo" />
-            )}
+            {!isMenu && <NavLink to="/" className="navigation__logo" />}
             <ul className="navigation__list navigation__list_movies">
               {isMenu && (
                 <li className="navigation__list-item">
@@ -99,7 +100,9 @@ function Navigation() {
                 </NavLink>
               </li>
               <li className="navigation__list-item">
-                <NavLink to="/saved-movies" className="navigation__link navigation__link_movies navigation__link_saved-movies">
+                <NavLink
+                  to="/saved-movies"
+                  className="navigation__link navigation__link_movies navigation__link_saved-movies">
                   Сохранённые фильмы
                 </NavLink>
               </li>

@@ -34,11 +34,11 @@
       position: fixed;
       top: 0;
       right: -100%;
-      width: 520px;
-      height: 100%;
+      width: 426px;
+      height: 100vh;
       overflow: auto;
       background-color: $main-bg;
-      padding: 164px 90px 90px 0;
+      padding: 160px 93px 90px 0;
       transition: all 0.8s ease 0.05s;
       box-sizing: border-box;
       display: flex;
@@ -48,7 +48,7 @@
     }
     @media (max-width: 520px) {
       width: 320px;
-      padding: 164px 0 90px;
+      padding: 146px 0 65px;
     }
     &_is-open {
       right: 0;
@@ -92,6 +92,9 @@
         row-gap: 28px;
         justify-items: center;
       }
+      @media (max-width: 520px) {
+        row-gap: 24px;
+      }
     }
   }
 
@@ -121,7 +124,7 @@
         &.active::before {
           content: '';
           position: absolute;
-          top: calc($enlarged + 5px);
+          top: calc($enlarged + 7px);
           left: 0;
           width: 100%;
           height: 2px;
@@ -173,6 +176,9 @@
     z-index: 5;
     transition: opacity 0.2s ease-out;
     cursor: pointer;
+    @media (max-width: 420px) {
+      width: 23px;
+    }
     &::before,
     &::after {
       content: '';
@@ -194,6 +200,11 @@
     }
     &_is-menu {
       display: block;
+    }
+    &_is-menu-open {
+      width: 22px;
+      height: 23px;
+      align-self: start;
     }
     &_is-menu-open::before {
       transform: rotate(45deg);

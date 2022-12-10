@@ -24,7 +24,7 @@ function App() {
     }
     setWithHeaderAndFooter(false);
   }, [location]);
-  console.log(withHeaderAndFooter);
+  
   return (
     <div className="app">
       {withHeaderAndFooter && <Header />}

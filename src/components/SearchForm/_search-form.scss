@@ -32,6 +32,10 @@
     padding: 0 70px 0 22px;
     height: 46px;
     outline: none;
+    @media (max-width: 420px) {
+      font-size: 11px;
+      padding-left: 18px;
+    }
   }
 
   &__fieldset {

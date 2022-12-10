@@ -2,15 +2,30 @@
   display: flex;
   justify-content: center;
   &__container {
-    padding: 80px 30px;
+    padding: 59px 70px 100px;
     box-sizing: border-box;
     max-width: 1280px;
     flex: 1 1 auto;
+    @media (max-width: 768px) {
+      padding: 80px 30px 10px;
+    }
+    @media (max-width: 420px) {
+      padding-right: 10px;
+      padding-left: 10px;
+      padding-bottom: 32px;
+    }
   }
   &__filter-checkbox {
-    margin-bottom: 50px;
+    margin-bottom: 69px;
+    @media (max-width: 768px) {
+      margin-bottom: 50px;
+    }
   }
   &__search-form {
     margin-bottom: 41px;
+    @media (max-width: 420px) {
+      margin-right: 5px;
+      margin-left: 5px;
+    }
   }
 }
