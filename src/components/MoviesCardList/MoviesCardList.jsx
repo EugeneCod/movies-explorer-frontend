@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { MoviesCard } from '../';
-import fakeMovies from '../../utils/fakeMovies';
+import { FilterCheckbox, MoviesCard, Preloader, SearchForm } from '../';
 
-function MoviesCardList() {
+function MoviesCardList({ isLoading, movies, wasSaved }) {
   const screenWithMobile = 420;
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [moviesLength, setMoviesLength] = useState(7);
+  const [moviesQuantity, setMoviesQuantity] = useState(7);
 
   useEffect(() => {
     const handleResize = () => {
@@ -13,7 +12,7 @@ function MoviesCardList() {
     };
     window.addEventListener('resize', handleResize);
     if (windowWidth <= screenWithMobile) {
-      setMoviesLength(5);
+      setMoviesQuantity(5);
     }
 
     return () => {
@@ -23,14 +22,25 @@ function MoviesCardList() {
 
   return (
     <section className="movies-card-list">
-      <ul className="movies-card-list__list">
-        {fakeMovies
-          .filter((item) => item.id <= moviesLength)
-          .map((movie) => (
-            <MoviesCard key={movie.id} movie={movie} />
-          ))}
-      </ul>
-      <button className="movies-card-list__button-more">Ещё</button>
+      {isLoading ? (
+        <Preloader />
+      ) : (
+        <>
+          <SearchForm className="movies-card-list__search-form" />
+          <FilterCheckbox
+            className="movies-card-list__filter-checkbox"
+            description="Короткометражки"
+          />
+          <ul className="movies-card-list__list">
+            {movies
+              .filter((item) => item.id <= moviesQuantity)
+              .map((movie) => (
+                <MoviesCard key={movie.id} movie={movie} wasSaved={wasSaved}/>
+              ))}
+          </ul>
+          {movies.length > moviesQuantity && <button className="movies-card-list__button-more">Ещё</button>}
+        </>
+      )}
     </section>
   );
 }

@@ -31,16 +31,13 @@ $app-font-family: 'Inter', Arial, Helvetica, sans-serif;
   }
 }
 
-%side-padding-main {
-  padding-left: 70px;
-  padding-right: 70px;
+%height-full-screen {
+  min-height: calc(100vh - 75px - 152.44px);
   @media (max-width: 768px) {
-    padding-left: 50px;
-    padding-right: 50px;
+    min-height: calc(100vh - 74px - 242.44px);
   }
   @media (max-width: 420px) {
-    padding-left: 50px;
-    padding-right: 50px;
+    min-height: calc(100vh - 74px - 301.06px);
   }
 }
 

@@ -63,6 +63,14 @@ const fakeMovies = [
       url: posterSeven,
     },
   },
+  {
+    id: 8,
+    nameRU: '33 слова о дизайне',
+    duration: 102,
+    image: {
+      url: posterOne,
+    },
+  },
 ]
 
 export default fakeMovies;

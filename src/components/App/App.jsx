@@ -14,20 +14,29 @@ import {
 
 function App() {
   const location = useLocation();
-  const [withHeaderAndFooter, setWithHeaderAndFooter] = useState(true);
+  const [pageWithHeader, setPageWithHeader] = useState(true);
+  const [pageWithFooter, setPageWithFooter] = useState(true);
 
   useEffect(() => {
-    const pathsToTheMainPages = ['/', '/movies', '/saved-movies'];
-    if (pathsToTheMainPages.includes(location.pathname)) {
-      setWithHeaderAndFooter(true);
+    const pathesWithHeaderAndFooter = ['/', '/movies', '/saved-movies'];
+    const pathesWithHeaderWithoutFooter = ['/profile'];
+    if (pathesWithHeaderAndFooter.includes(location.pathname)) {
+      setPageWithHeader(true);
+      setPageWithFooter(true);
       return;
     }
-    setWithHeaderAndFooter(false);
+    if (pathesWithHeaderWithoutFooter.includes(location.pathname)) {
+      setPageWithHeader(true);
+      setPageWithFooter(false);
+      return;
+    }
+    setPageWithHeader(false);
+    setPageWithFooter(false);
   }, [location]);
   
   return (
     <div className="app">
-      {withHeaderAndFooter && <Header />}
+      {pageWithHeader && <Header />}
       <Routes>
         <Route path="/" exact element={<Main />} />
         <Route path="/movies" element={<Movies />} />
@@ -37,7 +46,7 @@ function App() {
         <Route path="/signin" element={<Login />} />
         <Route path="*" element={<ErrorPage />}></Route>
       </Routes>
-      {withHeaderAndFooter && <Footer />}
+      {pageWithFooter && <Footer />}
     </div>
   );
 }

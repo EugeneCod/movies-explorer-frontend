@@ -4,28 +4,26 @@
   background-color: $main-bg;
   font-family: $app-font-family;
   flex: 1 1 auto;
-  padding-top: 81px;
-  border-top: 1px solid $dark-line-color;
   @media (max-width: 768px) {
     padding-top: 70px;
-  }
-  @media (max-width: 420px) {
-    padding-top: 50px;
   }
 
   &__list {
     display: grid;
     row-gap: 40px;
-    padding: 0;
-    margin: 0 0 59px;
+    padding: 81px 0 0;
+    margin: 0;
     list-style: none;
+    border-top: 1px solid $dark-line-color;
     @media (max-width: 768px) {
-      margin-bottom: 80px;
-      row-gap: 21px;
+      padding-top: 70px;
+      row-gap: 40px;
     }
     @media (max-width: 420px) {
-      margin-bottom: 72px;
+      padding-top: 50px;
+      row-gap: 21px;
     }
+
   }
 
   &__button-more {
@@ -36,7 +34,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto;
+    margin: 59px auto 0;
     padding: 0;
     background-color: initial;
     border: 1px solid $dark-line-color;
@@ -54,8 +52,27 @@
       opacity: 0.7;
       box-shadow: 0px 0px 2px 0px;
     }
+    @media (max-width: 768px) {
+      margin-top: 80px;
+    }
     @media (max-width: 600px) {
       width: 240px;
+    }
+    @media (max-width: 420px) {
+      margin-top: 72px;
+    }
+  }
+  &__filter-checkbox {
+    margin-bottom: 69px;
+    @media (max-width: 768px) {
+      margin-bottom: 50px;
+    }
+  }
+  &__search-form {
+    margin-bottom: 41px;
+    @media (max-width: 420px) {
+      margin-right: 5px;
+      margin-left: 5px;
     }
   }
 }

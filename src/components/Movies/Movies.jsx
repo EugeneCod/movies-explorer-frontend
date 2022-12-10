@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { SearchForm, MoviesCardList, FilterCheckbox } from '../';
+
+import { MoviesCardList } from '../';
+import fakeMovies from '../../utils/fakeMovies';
 
 function Movies() {
   const [isLoading, setIsLoading] = useState(false);
@@ -7,9 +9,7 @@ function Movies() {
   return (
     <section className="movies">
       <div className="movies__container">
-        <SearchForm className="movies__search-form"/>
-        <FilterCheckbox className="movies__filter-checkbox" description="Короткометражки" />
-        <MoviesCardList isLoading={isLoading} />
+        <MoviesCardList isLoading={isLoading} movies={fakeMovies} wasSaved={false} />
       </div>
     </section>
   );
