@@ -107,7 +107,7 @@ function Navigation() {
                 </NavLink>
               </li>
             </ul>
-            <NavLink to="/signin" className="navigation__link navigation__link_profile">
+            <NavLink to="/profile" className="navigation__link navigation__link_profile">
               <p className="navigation__profile-text">Аккаунт</p>
               <div className="navigation__profile-icon" />
             </NavLink>

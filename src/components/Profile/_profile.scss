@@ -1,0 +1,96 @@
+@import '../../scss/variables';
+
+.profile {
+  display: flex;
+  justify-content: center;
+  font-family: $app-font-family;
+  color: $main-font-color;
+
+  &__button {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 1.21;
+    background-color: initial;
+    color: $main-font-color;
+    border: none;
+    padding: 5px;
+    @media (max-width: 420px) {
+      font-size: 12px;
+    }
+    &_function_logout {
+      color: $red;
+    }
+  }
+  &__buttons-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    justify-items: center;
+    row-gap: 6px;
+  }
+  &__buttons-list-item {
+    font-size: 0;
+  }
+
+  &__container {
+    padding: 74px 0 0;
+    box-sizing: border-box;
+    max-width: 416px;
+    flex: 1 1 auto;
+    @media (max-width: 768px) {
+      padding-top: 236px;
+    }
+    @media (max-width: 420px) {
+      padding-top: 70px;
+      padding-left: 27px;
+      padding-right: 27px;
+    }
+  }
+
+  &__greeting {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.2104;
+    text-align: center;
+    margin: 0 0 120px;
+    @media (max-width: 768px) {
+      margin-bottom: 94px;
+    }
+    @media (max-width: 420px) {
+      margin-bottom: 78px;
+    }
+  }
+  &__table {
+    width: 100%;
+    margin-bottom: 212px;
+    @media (max-width: 768px) {
+      margin-bottom: 202px;
+    }
+    @media (max-width: 420px) {
+      margin-bottom: 372px;
+    }
+  }
+  &__table-data-cell {
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 1.21;
+  }
+  &__table-heading-cell {
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 1.21;
+  }
+  &__table-row {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 15px;
+    margin-bottom: 17px;
+    border-bottom: 1px solid $dark-line-color;
+    &:last-child {
+      margin-bottom: 0;
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+  }
+}
