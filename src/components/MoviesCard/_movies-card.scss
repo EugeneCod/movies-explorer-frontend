@@ -62,21 +62,22 @@
       grid-column: 2/3;
       grid-row: 1/2;
     }
-    &_like {
-      background-image: url(../../images/movies-card__like.svg);
-      &:active {
-        background-image: url(../../images/movies-card__like_active.svg);
-      }
-      &_active {
-        background-image: url(../../images/movies-card__like_active.svg);
-      }
-    }
+  }
 
-    &_remove {
-      background-image: url(../../images/movies-card__remove.svg);
-      &:active {
-        opacity: 0.3;
-      }
+  &__button-like {
+    background-image: url(../../images/movies-card__like.svg);
+    &:active {
+      background-image: url(../../images/movies-card__like_active.svg);
+    }
+    &_active {
+      background-image: url(../../images/movies-card__like_active.svg);
+    }
+  }
+
+  &__button-remove {
+    background-image: url(../../images/movies-card__remove.svg);
+    &:active {
+      opacity: 0.3;
     }
   }
 

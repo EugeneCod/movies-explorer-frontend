@@ -33,12 +33,12 @@ function MoviesCard({ wasSaved, movie, onMovieRemove, onMovieLike }) {
         <p className="movies-card__name">{movie.nameRU}</p>
         <p className="movies-card__duration">{resDuration}</p>
         {wasSaved ? (
-          <button type="button" className="movies-card__button movies-card__button_remove" onClick={handleRemoveClick} />
+          <button type="button" className="movies-card__button movies-card__button-remove" onClick={handleRemoveClick} />
         ) : (
           <button
             type="button"
-            className={classNames('movies-card__button movies-card__button_like', {
-              'movies-card__like_active': isLiked,
+            className={classNames('movies-card__button movies-card__button-like', {
+              'movies-card__button-like_active': isLiked,
             })}
             onClick={handleLikeClick}
           />
