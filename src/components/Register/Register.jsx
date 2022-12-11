@@ -1,4 +1,3 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Logo, AuthForm, AuthInput } from '../';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
@@ -61,7 +60,7 @@ function Register() {
         </AuthForm>
         <p className="register__redirection">
           Уже зарегистрированы?
-          <NavLink to="signin" className="register__redirection-link">Войти</NavLink>
+          <NavLink to="/signin" className="register__redirection-link">Войти</NavLink>
         </p>
       </div>
     </section>

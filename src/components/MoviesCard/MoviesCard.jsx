@@ -16,7 +16,6 @@ function MoviesCard({ wasSaved, movie, onMovieRemove, onMovieLike }) {
   }, [movie.duration]);
 
   function handleLikeClick() {
-    console.log('click');
     setIsLiked(!isLiked);
   }
 
