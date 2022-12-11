@@ -1,0 +1,11 @@
+@import '../../scss/variables';
+
+.logo {
+  @extend %link-effects;
+  background-image: url(../../images/header__logo.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 38px;
+  height: 38px;
+  display: block;
+}

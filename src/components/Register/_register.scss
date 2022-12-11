@@ -1,0 +1,38 @@
+@import '../../scss/variables';
+
+.register {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+  &__auth-form {
+    margin-bottom: 16px;
+  }
+
+  &__container {
+    box-sizing: border-box;
+    max-width: 396px;
+    width: 100%;
+    // @media (max-width: 768px) {}
+    // @media (max-width: 420px) {}
+  }
+  &__logo {
+    margin-bottom: 40px;
+  }
+  &__redirection {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.21;
+    color: $secondary-font-color;
+    margin: 0;
+    text-align: center;
+  }
+  &__redirection-link {
+    @extend %link-effects;
+    text-decoration: none;
+    color: $blue;
+    padding: 6px;
+  }
+}

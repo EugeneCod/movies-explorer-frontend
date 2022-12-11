@@ -1,11 +1,14 @@
 export { default as AboutMe } from './AboutMe/AboutMe.jsx';
 export { default as AboutProject } from './AboutProject/AboutProject.jsx';
 export { default as App } from './App/App.jsx';
+export { default as AuthForm } from './AuthForm/AuthForm.jsx';
+export { default as AuthInput } from './AuthInput/AuthInput.jsx';
 export { default as ErrorPage } from './ErrorPage/ErrorPage.jsx';
 export { default as FilterCheckbox } from './FilterCheckbox/FilterCheckbox.jsx';
 export { default as Footer } from './Footer/Footer.jsx';
 export { default as Header } from './Header/Header.jsx';
 export { default as Login } from './Login/Login.jsx';
+export { default as Logo } from './Logo/Logo.jsx';
 export { default as Main } from './Main/Main.jsx';
 export { default as Movies } from './Movies/Movies.jsx';
 export { default as MoviesCard } from './MoviesCard/MoviesCard.jsx';

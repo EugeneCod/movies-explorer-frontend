@@ -1,0 +1,42 @@
+@import '../../scss/variables';
+
+.auth-form {
+  font-family: $app-font-family;
+  color: $main-font-color;
+  &__button {
+    background-color: $blue;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.21;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 3px;
+    color: $main-font-color;
+    cursor: pointer;
+    @extend %link-effects;
+    &_inactive {
+      pointer-events: none;
+    }
+  }
+
+  &__inputs-stack {
+    min-height: 335px;
+  }
+  &__fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    display: grid;
+
+  }
+  &__legend {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.2104;
+    margin: 0 0 40px;
+    text-align: center;
+  }
+}

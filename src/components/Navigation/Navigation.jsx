@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
+import { Logo } from '../';
 
 function Navigation() {
   const location = useLocation().pathname;
@@ -50,7 +51,7 @@ function Navigation() {
       })}>
       {location === '/' ? (
         <>
-          <NavLink to="/" className="navigation__logo" />
+          <Logo className="navigation__logo" />
           <ul className="navigation__list navigation__list_auth">
             <li className="navigation__list-item">
               <NavLink to="/signup" className="navigation__link navigation__link_auth">
