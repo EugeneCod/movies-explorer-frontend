@@ -37,7 +37,7 @@ function Register() {
           <AuthInput
             value={values.email || ''}
             error={errors.email || ''}
-            isValid={inputsValidity.name || ''}
+            isValid={inputsValidity.email || ''}
             onChange={handleChange}
             onBlur={hadleShiftFocus}
             type="email"

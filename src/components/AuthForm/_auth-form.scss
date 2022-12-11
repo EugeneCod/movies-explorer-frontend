@@ -17,13 +17,17 @@
     color: $main-font-color;
     cursor: pointer;
     @extend %link-effects;
-    &_inactive {
-      pointer-events: none;
+    @media (max-width: 420px) {
+      font-size: 12px;
     }
+    // &_inactive {}
   }
 
   &__inputs-stack {
     min-height: 335px;
+    @media (max-width: 420px) {
+      min-height: 424px;
+    }
   }
   &__fieldset {
     border: 0;
@@ -37,6 +41,9 @@
     font-size: 24px;
     line-height: 1.2104;
     margin: 0 0 40px;
-    text-align: center;
+    @media (max-width: 420px) {
+      text-align: center;
+      margin-bottom: 80px;
+    }
   }
 }
