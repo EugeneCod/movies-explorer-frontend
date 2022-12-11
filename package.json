@@ -17,7 +17,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "npm run build && scp -r ./build/* eugene-k-gen@158.160.37.116:/home/eugene-k-gen/diplom/movies-explorer-frontend/build"
   },
   "eslintConfig": {
     "extends": [

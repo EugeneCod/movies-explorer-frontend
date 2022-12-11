@@ -3,3 +3,6 @@
 
 IP 158.160.37.116 
 https://diplom.ekg.nomoredomains.club
+
+Ссылка на макет
+https://disk.yandex.ru/d/OrjX3bKtRAFJ1g
