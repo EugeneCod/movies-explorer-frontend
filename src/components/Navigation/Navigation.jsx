@@ -69,7 +69,7 @@ function Navigation() {
         </>
       ) : (
         <>
-          {isMenu && <NavLink to="/" className="navigation__logo" />}
+          {isMenu && <Logo className="navigation__logo" />}
           <div
             onClick={toggleMenuOpen}
             className={`
@@ -86,7 +86,7 @@ function Navigation() {
             className={classNames('navigation__menu', {
               'navigation__menu_is-open': isMenuOpen,
             })}>
-            {!isMenu && <NavLink to="/" className="navigation__logo" />}
+            {!isMenu && <Logo className="navigation__logo" />}
             <ul className="navigation__list navigation__list_movies">
               {isMenu && (
                 <li className="navigation__list-item">
