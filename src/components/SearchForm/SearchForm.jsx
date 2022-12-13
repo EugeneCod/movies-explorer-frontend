@@ -11,6 +11,7 @@ function SearchForm({ className }) {
     <form className={`search-form ${className}`} name="search" id="search" method="get" onSubmit={handleSubmit}>
       <fieldset className="search-form__fieldset" form="search">
         <input
+          required
           className="search-form__input"
           type="text"
           name="search"

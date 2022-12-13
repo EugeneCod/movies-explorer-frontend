@@ -29,11 +29,21 @@
     font-weight: 400;
     font-size: 13px;
     line-height: 1.3076;
-    color: $secondary-font-color;
+    color: $main-font-color;
     border: none;
     padding: 0 70px 0 22px;
     height: 46px;
     outline: none;
+    transition: box-shadow 0.2s ease;
+    &::placeholder {
+      color: $secondary-font-color;
+    }
+    &:hover {
+      box-shadow: 0px 0px 2px 0px;
+    }
+    &:focus {
+      box-shadow: 0px 0px 4px 0px;
+    }
     @media (max-width: 420px) {
       font-size: 11px;
       padding-left: 18px;
