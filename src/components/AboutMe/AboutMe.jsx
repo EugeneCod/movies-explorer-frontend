@@ -17,7 +17,7 @@ function AboutMe() {
               работал в компании «СКБ Контур». После того, как прошёл курс по веб-разработке, начал
               заниматься фриланс-заказами и ушёл с постоянной работы.
             </p>
-            <a href="https://github.com/EugeneCod" className="about-me__github">
+            <a href="https://github.com/EugeneCod" target="blank" className="about-me__github">
               Github
             </a>
           </div>
