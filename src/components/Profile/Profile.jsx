@@ -2,7 +2,7 @@ import React from 'react';
 
 function Profile() {
   return (
-    <section className="profile">
+    <main className="profile">
       <div className="profile__container">
         <p className="profile__greeting">Привет, Виталий!</p>
         <table className="profile__table">
@@ -24,7 +24,7 @@ function Profile() {
           </li>
         </ul>
       </div>
-    </section>
+    </main>
   );
 }
 

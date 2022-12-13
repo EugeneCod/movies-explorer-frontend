@@ -11,7 +11,7 @@ function Register() {
   }
 
   return (
-    <section className="register">
+    <main className="register">
       <div className="register__container">
         <Logo className="register__logo" />
         <AuthForm
@@ -63,7 +63,7 @@ function Register() {
           <NavLink to="/signin" className="register__redirection-link">Войти</NavLink>
         </p>
       </div>
-    </section>
+    </main>
   );
 }
 

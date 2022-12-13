@@ -7,7 +7,7 @@ function ErrorPage() {
     navigate(-1);
   }
   return (
-    <section className="error-page">
+    <main className="error-page">
       <div className="error-page__content">
         <p className="error-page__error-code">404</p>
         <p className="error-page__message">Страница не найдена</p>
@@ -15,7 +15,7 @@ function ErrorPage() {
       <button onClick={handleClick} className="error-page__back-button">
         Назад
       </button>
-    </section>
+    </main>
   );
 }
 

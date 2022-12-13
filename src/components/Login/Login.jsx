@@ -11,7 +11,7 @@ function Login() {
   }
 
   return (
-    <section className="login">
+    <main className="login">
       <div className="login__container">
         <Logo className="login__logo" />
         <AuthForm
@@ -51,7 +51,7 @@ function Login() {
           <NavLink to="/signup" className="login__redirection-link">Регистрация</NavLink>
         </p>
       </div>
-    </section>
+    </main>
   );
 }
 

@@ -6,11 +6,11 @@ function SavedMovies() {
   const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <section className='saved-movies'>
+    <main className='saved-movies'>
       <div className="saved-movies__container">
         <MoviesCardList isLoading={isLoading} movies={fakeSavedMovies} wasSaved={true}/>
       </div>
-    </section>
+    </main>
   )
 }
 
