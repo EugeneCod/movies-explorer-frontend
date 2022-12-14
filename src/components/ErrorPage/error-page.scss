@@ -1,0 +1,58 @@
+@import '../../scss/variables';
+
+.error-page {
+  color: $main-font-color;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr min-content;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 55px;
+  padding-top: 67px;
+  box-sizing: border-box;
+  @media (max-width: 768px) {
+    padding-bottom: 215px;
+    padding-top: 227px;
+    
+  }
+  @media (max-width: 420px) {
+    padding-bottom: 25px;
+    padding-top: 53px;
+  }
+
+  &__back-button {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.21;
+    justify-self: center;
+    padding: 5px;
+    background-color: initial;
+    border: none;
+    color: $blue;
+    @media (max-width: 420px) {
+      font-size: 12px;
+    }
+  }
+
+  &__error-code {
+    font-weight: 400;
+    font-size: 140px;
+    line-height: 1.21;
+    margin: 0 0 5px;
+    text-align: center;
+    @media (max-width: 420px) {
+      font-size: 80px;
+      margin-bottom: 10px;
+    }
+  }
+  &__message {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.21;
+    margin: 0;
+    text-align: center;
+    @media (max-width: 420px) {
+      font-size: 12px;
+    }
+  }
+}

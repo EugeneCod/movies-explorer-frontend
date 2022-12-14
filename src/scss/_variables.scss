@@ -1,0 +1,44 @@
+//colors
+$promo-bg: #073042;
+$main-bg: #202020;
+$secondary-bg: #272727;
+$third-shade-bg: #303030;
+$items-bg: #2f2f2f;
+$main-font-color: #fff;
+$secondary-font-color: #8b8b8b;
+$dark-font-color: #000;
+$light-line-color: #dadada;
+$dark-line-color: #424242;
+$cover-color: #000;
+$red: #ee3465;
+$green: #3ddc84;
+$blue: #4285F4;
+
+//font-sizes
+$enlarged: 18px;
+
+//font-families
+$app-font-family: 'Inter', Arial, Helvetica, sans-serif;
+
+//templetes
+%link-effects {
+  transition: opacity 0.3s;
+  &:hover {
+    opacity: 0.7;
+  }
+  &:active {
+    opacity: 0.4;
+  }
+}
+
+%height-full-screen {
+  min-height: calc(100vh - 75px - 152.44px);
+  @media (max-width: 768px) {
+    min-height: calc(100vh - 74px - 242.44px);
+  }
+  @media (max-width: 420px) {
+    min-height: calc(100vh - 74px - 301.06px);
+  }
+}
+
+// @extend %link-effects;

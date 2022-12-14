@@ -1,0 +1,112 @@
+@import '../../scss/variables';
+
+.movies-card {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  background-color: $items-bg;
+  padding-left: 22px;
+  padding-right: 6px;
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  &__duration {
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 1.21;
+    color: $secondary-font-color;
+    margin: 0 0 26px;
+    @media (max-width: 600px) {
+      grid-column: 1/2;
+    }
+    @media (max-width: 420px) {
+      margin-bottom: 0;
+    }
+  }
+
+  &__image-container {
+    grid-column: 2/3;
+    grid-row: 1/2;
+    height: 122px;
+    width: 100%;
+    margin: 6px 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    @media (max-width: 600px) {
+      grid-column: 1/2;
+      height: 260px;
+      margin: 0;
+    }
+    @media (max-width: 420px) {
+      height: 168px;
+    }
+  }
+
+  &__button {
+    width: 14px;
+    height: 12px;
+    border: none;
+    padding: 0;
+    background-color: initial;
+    cursor: pointer;
+    background-position: center;
+    background-size: 14px 12px;
+    transition: background-image, opacity, 0.3s linear;
+    &:hover {
+      opacity: 0.7;
+    }
+    @media (max-width: 600px) {
+      grid-column: 2/3;
+      grid-row: 1/2;
+    }
+  }
+
+  &__button-like {
+    background-image: url(../../images/movies-card__like.svg);
+    &:active {
+      background-image: url(../../images/movies-card__like_active.svg);
+    }
+    &_active {
+      background-image: url(../../images/movies-card__like_active.svg);
+    }
+  }
+
+  &__button-remove {
+    background-image: url(../../images/movies-card__remove.svg);
+    &:active {
+      opacity: 0.3;
+    }
+  }
+
+  &__name {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.21;
+    color: $main-font-color;
+    margin: 0 0 13px;
+    @media (max-width: 420px) {
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+  }
+
+  &__text-container {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    margin: 22px 0 19px;
+    @media (max-width: 600px) {
+      grid-row: 2/3;
+      padding-left: 12px;
+      padding-right: 16px;
+      margin: 12px 0;
+      display: grid;
+      grid-template-columns: 1fr min-content;
+    }
+    @media (max-width: 420px) {
+      margin-top: 15px;
+    }
+  }
+}

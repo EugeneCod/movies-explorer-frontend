@@ -1,0 +1,55 @@
+@import '../../scss/variables';
+
+.register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  justify-content: center;
+
+  &__auth-form {
+    margin-bottom: 17px;
+    @media (max-width: 420px) {
+      margin-bottom: 15px;
+    }
+  }
+
+  &__container {
+    box-sizing: border-box;
+    max-width: 396px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    @media (max-width: 420px) {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+  }
+  &__logo {
+    margin-bottom: 40px;
+    @media (max-width: 420px) {
+      align-self: center;
+      margin-bottom: 50px;
+    }
+  }
+  &__redirection {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.21;
+    color: $secondary-font-color;
+    margin: 0;
+    text-align: center;
+    @media (max-width: 420px) {
+      font-size: 12px;
+    }
+  }
+  &__redirection-link {
+    @extend %link-effects;
+    text-decoration: none;
+    color: $blue;
+    padding: 6px;
+    @media (max-width: 420px) {
+      padding: 5px;
+    }
+  }
+}

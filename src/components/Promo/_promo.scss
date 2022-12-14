@@ -1,0 +1,49 @@
+@import '../../scss/variables';
+
+.promo {
+  font-family: $app-font-family;
+  background-color: $promo-bg;
+  padding-bottom: 40px;
+  @media (max-width: 768px) {
+    padding-bottom: 16px;
+  }
+  @media (max-width: 420px) {
+    padding-bottom: 42px;
+  }
+  
+  &__container {
+    padding-right: 15px;
+    padding-left: 15px;
+    min-height: 485px;
+    background-image: url(../../images/promo__image-bg.svg);
+    background-size: 320px 320px;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @media (max-width: 768px) {
+      min-height: 769px;
+    }
+    @media (max-width: 420px) {
+      min-height: 530px;
+      padding-right: 10px;
+      padding-left: 10px;
+      background-size: 248px 248px;
+    }
+  }
+  &__title {
+    color: $main-font-color;
+    margin: 0;
+    max-width: 730px;
+    font-weight: 400;
+    font-size: 47px;
+    line-height: 1.16;
+    text-align: center;
+    @media (max-width: 420px) {
+      font-size: 31px;
+      line-height: 1.25;
+      letter-spacing: -0.03em;
+    }
+  }
+}

@@ -1,0 +1,124 @@
+@import '../../scss/variables';
+
+.about-me {
+  background-color: $main-bg;
+  font-family: $app-font-family;
+  color: $main-font-color;
+  display: flex;
+  justify-content: center;
+
+  &__container {
+    padding: 110px 70px 101px;
+    box-sizing: border-box;
+    max-width: 1280px;
+    flex: 1 1 auto;
+    @media (max-width: 768px) {
+      padding: 90px 50px;
+    }
+    @media (max-width: 420px) {
+      padding: 70px 14px;
+    }
+  }
+  &__content {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: auto min-content;
+    column-gap: 49px;
+    @media (max-width: 768px) {
+      column-gap: 57px;
+    }
+    @media (max-width: 600px) {
+      column-gap: 0;
+      row-gap: 40px;
+    }
+  }
+  &__description {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.5714;
+    margin: 0 0 99px;
+    @media (max-width: 768px) {
+      font-size: 12px;
+      line-height: 1.5;
+      margin-bottom: 86px;
+    }
+    @media (max-width: 420px) {
+      font-size: 11px;
+      margin-bottom: 35px;
+    }
+  }
+  &__github {
+    @extend %link-effects;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.0587;
+    color: $main-font-color;
+    text-decoration: none;
+
+  }
+  &__info {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.1111;
+    margin: 0 0 26px;
+    @media (max-width: 768px) {
+      font-size: 12px;
+      margin-bottom: 22px;
+    }
+    @media (max-width: 420px) {
+      font-size: 11px;
+    }
+  }
+  &__name {
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 1.16;
+    letter-spacing: -0.04em;
+    margin: 0 0 18px;
+    @media (max-width: 768px) {
+      font-size: 40px;
+      margin-bottom: 12px;
+    }
+    @media (max-width: 420px) {
+      font-size: 30px;
+      margin-bottom: 22px;
+    }
+  }
+  &__photo {
+    width: 270px;
+    height: 327px;
+    border-radius: 10px;
+    object-fit: cover;
+    grid-column: 2/3;
+    @media (max-width: 768px) {
+      width: 255px;
+      height: 307px;
+    }
+    @media (max-width: 600px) {
+      grid-column: 1/2;
+    }
+    @media (max-width: 420px) {
+      width: 292px;
+      height: 352px;
+    }
+  }
+  &__text-block {
+    max-width: 600px;
+    grid-column: 1/2;
+  }
+  &__title {
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.2104;
+    letter-spacing: -0.04em;
+    margin: 0 0 66px;
+    padding-bottom: 23px;
+    border-bottom: 1px solid $light-line-color;
+    align-self: stretch;
+    @media (max-width: 420px) {
+      font-size: 18px;
+      padding-bottom: 27px;
+      margin-bottom: 62px;
+    }
+  }
+}
