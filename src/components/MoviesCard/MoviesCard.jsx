@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import classNames from 'classnames';
 
+import { url } from '../../utils/constants';
+
 function MoviesCard({ wasSaved, movie, onMovieRemove, onMovieLike }) {
   const [isLiked, setIsLiked] = useState(false);
   const [resDuration, setResDuration] = useState('');
@@ -27,7 +29,7 @@ function MoviesCard({ wasSaved, movie, onMovieRemove, onMovieLike }) {
     <li className="movies-card">
       <div
         className="movies-card__image-container"
-        style={{ backgroundImage: `url(${movie.image.url})` }}
+        style={{ backgroundImage: `url(${url.serverApi}${movie.image.url})` }}
       />
       <div className="movies-card__text-container">
         <p className="movies-card__name">{movie.nameRU}</p>

@@ -1,14 +1,18 @@
 import { searchFormErrors } from '../../utils/constants';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 
-function SearchForm({ className }) {
-  const { values, handleChange, errors, setErrors, isValid } = useFormAndValidation(false);
+function SearchForm({ className, onSubmit }) {
+  const { values, handleChange, errors, setErrors, isValid, resetForm } = useFormAndValidation(false);
+
 
   function handleSubmit(evt) {
     evt.preventDefault();
     if (!isValid) {
       setErrors({ ...errors, [evt.target.name]: searchFormErrors.inputIsRequired });
+      return;
     }
+    onSubmit(values.search);
+    resetForm();
     return;
   }
 
