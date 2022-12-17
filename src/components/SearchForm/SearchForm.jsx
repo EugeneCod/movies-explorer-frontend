@@ -1,14 +1,25 @@
-import { useState } from 'react';
+import { searchFormErrors } from '../../utils/constants';
+import useFormAndValidation from '../../hooks/useFormAndValidation';
 
 function SearchForm({ className }) {
-  const [value, setValue] = useState('');
+  const { values, handleChange, errors, setErrors, isValid } = useFormAndValidation(false);
 
   function handleSubmit(evt) {
     evt.preventDefault();
+    if (!isValid) {
+      setErrors({ ...errors, [evt.target.name]: searchFormErrors.inputIsRequired });
+    }
+    return;
   }
 
   return (
-    <form className={`search-form ${className}`} name="search" id="search" method="get" onSubmit={handleSubmit}>
+    <form
+      className={`search-form ${className}`}
+      name="search"
+      id="search"
+      method="get"
+      onSubmit={handleSubmit}
+      noValidate>
       <fieldset className="search-form__fieldset" form="search">
         <input
           required
@@ -16,11 +27,10 @@ function SearchForm({ className }) {
           type="text"
           name="search"
           placeholder="Фильм"
-          value={value}
-          onChange={(evt) => {
-            setValue(evt.value);
-          }}
+          value={values.search || ''}
+          onChange={handleChange}
         />
+        <span className="search-form__input-error">{errors.search}</span>
         <button type="submit" className="search-form__button">
           Найти
         </button>
