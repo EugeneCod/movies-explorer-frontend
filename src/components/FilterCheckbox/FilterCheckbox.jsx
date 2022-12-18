@@ -3,7 +3,7 @@ import classNames from 'classnames';
 function FilterCheckbox({ className, description, filterIsActive, onToggleFilter }) {
 
   function handleSwitch() {
-    onToggleFilter(!filterIsActive);
+    onToggleFilter(filterIsActive);
   }
 
   return (

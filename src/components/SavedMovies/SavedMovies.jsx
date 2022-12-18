@@ -1,14 +1,18 @@
-import {useState} from 'react'
+// import {useState} from 'react'
 import { MoviesCardList } from '../';
-import fakeSavedMovies from '../../utils/fakeSavedMovies';
 
 function SavedMovies() {
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
   return (
     <main className='saved-movies'>
       <div className="saved-movies__container">
-        <MoviesCardList isLoading={isLoading} movies={fakeSavedMovies} wasSaved={true}/>
+        <MoviesCardList 
+          // state={moviesListState}
+          // onSearchSubmit={handleSearchSubmit}
+          // onSearchInput={handleSearchInput}
+          // onToggleFilter={handleToggleFilter}
+        />
       </div>
     </main>
   )

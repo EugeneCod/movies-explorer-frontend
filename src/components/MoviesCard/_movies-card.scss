@@ -27,18 +27,13 @@
   }
 
   &__image-container {
-    grid-column: 2/3;
-    grid-row: 1/2;
     height: 122px;
     width: 100%;
-    margin: 6px 0;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     @media (max-width: 600px) {
-      grid-column: 1/2;
       height: 260px;
-      margin: 0;
     }
     @media (max-width: 420px) {
       height: 168px;
@@ -107,6 +102,17 @@
     }
     @media (max-width: 420px) {
       margin-top: 15px;
+    }
+  }
+
+  &__trailer-link {
+    display: block;
+    grid-column: 2/3;
+    grid-row: 1/2;
+    margin: 6px 0;
+    @media (max-width: 600px) {
+      grid-column: 1/2;
+      margin: 0;
     }
   }
 }

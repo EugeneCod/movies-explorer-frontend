@@ -1,9 +1,16 @@
+import { useEffect } from 'react';
 import { searchFormErrors } from '../../utils/constants';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 
-function SearchForm({ className, onSubmit }) {
-  const { values, handleChange, errors, setErrors, isValid, resetForm } = useFormAndValidation(false);
+function SearchForm({ className, onSubmit, onInput, searchText }) {
+  const { values, setValues, handleChange, errors, setErrors, isValid, setIsValid } = useFormAndValidation(false);
 
+  useEffect(() => {
+    setValues({
+      search: searchText || '',
+    })
+    searchText && setIsValid(true);
+  }, [setValues, searchText, setIsValid])
 
   function handleSubmit(evt) {
     evt.preventDefault();
@@ -12,8 +19,13 @@ function SearchForm({ className, onSubmit }) {
       return;
     }
     onSubmit(values.search);
-    resetForm();
+    // resetForm();
     return;
+  }
+
+  function handleInput(evt) {
+    handleChange(evt);
+    onInput(evt.target.value);
   }
 
   return (
@@ -32,7 +44,7 @@ function SearchForm({ className, onSubmit }) {
           name="search"
           placeholder="Фильм"
           value={values.search || ''}
-          onChange={handleChange}
+          onChange={handleInput}
         />
         <span className="search-form__input-error">{errors.search}</span>
         <button type="submit" className="search-form__button">

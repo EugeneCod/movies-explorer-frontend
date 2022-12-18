@@ -13,4 +13,15 @@ export const moviesData = {
   nameEn: 'nameEN',
   shortFilmDuration: 40,
 }
-export const shortFilmDuration = 40;
+
+export const notifications = {
+  nothingFound: 'Ничего не найдено',
+  serverError: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
+
+}
+
+export const contentDisplaySettings = {
+  mobileWidth: 480,
+  maxNumberOfCards: 7,
+  minNumberOfCards: 5,
+}

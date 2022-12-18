@@ -35,7 +35,6 @@
     height: 46px;
     outline: none;
     transition: box-shadow 0.2s ease;
-    margin-bottom: 4px;
     &::placeholder {
       color: $secondary-font-color;
     }
@@ -59,6 +58,7 @@
     transition: opacity .4s;
     text-align: center;
     min-height: 17px;
+    padding-top: 4px;
   }
 
   &__fieldset {

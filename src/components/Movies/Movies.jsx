@@ -1,74 +1,77 @@
-import { useState } from 'react';
+import { useReducer, useEffect } from 'react';
 
 import { MoviesCardList } from '../';
 import { getMovies } from '../../utils/movies.Api';
-// import fakeMovies from '../../utils/fakeMovies';
-import { moviesData } from '../../utils/constants';
+import { generalFilter } from '../../utils/functions';
 
 function Movies() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [displayMovies, setDisplayMovies] = useState(false);
-  const [filteredMovies, setFilteredMovies] = useState([]);
-  const [filter, setFilter] = useState({ shortMovies: false });
+  const initialmoviesListState = {
+    initialMovies: JSON.parse(localStorage.getItem('initialMovies')) || [],
+    resultMovies: JSON.parse(localStorage.getItem('resultMovies')) || [],
+    searchText: localStorage.getItem('searchText') || '',
+    shortMoviesFilter: JSON.parse(localStorage.getItem('filterShortMovies')) || false,
+    wasSaved: false,
+    moviesLoadingStatus: {
+      isLoading: false,
+      isLoadingError: false,
+      noResult: false,
+      successfully: false,
+    },
+  };
 
-  function filterTheArrayByKeyString(array, keyString, isRusLang) {
-    const { nameRu, nameEn } = moviesData;
-    const objectField = isRusLang ? nameRu : nameEn;
-    console.log(array);
-    console.log(objectField);
-    console.log(keyString);
-    return array.filter((item) => item[objectField].toLowerCase().includes(keyString.toLowerCase()));
-    
-  }
+  const [moviesListState, updateMoviesListState] = useReducer(
+    (state, updates) => ({ ...state, ...updates }),
+    initialmoviesListState,
+  );
 
-  function filterTheArrayByDuration(array, duration) {
-    return array.filter((item) => item.duration <= duration);
-  }
+  useEffect(() => {
+    moviesListState.resultMovies.length > 0 &&
+      updateMoviesListState({ moviesLoadingStatus: { successfully: true } });
+      updateMoviesListState({ resultMovies: generalFilter()});
+  }, []);
 
-  function checkRusLang(strForCheck) {
-    const regex = /[а-яёА-ЯЁ]+/;
-    return regex.test(strForCheck);
-  }
+  useEffect(() => {
+    updateMoviesListState({ resultMovies: generalFilter()});
+  }, [moviesListState.shortMoviesFilter]);
 
-  async function handleSearchFilms(searchText) {
-    setIsLoading(true);
+  async function handleSearchSubmit(searchText) {
+    updateMoviesListState({ isLoading: true, searchText });
     if (!localStorage.getItem('initialMovies')) {
       try {
         const initialMovies = await getMovies();
         localStorage.setItem('initialMovies', JSON.stringify(initialMovies));
       } catch (err) {
+        updateMoviesListState({ isLoadingError: true });
         console.log(`При загрузке фильмов произошла ошибка: ${err}`);
       }
     }
-    const initialMovies = JSON.parse(localStorage.getItem('initialMovies'));
-    localStorage.setItem('filterShortFilms', filter.shortMovies);
-    localStorage.setItem('searcText', searchText);
-    const isRusLang = checkRusLang(searchText);
-    const foundMovies = filterTheArrayByKeyString(initialMovies, searchText, isRusLang);
-    console.log(foundMovies);
-    const resultMovies =
-      localStorage.getItem('filterShortFilms') === true
-        ? filterTheArrayByDuration(foundMovies, moviesData.shortFilmDuration)
-        : foundMovies;
-    setFilteredMovies(resultMovies);
-    setDisplayMovies(true);
-    setIsLoading(false);
+    const resultMovies = generalFilter();
+    updateMoviesListState({ resultMovies: resultMovies, isLoading: false });
+    
+    localStorage.setItem('resultMovies', JSON.stringify(resultMovies));
+    moviesListState.resultMovies.length === 0
+      ? updateMoviesListState({ moviesLoadingStatus: { noResult: true } })
+      : updateMoviesListState({ moviesLoadingStatus: { successfully: true } });
   }
 
-  // Как только поиск произведён, текст запроса, найденные фильмы и состояние переключателя короткометражек
-  // сохраняются в хранилище, а блок появляется.
+  function handleToggleFilter(currentState) {
+    updateMoviesListState({ shortMoviesFilter: !currentState });
+    localStorage.setItem('filterShortMovies', JSON.stringify(!currentState));
+  }
+
+  function handleSearchInput(value) {
+    updateMoviesListState({ searchText: value });
+    localStorage.setItem('searchText', value);
+  }
 
   return (
     <main className="movies">
       <div className="movies__container">
         <MoviesCardList
-          isLoading={isLoading}
-          movies={filteredMovies}
-          wasSaved={false}
-          onSearch={handleSearchFilms}
-          displayMovies={displayMovies}
-          filter={filter}
-          onToggleFilter={setFilter}
+          state={moviesListState}
+          onSearchSubmit={handleSearchSubmit}
+          onSearchInput={handleSearchInput}
+          onToggleFilter={handleToggleFilter}
         />
       </div>
     </main>

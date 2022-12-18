@@ -1,48 +1,85 @@
 import { useState, useEffect } from 'react';
 import { FilterCheckbox, MoviesCard, Preloader, SearchForm } from '../';
+import { notifications, contentDisplaySettings } from '../../utils/constants';
 
-function MoviesCardList({ isLoading, movies, wasSaved, onSearch, filter, onToggleFilter, displayMovies }) {
+function MoviesCardList({ state, onSearchSubmit, onSearchInput, onToggleFilter }) {
+  const { mobileWidth, maxNumberOfCards, minNumberOfCards } = contentDisplaySettings;
+  const {
+    resultMovies,
+    searchText,
+    shortMoviesFilter,
+    wasSaved,
+    moviesLoadingStatus,
+  } = state;
 
-  const screenWithMobile = 420;
+  const { isLoading, isLoadingError, noResult, successfully } = moviesLoadingStatus;
+
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [moviesQuantity, setMoviesQuantity] = useState(7);
+  const [moviesQuantity, setMoviesQuantity] = useState(maxNumberOfCards);
+  const [numberOfAdditions, setNumberOfAdditions] = useState(1);
 
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
     };
     window.addEventListener('resize', handleResize);
-    if (windowWidth <= screenWithMobile) {
-      setMoviesQuantity(5);
+    if (windowWidth <= mobileWidth) {
+      setMoviesQuantity(minNumberOfCards * numberOfAdditions);
+    } else {
+      setMoviesQuantity(maxNumberOfCards * numberOfAdditions);
     }
 
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [windowWidth]);
+  }, [windowWidth, mobileWidth, minNumberOfCards, maxNumberOfCards, numberOfAdditions]);
+
+  useEffect(() => {
+    
+  }, [])
+
+  function displayMoreMovies() {
+    if (windowWidth <= mobileWidth) {
+      setMoviesQuantity((prev) => prev + minNumberOfCards);
+    } else {
+      setMoviesQuantity((prev) => prev + maxNumberOfCards);
+    }
+    setNumberOfAdditions((prev) => prev + 1);
+  }
 
   return (
     <section className="movies-card-list">
-      {isLoading ? (
-        <Preloader />
-      ) : (
+      <SearchForm
+        className="movies-card-list__search-form"
+        onSubmit={onSearchSubmit}
+        onInput={onSearchInput}
+        searchText={searchText}
+      />
+      <FilterCheckbox
+        className="movies-card-list__filter-checkbox"
+        description="Короткометражки"
+        filterIsActive={shortMoviesFilter}
+        onToggleFilter={onToggleFilter}
+      />
+      {isLoading && <Preloader />}
+      {isLoadingError && (
+        <p className="movies-card-list__notification">{notifications.serverError}</p>
+      )}
+      {noResult && <p className="movies-card-list__notification">{notifications.nothingFound}</p>}
+      {successfully && (
         <>
-          <SearchForm className="movies-card-list__search-form" onSubmit={onSearch}/>
-          <FilterCheckbox
-            className="movies-card-list__filter-checkbox"
-            description="Короткометражки"
-            filterIsActive={filter.shortFilms}
-            onToggleFilter={onToggleFilter}
-
-          />
           <ul className="movies-card-list__list">
-            {movies
+            {resultMovies
               .filter((item, index) => index < moviesQuantity)
               .map((movie) => (
-                <MoviesCard key={movie.id} movie={movie} wasSaved={wasSaved}/>
+                <MoviesCard key={movie.id} movie={movie} wasSaved={wasSaved} />
               ))}
           </ul>
-          {movies.length > moviesQuantity && <button className="movies-card-list__button-more">Ещё</button>}
+          {resultMovies.length > moviesQuantity && (
+            <button onClick={displayMoreMovies} className="movies-card-list__button-more">
+              Ещё
+            </button>
+          )}
         </>
       )}
     </section>
@@ -50,3 +87,8 @@ function MoviesCardList({ isLoading, movies, wasSaved, onSearch, filter, onToggl
 }
 
 export default MoviesCardList;
+
+// isLoading,
+//     isLoadingError,
+//     noResult,
+//     successfully,

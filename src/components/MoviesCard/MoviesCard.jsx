@@ -27,15 +27,25 @@ function MoviesCard({ wasSaved, movie, onMovieRemove, onMovieLike }) {
 
   return (
     <li className="movies-card">
-      <div
-        className="movies-card__image-container"
-        style={{ backgroundImage: `url(${url.serverApi}${movie.image.url})` }}
-      />
+      <a
+        href={movie.trailerLink}
+        target="_blank"
+        rel="noreferrer"
+        className="movies-card__trailer-link">
+        <div
+          className="movies-card__image-container"
+          style={{ backgroundImage: `url(${url.serverApi}${movie.image.url})` }}
+        />
+      </a>
       <div className="movies-card__text-container">
         <p className="movies-card__name">{movie.nameRU}</p>
         <p className="movies-card__duration">{resDuration}</p>
         {wasSaved ? (
-          <button type="button" className="movies-card__button movies-card__button-remove" onClick={handleRemoveClick} />
+          <button
+            type="button"
+            className="movies-card__button movies-card__button-remove"
+            onClick={handleRemoveClick}
+          />
         ) : (
           <button
             type="button"
