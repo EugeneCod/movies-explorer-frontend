@@ -1,11 +1,11 @@
 import { useReducer, useEffect } from 'react';
 
 import { MoviesCardList } from '../';
-import { getMovies } from '../../utils/movies.Api';
+import { getMovies } from '../../utils/moviesApi';
 import { generalFilter } from '../../utils/functions';
 
 function Movies() {
-  const initialmoviesListState = {
+  const initialMoviesListState = {
     initialMovies: JSON.parse(localStorage.getItem('initialMovies')) || [],
     resultMovies: JSON.parse(localStorage.getItem('resultMovies')) || [],
     searchText: localStorage.getItem('searchText') || '',
@@ -21,33 +21,42 @@ function Movies() {
 
   const [moviesListState, updateMoviesListState] = useReducer(
     (state, updates) => ({ ...state, ...updates }),
-    initialmoviesListState,
+    initialMoviesListState,
   );
+
+  const { initialMovies, searchText, shortMoviesFilter } = moviesListState;
 
   useEffect(() => {
     moviesListState.resultMovies.length > 0 &&
       updateMoviesListState({ moviesLoadingStatus: { successfully: true } });
-      updateMoviesListState({ resultMovies: generalFilter()});
+    updateMoviesListState({
+      resultMovies: generalFilter(initialMovies, searchText, shortMoviesFilter),
+    });
   }, []);
 
   useEffect(() => {
-    updateMoviesListState({ resultMovies: generalFilter()});
+    updateMoviesListState({
+      resultMovies: generalFilter(initialMovies, searchText, shortMoviesFilter),
+    });
   }, [moviesListState.shortMoviesFilter]);
 
-  async function handleSearchSubmit(searchText) {
-    updateMoviesListState({ isLoading: true, searchText });
+  async function handleSearchSubmit(searchValue) {
+    updateMoviesListState({ isLoading: true });
+    updateMoviesListState({ searchText: searchValue });
+    localStorage.setItem('searchText', searchValue);
     if (!localStorage.getItem('initialMovies')) {
       try {
-        const initialMovies = await getMovies();
-        localStorage.setItem('initialMovies', JSON.stringify(initialMovies));
+        const foundMovies = await getMovies();
+        localStorage.setItem('initialMovies', JSON.stringify(foundMovies));
+        updateMoviesListState({ initialMovies: foundMovies });
       } catch (err) {
         updateMoviesListState({ isLoadingError: true });
         console.log(`При загрузке фильмов произошла ошибка: ${err}`);
       }
     }
-    const resultMovies = generalFilter();
+    const resultMovies = generalFilter(initialMovies, searchValue, shortMoviesFilter);
     updateMoviesListState({ resultMovies: resultMovies, isLoading: false });
-    
+
     localStorage.setItem('resultMovies', JSON.stringify(resultMovies));
     moviesListState.resultMovies.length === 0
       ? updateMoviesListState({ moviesLoadingStatus: { noResult: true } })
@@ -59,10 +68,10 @@ function Movies() {
     localStorage.setItem('filterShortMovies', JSON.stringify(!currentState));
   }
 
-  function handleSearchInput(value) {
-    updateMoviesListState({ searchText: value });
-    localStorage.setItem('searchText', value);
-  }
+  // function handleSearchInput(value) {
+    // updateMoviesListState({ searchText: value });
+    // localStorage.setItem('searchText', value);
+  // }
 
   return (
     <main className="movies">
@@ -70,7 +79,7 @@ function Movies() {
         <MoviesCardList
           state={moviesListState}
           onSearchSubmit={handleSearchSubmit}
-          onSearchInput={handleSearchInput}
+          // onSearchInput={handleSearchInput}
           onToggleFilter={handleToggleFilter}
         />
       </div>

@@ -1,12 +1,8 @@
 import {moviesData} from './constants';
 
-function generalFilter() {
-  const initialMovies = JSON.parse(localStorage.getItem('initialMovies')) || [];
-  const searchText = localStorage.getItem('searchText') || '';
-  const filterShortMovies = JSON.parse(localStorage.getItem('filterShortMovies')) || false;
-
+function generalFilter(moviesArray, searchText, filterShortMovies) {
   const isRusLang = checkRusLang(searchText);
-  const foundMovies = filterTheArrayByKeyString(initialMovies, searchText, isRusLang);
+  const foundMovies = filterTheArrayByKeyString(moviesArray, searchText, isRusLang);
 
   const resultMovies =
     filterShortMovies === true

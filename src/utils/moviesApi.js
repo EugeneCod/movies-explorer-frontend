@@ -1,6 +1,6 @@
-import { url } from '../utils/constants';
+import { url } from './constants';
 
-export const getMovies =  async () => {
+export const getMovies = async () => {
   const response = await fetch(url.moviesApi, {
     method: 'GET',
     headers: {
@@ -10,4 +10,4 @@ export const getMovies =  async () => {
   });
   const json = await response.json();
   return response.ok ? json : Promise.reject(json.message);
-}
+};

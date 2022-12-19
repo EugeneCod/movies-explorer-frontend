@@ -12,6 +12,7 @@ function AuthInput({
   label,
   minLength,
   maxLength,
+  pattern,
 }) {
 
   function handleChange(evt) {
@@ -36,6 +37,7 @@ function AuthInput({
         id={name}
         minLength={minLength}
         maxLength={maxLength}
+        pattern={pattern}
         className={classNames('auth-input__input-line', {
           'auth-input__input-line_invalid': !isValid,
         })}

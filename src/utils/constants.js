@@ -25,3 +25,13 @@ export const contentDisplaySettings = {
   maxNumberOfCards: 7,
   minNumberOfCards: 5,
 }
+
+export const routes = {
+  main: '/',
+  movies: '/movies',
+  savedMovies: '/saved-movies',
+  profile: '/profile',
+  signup: '/signup',
+  signin: '/signin',
+  unassigned: '*',
+}

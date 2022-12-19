@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { Logo, AuthForm, AuthInput } from '../';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 
-function Login() {
+function Login({ buttonText }) {
   const { values, handleChange, hadleShiftFocus, errors, inputsValidity, isValid } =
     useFormAndValidation(false);
 
@@ -19,7 +19,7 @@ function Login() {
           name="login"
           onSubmit={handleSubmit}
           title="Рады видеть!"
-          buttonText="Войти"
+          buttonText={buttonText}
           isValid={isValid}>
           <AuthInput
             value={values.email || ''}

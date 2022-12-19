@@ -2,14 +2,14 @@ import { NavLink } from 'react-router-dom';
 import { Logo, AuthForm, AuthInput } from '../';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 
-function Register() {
+function Register({onRegistration, buttonText}) {
   const { values, handleChange, hadleShiftFocus, errors, inputsValidity, isValid } =
     useFormAndValidation(false);
 
   function handleSubmit(evt) {
     evt.preventDefault();
+    onRegistration(values.name, values.email, values.password);
   }
-
   return (
     <main className="register">
       <div className="register__container">
@@ -19,7 +19,7 @@ function Register() {
           name="register"
           onSubmit={handleSubmit}
           title="Добро пожаловать!"
-          buttonText="Зарегистрироваться"
+          buttonText={buttonText}
           isValid={isValid}>
           <AuthInput
             value={values.name || ''}
@@ -32,6 +32,7 @@ function Register() {
             label="Имя"
             minLength="2"
             maxLength="40"
+            pattern="[а-яА-Яa-zA-ZёË\- ]{1,}"
           />
           <AuthInput
             value={values.email || ''}

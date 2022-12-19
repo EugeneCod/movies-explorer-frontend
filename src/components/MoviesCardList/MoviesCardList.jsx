@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { FilterCheckbox, MoviesCard, Preloader, SearchForm } from '../';
 import { notifications, contentDisplaySettings } from '../../utils/constants';
 
-function MoviesCardList({ state, onSearchSubmit, onSearchInput, onToggleFilter }) {
+function MoviesCardList({ state, onSearchSubmit, onToggleFilter }) {
   const { mobileWidth, maxNumberOfCards, minNumberOfCards } = contentDisplaySettings;
   const {
     resultMovies,
@@ -52,7 +52,6 @@ function MoviesCardList({ state, onSearchSubmit, onSearchInput, onToggleFilter }
       <SearchForm
         className="movies-card-list__search-form"
         onSubmit={onSearchSubmit}
-        onInput={onSearchInput}
         searchText={searchText}
       />
       <FilterCheckbox
