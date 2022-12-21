@@ -10,6 +10,7 @@ import {
   Register,
   Login,
   Footer,
+  PopupWithInfoTooltip,
 } from '../';
 
 import { AuthContext } from '../../context/';
@@ -19,12 +20,16 @@ import { register, login, getUserInfo } from '../../utils/mainApi';
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
+
   const [pageWithHeader, setPageWithHeader] = useState(true);
   const [pageWithFooter, setPageWithFooter] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [registrationErrorMessage, setRegistrationErrorMessage] = useState('');
   const [loginErrorMessage, setLogintionErrorMessage] = useState('');
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
+  const [infoTooltipData, setInfoTooltipData] = useState({ text: '', imageName: '' });
+
   const [currentUser, setCurrentUser] = useState({ email: '', name: '' });
 
   useEffect(() => {
@@ -62,22 +67,21 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
+  function closeInfoTooltip() {
+    setIsInfoTooltipOpen(false);
+  }
+
   function handleRegistration(name, email, password) {
     setIsLoading(true);
     register(name, email, password)
       .then((res) => {
-        // setInfoTooltipData(infoTooltpOptions.approval);
-        // setIsInfoTooltipOpen(true);
         handleLogin(email, password);
         setRegistrationErrorMessage('');
       })
       .catch((err) => {
-        // setInfoTooltipData(infoTooltpOptions.failure);
-        // setIsInfoTooltipOpen(true);
         setRegistrationErrorMessage(
           err.code === 409 ? authErrorMessages.emailConflict : authErrorMessages.unidentified,
         );
-
         console.log(err);
       })
       .finally(() => {
@@ -89,7 +93,6 @@ function App() {
     setIsLoading(true);
     login(email, password)
       .then((res) => {
-        localStorage.setItem('jwt', res.token);
         getUserInfo()
           .then((userData) => {
             setCurrentUser(userData);
@@ -102,8 +105,6 @@ function App() {
       .catch((err) => {
         setLogintionErrorMessage(authErrorMessages.unidentified);
         console.log(err);
-        // setInfoTooltipData(infoTooltpOptions.failure);
-        // setIsInfoTooltipOpen(true);
       })
       .finally(() => {
         setIsLoading(false);
@@ -148,6 +149,11 @@ function App() {
           <Route path={routes.unassigned} element={<ErrorPage />}></Route>
         </Routes>
         {pageWithFooter && <Footer />}
+        <PopupWithInfoTooltip
+          isOpen={isInfoTooltipOpen}
+          onClose={closeInfoTooltip}
+          data={infoTooltipData}
+        />
       </div>
     </AuthContext.Provider>
   );

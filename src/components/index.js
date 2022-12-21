@@ -15,6 +15,8 @@ export { default as MoviesCard } from './MoviesCard/MoviesCard.jsx';
 export { default as MoviesCardList } from './MoviesCardList/MoviesCardList.jsx';
 export { default as Navigation } from './Navigation/Navigation.jsx';
 export { default as NavTab } from './NavTab/NavTab.jsx';
+export { default as Popup } from './Popup/Popup.jsx';
+export { default as PopupWithInfoTooltip } from './PopupWithInfoTooltip/PopupWithInfoTooltip.jsx';
 export { default as Portfolio } from './Portfolio/Portfolio.jsx';
 export { default as Preloader } from './Preloader/Preloader.jsx';
 export { default as Profile } from './Profile/Profile.jsx';
