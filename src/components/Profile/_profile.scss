@@ -14,8 +14,15 @@
     color: $main-font-color;
     border: none;
     padding: 5px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    @extend %link-effects;
     @media (max-width: 420px) {
       font-size: 12px;
+    }
+    &_inactive {
+      opacity: 0.5;
+      pointer-events: none;
     }
     &_function_logout {
       color: $red;
@@ -61,7 +68,7 @@
       margin-bottom: 78px;
     }
   }
-  &__table {
+  &__form {
     width: 100%;
     margin-bottom: 212px;
     @media (max-width: 768px) {
@@ -71,17 +78,23 @@
       margin-bottom: 372px;
     }
   }
-  &__table-data-cell {
+  &__form-input {
     font-weight: 400;
     font-size: 11px;
     line-height: 1.21;
+    background-color: initial;
+    border: none;
+    color: $main-font-color;
+    flex: 0 0 75%;
+    text-align: end;
   }
-  &__table-heading-cell {
+  &__form-label {
     font-weight: 500;
     font-size: 11px;
     line-height: 1.21;
+    flex: 0 0 20%;
   }
-  &__table-row {
+  &__form-row {
     display: flex;
     justify-content: space-between;
     padding-bottom: 15px;

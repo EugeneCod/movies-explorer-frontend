@@ -42,3 +42,14 @@ export const routes = {
   signin: '/signin',
   unassigned: '*',
 }
+
+export const infoTooltpOptions = {
+  profileСhanged: {
+    text: 'Данные профиля успешно обновлены!',
+    imageName: 'approval'
+  },
+  failure: {
+    text: 'Что-то пошло не так! Попробуйте ещё раз.',
+    imageName: 'failure'
+  }
+}

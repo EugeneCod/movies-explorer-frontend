@@ -14,8 +14,8 @@ import {
 } from '../';
 
 import { AuthContext } from '../../context/';
-import { routes, authErrorMessages } from '../../utils/constants';
-import { register, login, getUserInfo } from '../../utils/mainApi';
+import { routes, authErrorMessages, infoTooltpOptions } from '../../utils/constants';
+import { register, login, getUserInfo, updateUserInfo } from '../../utils/mainApi';
 
 function App() {
   const location = useLocation();
@@ -71,6 +71,23 @@ function App() {
     setIsInfoTooltipOpen(false);
   }
 
+  function handleUpdateUser(name, email) {
+    setIsLoading(true);
+    updateUserInfo(name, email)
+      .then(userData => {
+        setCurrentUser(userData);
+        setInfoTooltipData(infoTooltpOptions.profileСhanged);
+        setIsInfoTooltipOpen(true);
+      })
+      .catch(err => {
+        setInfoTooltipData(infoTooltpOptions.failure);
+        setIsInfoTooltipOpen(true);
+      })
+      .finally(() => {
+        setIsLoading(false);
+    })
+  }
+
   function handleRegistration(name, email, password) {
     setIsLoading(true);
     register(name, email, password)
@@ -116,7 +133,7 @@ function App() {
       value={{
         loggedIn,
         setLoggedIn,
-        // isLoading,
+        isLoading,
         currentUser,
       }}>
       <div className="app">
@@ -125,7 +142,7 @@ function App() {
           <Route path={routes.main} exact element={<Main />} />
           <Route path={routes.movies} element={<Movies />} />
           <Route path={routes.savedMovies} element={<SavedMovies />} />
-          <Route path={routes.profile} element={<Profile />} />
+          <Route path={routes.profile} element={<Profile onUpdateUser={handleUpdateUser} />} />
           <Route
             path={routes.signup}
             element={
