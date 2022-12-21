@@ -19,6 +19,7 @@ export { default as Portfolio } from './Portfolio/Portfolio.jsx';
 export { default as Preloader } from './Preloader/Preloader.jsx';
 export { default as Profile } from './Profile/Profile.jsx';
 export { default as Promo } from './Promo/Promo.jsx';
+export { default as ProtectedRoute } from './ProtectedRoute/ProtectedRoute.jsx';
 export { default as Register } from './Register/Register.jsx';
 export { default as SavedMovies } from './SavedMovies/SavedMovies.jsx';
 export { default as SearchForm } from './SearchForm/SearchForm.jsx';

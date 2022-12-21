@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { searchFormErrors } from '../../utils/constants';
+import { searchFormErrorMessages } from '../../utils/constants';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 
 function SearchForm({ className, onSubmit, onInput, searchText }) {
@@ -15,7 +15,7 @@ function SearchForm({ className, onSubmit, onInput, searchText }) {
   function handleSubmit(evt) {
     evt.preventDefault();
     if (!isValid) {
-      setErrors({ ...errors, [evt.target.name]: searchFormErrors.inputIsRequired });
+      setErrors({ ...errors, [evt.target.name]: searchFormErrorMessages.inputIsRequired });
       return;
     }
     onSubmit(values.search);

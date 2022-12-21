@@ -1,9 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 import { Logo } from '../';
+import { AuthContext } from '../../context';
 
 function Navigation() {
+  const auth = useContext(AuthContext);
+  const { loggedIn } = auth;
   const location = useLocation().pathname;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMenu, setIsMenu] = useState(false);
@@ -12,6 +15,8 @@ function Navigation() {
   const screenWithTablet = 768;
   const isMenuOpenClassFr = '_is-menu-open';
   const isMenuClassFr = '_is-menu';
+  console.log(loggedIn);
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -46,10 +51,10 @@ function Navigation() {
   return (
     <nav
       className={classNames('navigation', {
-        navigation_main: location === '/',
+        navigation_main: !loggedIn,
         'navigation_is-menu-open': isMenuOpen,
       })}>
-      {location === '/' ? (
+      {!loggedIn ? (
         <>
           <Logo className="navigation__logo" />
           <ul className="navigation__list navigation__list_auth">

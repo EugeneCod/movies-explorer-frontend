@@ -11,7 +11,7 @@ export const register =  async (name, email, password) => {
     body: JSON.stringify({ name, email, password, }),
   });
   const json = await response.json();
-  return response.ok ? json : Promise.reject(json.message);
+  return response.ok ? json : Promise.reject(json);
 }
 
 export const login =  async (email, password) => {
@@ -21,6 +21,7 @@ export const login =  async (email, password) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ email, password, }),
+    credentials: 'include',
   });
   const json = await response.json();
   return response.ok ? json : Promise.reject(json.message);

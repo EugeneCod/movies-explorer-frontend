@@ -1,11 +1,18 @@
 export const url = {
-  mainApi: 'https://api.diplom.ekg.nomoredomains.club',
+  mainApi: 'http://localhost:3001',
   moviesApi: 'https://api.nomoreparties.co/beatfilm-movies',
   serverApi: 'https://api.nomoreparties.co/',
+  testMainApi: 'http://localhost:3001',
+  // 'https://api.diplom.ekg.nomoredomains.club'
 }
 
-export const searchFormErrors = {
+export const searchFormErrorMessages = {
   inputIsRequired: 'Нужно ввести ключевое слово',
+}
+
+export const authErrorMessages = {
+  emailConflict: 'Пользователь с таким email уже зарегистрирован',
+  unidentified: 'В процессе авторизации произошла ошибка',
 }
 
 export const moviesData = {

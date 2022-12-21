@@ -2,7 +2,9 @@ import { NavLink } from 'react-router-dom';
 import { Logo, AuthForm, AuthInput } from '../';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 
-function Register({onRegistration, buttonText}) {
+import {routes} from '../../utils/constants'
+
+function Register({ onRegistration, buttonText, registrationError }) {
   const { values, handleChange, hadleShiftFocus, errors, inputsValidity, isValid } =
     useFormAndValidation(false);
 
@@ -20,7 +22,8 @@ function Register({onRegistration, buttonText}) {
           onSubmit={handleSubmit}
           title="Добро пожаловать!"
           buttonText={buttonText}
-          isValid={isValid}>
+          isValid={isValid}
+          notification={registrationError}>
           <AuthInput
             value={values.name || ''}
             error={errors.name || ''}
@@ -61,7 +64,9 @@ function Register({onRegistration, buttonText}) {
         </AuthForm>
         <p className="register__redirection">
           Уже зарегистрированы?
-          <NavLink to="/signin" className="register__redirection-link">Войти</NavLink>
+          <NavLink to={routes.signin} className="register__redirection-link">
+            Войти
+          </NavLink>
         </p>
       </div>
     </main>
