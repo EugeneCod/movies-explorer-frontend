@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { searchFormErrorMessages } from '../../utils/constants';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 
-function SearchForm({ className, onSubmit, onInput, searchText }) {
+function SearchForm({ className, onSubmit, searchText }) {
   const { values, setValues, handleChange, errors, setErrors, isValid, setIsValid } = useFormAndValidation(false);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ function SearchForm({ className, onSubmit, onInput, searchText }) {
 
   function handleInput(evt) {
     handleChange(evt);
-    onInput(evt.target.value);
+    // onInput(evt.target.value);
   }
 
   return (

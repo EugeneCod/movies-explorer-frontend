@@ -15,7 +15,7 @@ import {
 
 import { AuthContext } from '../../context/';
 import { routes, authErrorMessages, infoTooltpOptions } from '../../utils/constants';
-import { register, login, getUserInfo, updateUserInfo } from '../../utils/mainApi';
+import { register, login, logout, getUserInfo, updateUserInfo } from '../../utils/mainApi';
 
 function App() {
   const location = useLocation();
@@ -128,6 +128,25 @@ function App() {
       });
   }
 
+  function clearStorage() {
+    localStorage.removeItem('initialMovies');
+    localStorage.removeItem('resultMovies');
+    localStorage.removeItem('resultSavedMovies');
+    localStorage.removeItem('searchText');
+    localStorage.removeItem('searchSavedMoviesText');
+    localStorage.removeItem('filterShortMovies');
+    localStorage.removeItem('filterShortSavedMovies');
+  }
+
+  function handleLogout() {
+    logout()
+      .then((res) => {
+        setLoggedIn(false);
+        navigate(routes.main);
+        clearStorage();
+      })
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -142,7 +161,7 @@ function App() {
           <Route path={routes.main} exact element={<Main />} />
           <Route path={routes.movies} element={<Movies />} />
           <Route path={routes.savedMovies} element={<SavedMovies />} />
-          <Route path={routes.profile} element={<Profile onUpdateUser={handleUpdateUser} />} />
+          <Route path={routes.profile} element={<Profile onUpdateUser={handleUpdateUser} onLogout={handleLogout} />} />
           <Route
             path={routes.signup}
             element={

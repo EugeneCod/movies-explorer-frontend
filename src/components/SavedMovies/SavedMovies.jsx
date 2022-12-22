@@ -2,6 +2,7 @@ import { useReducer, useEffect } from 'react';
 
 import { MoviesCardList } from '../';
 import { getSavedMovies } from '../../utils/mainApi';
+import { deleteMovie } from '../../utils/mainApi';
 import { generalFilter } from '../../utils/functions';
 
 function SavedMovies() {
@@ -33,6 +34,7 @@ function SavedMovies() {
           resultMovies: generalFilter(moviesData, searchText, shortMoviesFilter),
           moviesLoadingStatus: { successfully: true },
         });
+        localStorage.setItem('savedMovies', JSON.stringify(moviesData));
       })
       .catch((err) => console.log(`${err} при загрузке сохраненных фильмов`));
   }, []);
@@ -46,6 +48,17 @@ function SavedMovies() {
     localStorage.setItem('filterShortMovies', JSON.stringify(!currentState));
   }
 
+  function handleMovieRemove(movieId) {
+    console.log(movieId);
+    deleteMovie(movieId)
+    .then((removedMovie) => {
+      updateSavedMoviesListState({resultMovies: savedMoviesListState.resultMovies.filter((movie) => movie._id !== movieId)});
+    })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   return (
     <main className="saved-movies">
       <div className="saved-movies__container">
@@ -53,6 +66,7 @@ function SavedMovies() {
           state={savedMoviesListState}
           onSearchSubmit={handleSearchSubmit}
           onToggleFilter={handleToggleFilter}
+          onMovieRemove={handleMovieRemove}
         />
       </div>
     </main>

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { FilterCheckbox, MoviesCard, Preloader, SearchForm } from '../';
 import { notifications, contentDisplaySettings } from '../../utils/constants';
 
-function MoviesCardList({ state, onSearchSubmit, onToggleFilter }) {
+function MoviesCardList({ state, onSearchSubmit, onToggleFilter, onMovieLike, onMovieRemove }) {
   const { mobileWidth, maxNumberOfCards, minNumberOfCards } = contentDisplaySettings;
   const {
     resultMovies,
@@ -19,24 +19,22 @@ function MoviesCardList({ state, onSearchSubmit, onToggleFilter }) {
   const [numberOfAdditions, setNumberOfAdditions] = useState(1);
 
   useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-    window.addEventListener('resize', handleResize);
-    if (windowWidth <= mobileWidth) {
-      setMoviesQuantity(minNumberOfCards * numberOfAdditions);
-    } else {
-      setMoviesQuantity(maxNumberOfCards * numberOfAdditions);
+    if (!wasSaved) {
+      const handleResize = () => {
+        setWindowWidth(window.innerWidth);
+      };
+      window.addEventListener('resize', handleResize);
+      if (windowWidth <= mobileWidth) {
+        setMoviesQuantity(minNumberOfCards * numberOfAdditions);
+      } else {
+        setMoviesQuantity(maxNumberOfCards * numberOfAdditions);
+      }
+
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
     }
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [windowWidth, mobileWidth, minNumberOfCards, maxNumberOfCards, numberOfAdditions]);
-
-  useEffect(() => {
-    
-  }, [])
+  }, [windowWidth, mobileWidth, minNumberOfCards, maxNumberOfCards, numberOfAdditions, wasSaved]);
 
   function displayMoreMovies() {
     if (windowWidth <= mobileWidth) {
@@ -70,11 +68,11 @@ function MoviesCardList({ state, onSearchSubmit, onToggleFilter }) {
           <ul className="movies-card-list__list">
             {resultMovies
               .filter((item, index) => index < moviesQuantity)
-              .map((movie) => (
-                <MoviesCard key={movie.id} movie={movie} wasSaved={wasSaved} />
+              .map((movie, index) => (
+                <MoviesCard key={`${movie.id}${index}`} movie={movie} wasSavedList={wasSaved} onMovieRemove={onMovieRemove} onMovieLike={onMovieLike} />
               ))}
           </ul>
-          {resultMovies.length > moviesQuantity && (
+          {(resultMovies.length > moviesQuantity || !wasSaved) && (
             <button onClick={displayMoreMovies} className="movies-card-list__button-more">
               Ещё
             </button>

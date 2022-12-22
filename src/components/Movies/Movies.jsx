@@ -2,7 +2,8 @@ import { useReducer, useEffect } from 'react';
 
 import { MoviesCardList } from '../';
 import { getMovies } from '../../utils/moviesApi';
-import { generalFilter } from '../../utils/functions';
+import { saveMovie, deleteMovie } from '../../utils/mainApi';
+import { generalFilter, prepareMovieForSaving } from '../../utils/functions';
 
 function Movies() {
   const initialMoviesListState = {
@@ -28,7 +29,9 @@ function Movies() {
 
   useEffect(() => {
     moviesListState.resultMovies.length > 0 &&
-      updateMoviesListState({ moviesLoadingStatus: { successfully: true } });
+      updateMoviesListState({
+        moviesLoadingStatus: { ...moviesListState.moviesLoadingStatus, successfully: true },
+      });
     updateMoviesListState({
       resultMovies: generalFilter(initialMovies, searchText, shortMoviesFilter),
     });
@@ -44,23 +47,37 @@ function Movies() {
     updateMoviesListState({ isLoading: true });
     updateMoviesListState({ searchText: searchValue });
     localStorage.setItem('searchText', searchValue);
-    if (!localStorage.getItem('initialMovies')) {
+    let foundMovies = initialMovies;
+    if (foundMovies.length === 0) {
       try {
-        const foundMovies = await getMovies();
+        foundMovies = await getMovies();
         localStorage.setItem('initialMovies', JSON.stringify(foundMovies));
         updateMoviesListState({ initialMovies: foundMovies });
       } catch (err) {
         updateMoviesListState({ isLoadingError: true });
         console.log(`При загрузке фильмов произошла ошибка: ${err}`);
+        return;
       }
     }
-    const resultMovies = generalFilter(initialMovies, searchValue, shortMoviesFilter);
+    const resultMovies = generalFilter(foundMovies, searchValue, shortMoviesFilter);
     updateMoviesListState({ resultMovies: resultMovies, isLoading: false });
 
     localStorage.setItem('resultMovies', JSON.stringify(resultMovies));
-    moviesListState.resultMovies.length === 0
-      ? updateMoviesListState({ moviesLoadingStatus: { noResult: true } })
-      : updateMoviesListState({ moviesLoadingStatus: { successfully: true } });
+    resultMovies.length === 0
+      ? updateMoviesListState({
+          moviesLoadingStatus: {
+            ...moviesListState.moviesLoadingStatus,
+            successfully: false,
+            noResult: true,
+          },
+        })
+      : updateMoviesListState({
+          moviesLoadingStatus: {
+            ...moviesListState.moviesLoadingStatus,
+            successfully: true,
+            noResult: false,
+          },
+        });
   }
 
   function handleToggleFilter(currentState) {
@@ -68,10 +85,21 @@ function Movies() {
     localStorage.setItem('filterShortMovies', JSON.stringify(!currentState));
   }
 
-  // function handleSearchInput(value) {
-    // updateMoviesListState({ searchText: value });
-    // localStorage.setItem('searchText', value);
-  // }
+  function handleMovieLike(movie) {
+    saveMovie(prepareMovieForSaving(movie))
+      .then((savedMovie) => {})
+      .catch((err) => {
+        console.log(err);
+      });
+    }
+
+  function handleMovieRemove(movieId) {
+    deleteMovie(movieId)
+    .then((removedMovie) => {})
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   return (
     <main className="movies">
@@ -81,6 +109,8 @@ function Movies() {
           onSearchSubmit={handleSearchSubmit}
           // onSearchInput={handleSearchInput}
           onToggleFilter={handleToggleFilter}
+          onMovieLike={handleMovieLike}
+          onMovieRemove={handleMovieRemove}
         />
       </div>
     </main>

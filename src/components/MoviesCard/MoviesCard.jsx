@@ -3,9 +3,10 @@ import classNames from 'classnames';
 
 import { url } from '../../utils/constants';
 
-function MoviesCard({ wasSaved, movie, onMovieRemove, onMovieLike }) {
+function MoviesCard({ movie, wasSavedList, onMovieRemove, onMovieLike }) {
   const [isLiked, setIsLiked] = useState(false);
   const [resDuration, setResDuration] = useState('');
+  const [savedMovieId, setSavedMovieId] = useState('');
 
   useEffect(() => {
     function calculateDuration() {
@@ -17,12 +18,26 @@ function MoviesCard({ wasSaved, movie, onMovieRemove, onMovieLike }) {
     setResDuration(calculateDuration());
   }, [movie.duration]);
 
+  useEffect(() => {
+    if (wasSavedList) return;
+    const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
+    if (!savedMovies) return;
+    console.log(savedMovies);
+    const savedMovie = savedMovies.find((item) => item.movieId === movie.id);
+    if (savedMovie) {
+      setIsLiked(true);
+      setSavedMovieId(savedMovie._id);
+    }
+  }, [wasSavedList, movie]);
+
   function handleLikeClick() {
-    setIsLiked(!isLiked);
+    console.log('click');
+    console.log(isLiked);
+    !isLiked ? onMovieLike(movie) : onMovieRemove(savedMovieId);
   }
 
   function handleRemoveClick() {
-    return;
+    onMovieRemove(movie._id);
   }
 
   return (
@@ -40,7 +55,7 @@ function MoviesCard({ wasSaved, movie, onMovieRemove, onMovieLike }) {
       <div className="movies-card__text-container">
         <p className="movies-card__name">{movie.nameRU}</p>
         <p className="movies-card__duration">{resDuration}</p>
-        {wasSaved ? (
+        {wasSavedList ? (
           <button
             type="button"
             className="movies-card__button movies-card__button-remove"

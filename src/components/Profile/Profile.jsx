@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 import { AuthContext } from '../../context';
 
-function Profile({ onUpdateUser }) {
+function Profile({ onUpdateUser, onLogout }) {
   const auth = useContext(AuthContext);
   const { currentUser, isLoading } = auth;
   const [inputsСhanged, setInputsСhanged] = useState(false);
@@ -20,7 +20,6 @@ function Profile({ onUpdateUser }) {
     (values.name !== currentUser.name || values.email !== currentUser.email)
       ? setInputsСhanged(true)
       : setInputsСhanged(false);
-      console.log(inputsСhanged);
   }, [setValues, currentUser, values]);
 
   function handleSubmit(evt) {
@@ -76,7 +75,7 @@ function Profile({ onUpdateUser }) {
             </button>
           </li>
           <li className="profile__buttons-list-item">
-            <button className="profile__button profile__button_function_logout">
+            <button onClick={onLogout} className="profile__button profile__button_function_logout">
               Выйти из аккаунта
             </button>
           </li>
