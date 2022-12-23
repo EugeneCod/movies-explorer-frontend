@@ -131,6 +131,7 @@ function App() {
   function clearStorage() {
     localStorage.removeItem('initialMovies');
     localStorage.removeItem('resultMovies');
+    localStorage.removeItem('savedMovies');
     localStorage.removeItem('resultSavedMovies');
     localStorage.removeItem('searchText');
     localStorage.removeItem('searchSavedMoviesText');
@@ -152,7 +153,6 @@ function App() {
       value={{
         loggedIn,
         setLoggedIn,
-        isLoading,
         currentUser,
       }}>
       <div className="app">

@@ -92,25 +92,26 @@ function Navigation() {
             <ul className="navigation__list navigation__list_movies">
               {isMenu && (
                 <li className="navigation__list-item">
-                  <NavLink to="/" className=" navigation__link navigation__link_movies">
+                  <NavLink to="/" onClick={toggleMenuOpen} className="navigation__link navigation__link_movies">
                     Главная
                   </NavLink>
                 </li>
               )}
               <li className="navigation__list-item">
-                <NavLink to="/movies" className=" navigation__link navigation__link_movies">
+                <NavLink to="/movies" onClick={toggleMenuOpen} className=" navigation__link navigation__link_movies">
                   Фильмы
                 </NavLink>
               </li>
               <li className="navigation__list-item">
                 <NavLink
                   to="/saved-movies"
+                  onClick={toggleMenuOpen}
                   className="navigation__link navigation__link_movies navigation__link_saved-movies">
                   Сохранённые фильмы
                 </NavLink>
               </li>
             </ul>
-            <NavLink to="/profile" className="navigation__link navigation__link_profile">
+            <NavLink to="/profile" onClick={toggleMenuOpen} className="navigation__link navigation__link_profile">
               <p className="navigation__profile-text">Аккаунт</p>
               <div className="navigation__profile-icon" />
             </NavLink>

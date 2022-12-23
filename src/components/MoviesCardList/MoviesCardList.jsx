@@ -4,37 +4,57 @@ import { notifications, contentDisplaySettings } from '../../utils/constants';
 
 function MoviesCardList({ state, onSearchSubmit, onToggleFilter, onMovieLike, onMovieRemove }) {
   const { mobileWidth, maxNumberOfCards, minNumberOfCards } = contentDisplaySettings;
-  const {
-    resultMovies,
-    searchText,
-    shortMoviesFilter,
-    wasSaved,
-    moviesLoadingStatus,
-  } = state;
+  const { resultMovies, searchText, shortMoviesFilter, wasSaved, moviesLoadingStatus } = state;
 
   const { isLoading, isLoadingError, noResult, successfully } = moviesLoadingStatus;
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [moviesQuantity, setMoviesQuantity] = useState(maxNumberOfCards);
   const [numberOfAdditions, setNumberOfAdditions] = useState(1);
+  let timeoutId = null;
+
+  // useEffect(() => {
+  //   if (!wasSaved) {
+  //     const handleResize = () => {
+  //       setWindowWidth(window.innerWidth);
+  //     };
+  //     window.addEventListener('resize', handleResize);
+  //     if (windowWidth <= mobileWidth) {
+  //       setMoviesQuantity(minNumberOfCards * numberOfAdditions);
+  //     } else {
+  //       setMoviesQuantity(maxNumberOfCards * numberOfAdditions);
+  //     }
+
+  //     return () => {
+  //       window.removeEventListener('resize', handleResize);
+  //     };
+  //   }
+  // }, [windowWidth, mobileWidth, minNumberOfCards, maxNumberOfCards, numberOfAdditions, wasSaved]);
 
   useEffect(() => {
     if (!wasSaved) {
-      const handleResize = () => {
-        setWindowWidth(window.innerWidth);
-      };
       window.addEventListener('resize', handleResize);
-      if (windowWidth <= mobileWidth) {
-        setMoviesQuantity(minNumberOfCards * numberOfAdditions);
-      } else {
-        setMoviesQuantity(maxNumberOfCards * numberOfAdditions);
-      }
 
       return () => {
         window.removeEventListener('resize', handleResize);
       };
     }
-  }, [windowWidth, mobileWidth, minNumberOfCards, maxNumberOfCards, numberOfAdditions, wasSaved]);
+  }, []);
+
+  useEffect(() => {
+    if (!wasSaved) {
+      if (windowWidth <= mobileWidth) {
+        setMoviesQuantity(minNumberOfCards * numberOfAdditions);
+      } else {
+        setMoviesQuantity(maxNumberOfCards * numberOfAdditions);
+      }
+    }
+  }, [wasSaved, windowWidth, maxNumberOfCards, minNumberOfCards, mobileWidth, numberOfAdditions]);
+
+  function handleResize() {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(setWindowWidth(window.innerWidth, 3000));
+  }
 
   function displayMoreMovies() {
     if (windowWidth <= mobileWidth) {
@@ -69,7 +89,13 @@ function MoviesCardList({ state, onSearchSubmit, onToggleFilter, onMovieLike, on
             {resultMovies
               .filter((item, index) => index < moviesQuantity)
               .map((movie, index) => (
-                <MoviesCard key={`${movie.id}${index}`} movie={movie} wasSavedList={wasSaved} onMovieRemove={onMovieRemove} onMovieLike={onMovieLike} />
+                <MoviesCard
+                  key={`${movie.id}${index}`}
+                  movie={movie}
+                  wasSavedList={wasSaved}
+                  onMovieRemove={onMovieRemove}
+                  onMovieLike={onMovieLike}
+                />
               ))}
           </ul>
           {(resultMovies.length > moviesQuantity || !wasSaved) && (
