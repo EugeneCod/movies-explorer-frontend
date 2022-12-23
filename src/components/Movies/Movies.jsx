@@ -12,12 +12,10 @@ function Movies() {
     searchText: localStorage.getItem('searchText') || '',
     shortMoviesFilter: JSON.parse(localStorage.getItem('filterShortMovies')) || false,
     wasSaved: false,
-    moviesLoadingStatus: {
-      isLoading: false,
-      isLoadingError: false,
-      noResult: false,
-      successfully: false,
-    },
+    isLoading: false,
+    isLoadingError: false,
+    noResult: false,
+    successfully: false,
   };
 
   const [moviesListState, updateMoviesListState] = useReducer(
@@ -28,13 +26,11 @@ function Movies() {
   const { initialMovies, searchText, shortMoviesFilter } = moviesListState;
 
   useEffect(() => {
-    moviesListState.resultMovies.length > 0 &&
+    moviesListState.initialMovies.length > 0 &&
       updateMoviesListState({
-        moviesLoadingStatus: { ...moviesListState.moviesLoadingStatus, successfully: true },
+        resultMovies: generalFilter(initialMovies, searchText, shortMoviesFilter),
+        successfully: true,
       });
-    updateMoviesListState({
-      resultMovies: generalFilter(initialMovies, searchText, shortMoviesFilter),
-    });
   }, []);
 
   useEffect(() => {
@@ -91,11 +87,11 @@ function Movies() {
       .catch((err) => {
         console.log(err);
       });
-    }
+  }
 
   function handleMovieRemove(movieId) {
     deleteMovie(movieId)
-    .then((removedMovie) => {})
+      .then((removedMovie) => {})
       .catch((err) => {
         console.log(err);
       });

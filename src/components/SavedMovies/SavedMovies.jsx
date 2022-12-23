@@ -7,17 +7,15 @@ import { generalFilter } from '../../utils/functions';
 
 function SavedMovies() {
   const initialSavedMoviesListState = {
-    savedMovies: JSON.parse(localStorage.getItem('savedMovies')) || [],
+    initialMovies: JSON.parse(localStorage.getItem('savedMovies')) || [],
     resultMovies: JSON.parse(localStorage.getItem('resultSavedMovies')) || [],
     searchText: localStorage.getItem('searchSavedMoviesText') || '',
     shortMoviesFilter: JSON.parse(localStorage.getItem('filterShortSavedMovies')) || false,
     wasSaved: true,
-    moviesLoadingStatus: {
-      isLoading: false,
-      isLoadingError: false,
-      noResult: false,
-      successfully: false,
-    },
+    isLoading: false,
+    isLoadingError: false,
+    noResult: false,
+    successfully: false,
   };
 
   const [savedMoviesListState, updateSavedMoviesListState] = useReducer(
@@ -28,19 +26,26 @@ function SavedMovies() {
   const { searchText, shortMoviesFilter } = savedMoviesListState;
 
   useEffect(() => {
+    updateSavedMoviesListState({ isLoading:true });
     getSavedMovies()
       .then((moviesData) => {
-        updateSavedMoviesListState({
-          resultMovies: generalFilter(moviesData, searchText, shortMoviesFilter),
-          moviesLoadingStatus: { successfully: true },
-        });
+        updateSavedMoviesListState({ initialMovies: moviesData });
         localStorage.setItem('savedMovies', JSON.stringify(moviesData));
+
+        const filteredMovies = generalFilter(moviesData, searchText, shortMoviesFilter);
+        updateSavedMoviesListState({
+          resultMovies: generalFilter(filteredMovies, searchText, shortMoviesFilter),
+          successfully: true,
+        });
       })
-      .catch((err) => console.log(`${err} при загрузке сохраненных фильмов`));
+      .catch((err) => console.log(`${err} при загрузке сохраненных фильмов`))
+      .finally(() => {
+        updateSavedMoviesListState({ isLoading: false });
+      })
   }, []);
 
   async function handleSearchSubmit(searchText) {
-    return
+    return;
   }
 
   function handleToggleFilter(currentState) {
@@ -51,9 +56,11 @@ function SavedMovies() {
   function handleMovieRemove(movieId) {
     console.log(movieId);
     deleteMovie(movieId)
-    .then((removedMovie) => {
-      updateSavedMoviesListState({resultMovies: savedMoviesListState.resultMovies.filter((movie) => movie._id !== movieId)});
-    })
+      .then((removedMovie) => {
+        updateSavedMoviesListState({
+          resultMovies: savedMoviesListState.resultMovies.filter((movie) => movie._id !== movieId),
+        });
+      })
       .catch((err) => {
         console.log(err);
       });

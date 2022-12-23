@@ -49,7 +49,11 @@ function MoviesCard({ movie, wasSavedList, onMovieRemove, onMovieLike }) {
         className="movies-card__trailer-link">
         <div
           className="movies-card__image-container"
-          style={{ backgroundImage: `url(${url.serverApi}${movie.image.url})` }}
+          style={
+            wasSavedList
+              ? { backgroundImage: `url(${movie.image})` }
+              : { backgroundImage: `url(${url.serverApi}${movie.image.url})` }
+          }
         />
       </a>
       <div className="movies-card__text-container">
