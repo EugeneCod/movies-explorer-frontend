@@ -17,7 +17,9 @@ function MoviesCardList({ state, onSearchSubmit, onToggleFilter, onMovieLike, on
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [moviesQuantity, setMoviesQuantity] = useState(maxNumberOfCards);
+  const [renderedMovies, setRenderedMovies] = useState(resultMovies);
   let timeoutId = null;
+  
 
   useEffect(() => {
     if (!wasSaved) {
@@ -26,8 +28,10 @@ function MoviesCardList({ state, onSearchSubmit, onToggleFilter, onMovieLike, on
       return () => {
         window.removeEventListener('resize', handleResize);
       };
+    } else {
+      setRenderedMovies(resultMovies.slice(0).reverse());
     }
-  }, []);
+  }, [resultMovies]);
 
   useEffect(() => {
     if (!wasSaved) {
@@ -73,7 +77,7 @@ function MoviesCardList({ state, onSearchSubmit, onToggleFilter, onMovieLike, on
       {successfully && (
         <>
           <ul className="movies-card-list__list">
-            {resultMovies
+            {renderedMovies
               .filter((item, index) => index < moviesQuantity)
               .map((movie, index) => (
                 <MoviesCard

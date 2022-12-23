@@ -1,11 +1,13 @@
-import { useReducer, useEffect } from 'react';
+import { useReducer, useEffect, useContext } from 'react';
 
+import { AuthContext } from '../../context';
 import { MoviesCardList } from '../';
 import { getMovies } from '../../utils/moviesApi';
 import { saveMovie, deleteMovie } from '../../utils/mainApi';
 import { generalFilter, prepareMovieForSaving } from '../../utils/functions';
 
 function Movies() {
+  const { savedMovies, setSavedMovies } = useContext(AuthContext);
   const initialMoviesListState = {
     initialMovies: JSON.parse(localStorage.getItem('initialMovies')) || [],
     resultMovies: JSON.parse(localStorage.getItem('resultMovies')) || [],
@@ -83,7 +85,11 @@ function Movies() {
 
   function handleMovieLike(movie) {
     saveMovie(prepareMovieForSaving(movie))
-      .then((savedMovie) => {})
+      .then((savedMovie) => {
+        setSavedMovies((prev) => {
+          return [...prev, savedMovie];
+        });
+      })
       .catch((err) => {
         console.log(err);
       });
@@ -91,7 +97,11 @@ function Movies() {
 
   function handleMovieRemove(movieId) {
     deleteMovie(movieId)
-      .then((removedMovie) => {})
+      .then((removedMovie) => {
+        setSavedMovies((prev) => {
+          return prev.filter((movie) => movie._id !== movieId);
+        });
+      })
       .catch((err) => {
         console.log(err);
       });

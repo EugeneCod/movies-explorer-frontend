@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import classNames from 'classnames';
 
+import { AuthContext } from '../../context';
 import { url } from '../../utils/constants';
 
 function MoviesCard({ movie, wasSavedList, onMovieRemove, onMovieLike }) {
+  const { savedMovies, setSavedMovies } = useContext(AuthContext);
   const [isLiked, setIsLiked] = useState(false);
   const [resDuration, setResDuration] = useState('');
   const [savedMovieId, setSavedMovieId] = useState('');
@@ -20,19 +22,18 @@ function MoviesCard({ movie, wasSavedList, onMovieRemove, onMovieLike }) {
 
   useEffect(() => {
     if (wasSavedList) return;
-    const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
-    if (!savedMovies) return;
-    console.log(savedMovies);
     const savedMovie = savedMovies.find((item) => item.movieId === movie.id);
     if (savedMovie) {
       setIsLiked(true);
       setSavedMovieId(savedMovie._id);
+    } else {
+      setIsLiked(false);
+      setSavedMovieId('');
     }
-  }, [wasSavedList, movie]);
+  }, [wasSavedList, savedMovies, movie]);
+  console.log(isLiked);
 
   function handleLikeClick() {
-    console.log('click');
-    console.log(isLiked);
     !isLiked ? onMovieLike(movie) : onMovieRemove(savedMovieId);
   }
 

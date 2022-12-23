@@ -1,14 +1,14 @@
-import { useReducer, useEffect } from 'react';
+import { useReducer, useEffect, useContext } from 'react';
 
+import { AuthContext } from '../../context';
 import { MoviesCardList } from '../';
-import { getSavedMovies } from '../../utils/mainApi';
-import { deleteMovie } from '../../utils/mainApi';
+import { deleteMovie, getSavedMovies } from '../../utils/mainApi';
 import { generalFilter } from '../../utils/functions';
 
 function SavedMovies() {
+  const { savedMovies, setSavedMovies } = useContext(AuthContext);
   const initialSavedMoviesListState = {
-    initialMovies: JSON.parse(localStorage.getItem('savedMovies')) || [],
-    resultMovies: JSON.parse(localStorage.getItem('resultSavedMovies')) || [],
+    resultMovies: savedMovies || [],
     searchText: localStorage.getItem('searchSavedMoviesText') || '',
     shortMoviesFilter: JSON.parse(localStorage.getItem('filterShortSavedMovies')) || false,
     wasSaved: true,
@@ -26,23 +26,12 @@ function SavedMovies() {
   const { searchText, shortMoviesFilter } = savedMoviesListState;
 
   useEffect(() => {
-    updateSavedMoviesListState({ isLoading:true });
-    getSavedMovies()
-      .then((moviesData) => {
-        updateSavedMoviesListState({ initialMovies: moviesData });
-        localStorage.setItem('savedMovies', JSON.stringify(moviesData));
-
-        const filteredMovies = generalFilter(moviesData, searchText, shortMoviesFilter);
-        updateSavedMoviesListState({
-          resultMovies: generalFilter(filteredMovies, searchText, shortMoviesFilter),
-          successfully: true,
-        });
-      })
-      .catch((err) => console.log(`${err} при загрузке сохраненных фильмов`))
-      .finally(() => {
-        updateSavedMoviesListState({ isLoading: false });
-      })
-  }, []);
+    const filteredMovies = generalFilter(savedMovies, searchText, shortMoviesFilter);
+    updateSavedMoviesListState({
+      resultMovies: generalFilter(filteredMovies, searchText, shortMoviesFilter),
+      successfully: true,
+    })
+  }, [savedMovies, searchText, shortMoviesFilter]);
 
   async function handleSearchSubmit(searchText) {
     return;

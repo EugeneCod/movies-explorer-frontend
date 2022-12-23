@@ -15,7 +15,7 @@ import {
 
 import { AuthContext } from '../../context/';
 import { routes, authErrorMessages, infoTooltpOptions } from '../../utils/constants';
-import { register, login, logout, getUserInfo, updateUserInfo } from '../../utils/mainApi';
+import { register, login, logout, getUserInfo, updateUserInfo, getSavedMovies } from '../../utils/mainApi';
 
 function App() {
   const location = useLocation();
@@ -29,6 +29,7 @@ function App() {
   const [loginErrorMessage, setLogintionErrorMessage] = useState('');
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [infoTooltipData, setInfoTooltipData] = useState({ text: '', imageName: '' });
+  const [savedMovies, setSavedMovies] = useState([]);
 
   const [currentUser, setCurrentUser] = useState({ email: '', name: '' });
 
@@ -49,22 +50,18 @@ function App() {
     setPageWithFooter(false);
   }, [location]);
 
-  // useEffect(() => {
-  //   loggedIn &&
-  //     getUserInfo()
-  //       .then((userData) => {
-  //         setCurrentUser(userData);
-  //       })
-  //       .catch((err) => console.log(`${err} при загрузке данных о текущем пользователе`));
-  // }, [loggedIn]);
-
   useEffect(() => {
     getUserInfo()
       .then((userData) => {
         setLoggedIn(true);
         setCurrentUser(userData);
+        getSavedMovies()
+          .then((moviesData) => {
+            setSavedMovies(moviesData);
+          })
+          .catch((err) => console.log(`${err} при загрузке сохраненных фильмов`))
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(`${err} при получении информации о пользователе`));
   }, []);
 
   function closeInfoTooltip() {
@@ -131,8 +128,8 @@ function App() {
   function clearStorage() {
     localStorage.removeItem('initialMovies');
     localStorage.removeItem('resultMovies');
-    localStorage.removeItem('savedMovies');
-    localStorage.removeItem('resultSavedMovies');
+    // localStorage.removeItem('savedMovies');
+    // localStorage.removeItem('resultSavedMovies');
     localStorage.removeItem('searchText');
     localStorage.removeItem('searchSavedMoviesText');
     localStorage.removeItem('filterShortMovies');
@@ -154,6 +151,8 @@ function App() {
         loggedIn,
         setLoggedIn,
         currentUser,
+        savedMovies,
+        setSavedMovies,
       }}>
       <div className="app">
         {pageWithHeader && <Header />}
