@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { FilterCheckbox, MoviesCard, Preloader, SearchForm } from '../';
-import { notifications, contentDisplaySettings } from '../../utils/constants';
+import { NOTIFICATIONS, CONTENT_DISPLAY_SETTINGS } from '../../utils/constants';
 
 function MoviesCardList({ state, onSearchSubmit, onToggleFilter, onMovieLike, onMovieRemove }) {
-  const { mobileWidth, maxNumberOfCards, minNumberOfCards } = contentDisplaySettings;
+  const { MOBILE_WIDTH, MAX_NUMBER_OF_CARDS, MIN_NUMBER_OF_CARDS } = CONTENT_DISPLAY_SETTINGS;
   const {
     resultMovies,
     searchText,
@@ -16,7 +16,7 @@ function MoviesCardList({ state, onSearchSubmit, onToggleFilter, onMovieLike, on
   } = state;
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [moviesQuantity, setMoviesQuantity] = useState(maxNumberOfCards);
+  const [moviesQuantity, setMoviesQuantity] = useState(MAX_NUMBER_OF_CARDS);
   const [renderedMovies, setRenderedMovies] = useState([]);
   let timeoutId = null;
 
@@ -28,13 +28,13 @@ function MoviesCardList({ state, onSearchSubmit, onToggleFilter, onMovieLike, on
 
   useEffect(() => {
     if (!wasSaved) {
-      if (windowWidth <= mobileWidth) {
-        setMoviesQuantity(minNumberOfCards);
+      if (windowWidth <= MOBILE_WIDTH) {
+        setMoviesQuantity(MIN_NUMBER_OF_CARDS);
       } else {
-        setMoviesQuantity(maxNumberOfCards);
+        setMoviesQuantity(MAX_NUMBER_OF_CARDS);
       }
     }
-  }, [wasSaved, windowWidth, maxNumberOfCards, minNumberOfCards, mobileWidth]);
+  }, [wasSaved, windowWidth, MAX_NUMBER_OF_CARDS, MIN_NUMBER_OF_CARDS, MOBILE_WIDTH]);
 
   useEffect(() => {
     if (!wasSaved) {
@@ -52,10 +52,10 @@ function MoviesCardList({ state, onSearchSubmit, onToggleFilter, onMovieLike, on
   }
 
   function displayMoreMovies() {
-    if (windowWidth <= mobileWidth) {
-      setMoviesQuantity((prev) => prev + minNumberOfCards);
+    if (windowWidth <= MOBILE_WIDTH) {
+      setMoviesQuantity((prev) => prev + MIN_NUMBER_OF_CARDS);
     } else {
-      setMoviesQuantity((prev) => prev + maxNumberOfCards);
+      setMoviesQuantity((prev) => prev + MAX_NUMBER_OF_CARDS);
     }
   }
 
@@ -74,9 +74,9 @@ function MoviesCardList({ state, onSearchSubmit, onToggleFilter, onMovieLike, on
       />
       {isLoading && <Preloader />}
       {isLoadingError && (
-        <p className="movies-card-list__notification">{notifications.serverError}</p>
+        <p className="movies-card-list__notification">{NOTIFICATIONS.SERVER_ERROR}</p>
       )}
-      {noResult && <p className="movies-card-list__notification">{notifications.nothingFound}</p>}
+      {noResult && <p className="movies-card-list__notification">{NOTIFICATIONS.NOTHING_FOUND}</p>}
       {successfully && (
         <>
           <ul className="movies-card-list__list">

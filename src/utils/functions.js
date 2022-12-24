@@ -1,4 +1,4 @@
-import {moviesData, URL} from './constants';
+import {MOVIES_DATA, URL} from './constants';
 
 function generalFilter(moviesArray, searchText, filterShortMovies) {
   const isRusLang = checkRusLang(searchText);
@@ -6,14 +6,14 @@ function generalFilter(moviesArray, searchText, filterShortMovies) {
 
   const resultMovies =
     filterShortMovies === true
-      ? filterTheArrayByDuration(foundMovies, moviesData.shortFilmDuration)
+      ? filterTheArrayByDuration(foundMovies, MOVIES_DATA.SHORT_MOVIE_DURATION)
       : foundMovies;
   return resultMovies;
 }
 
 function filterTheArrayByKeyString(array, keyString, isRusLang) {
-  const { nameRu, nameEn } = moviesData;
-  const objectField = isRusLang ? nameRu : nameEn;
+  const { NAME_RU, NAME_EN } = MOVIES_DATA;
+  const objectField = isRusLang ? NAME_RU : NAME_EN;
   return array.filter((item) =>
     item[objectField].toLowerCase().includes(keyString.toLowerCase()),
   );
