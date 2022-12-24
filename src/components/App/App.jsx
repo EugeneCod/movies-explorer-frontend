@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import {
   ErrorPage,
   Header,
@@ -60,7 +60,6 @@ function App() {
   useEffect(() => {
     getUserInfo()
       .then((userData) => {
-        
         setLoggedIn(true);
         setCurrentUser(userData);
         getSavedMovies()
@@ -74,7 +73,7 @@ function App() {
         setLoggedIn(false);
       });
   }, []);
-  
+
   function closeInfoTooltip() {
     setIsInfoTooltipOpen(false);
   }
@@ -113,7 +112,7 @@ function App() {
         setIsLoading(false);
       });
   }
-  
+
   function handleLogin(email, password) {
     setIsLoading(true);
     login(email, password)
@@ -196,21 +195,29 @@ function App() {
           <Route
             path={routes.signup}
             element={
-              <Register
-                buttonText={!isLoading ? 'Зарегистрироваться' : 'Выполнение...'}
-                onRegistration={handleRegistration}
-                registrationError={registrationErrorMessage}
-              />
+              loggedIn ? (
+                <Navigate to={routes.main} />
+              ) : (
+                <Register
+                  buttonText={!isLoading ? 'Зарегистрироваться' : 'Выполнение...'}
+                  onRegistration={handleRegistration}
+                  registrationError={registrationErrorMessage}
+                />
+              )
             }
           />
           <Route
             path={routes.signin}
             element={
-              <Login
-                buttonText={!isLoading ? 'Войти' : 'Выполнение...'}
-                onLogin={handleLogin}
-                registrationError={loginErrorMessage}
-              />
+              loggedIn ? (
+                <Navigate to={routes.main} />
+              ) : (
+                <Login
+                  buttonText={!isLoading ? 'Войти' : 'Выполнение...'}
+                  onLogin={handleLogin}
+                  registrationError={loginErrorMessage}
+                />
+              )
             }
           />
           <Route path={routes.unassigned} element={<ErrorPage />}></Route>
