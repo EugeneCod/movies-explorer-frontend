@@ -1,11 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
-import { AuthContext } from '../../context';
+import { CurrentUserContext } from '../../context';
 
 function Profile({ onUpdateUser, onLogout }) {
-  const auth = useContext(AuthContext);
-  const { currentUser, isLoading } = auth;
+  const { currentUser, isLoading } = useContext(CurrentUserContext);
   const [inputsСhanged, setInputsСhanged] = useState(false);
   const {
     values,

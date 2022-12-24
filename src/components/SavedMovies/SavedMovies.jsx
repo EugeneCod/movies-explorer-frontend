@@ -1,12 +1,11 @@
 import { useReducer, useEffect, useContext } from 'react';
-
-import { AuthContext } from '../../context';
+import { CurrentUserContext } from '../../context';
 import { MoviesCardList } from '../';
 import { deleteMovie } from '../../utils/mainApi';
 import { generalFilter } from '../../utils/functions';
 
 function SavedMovies() {
-  const { savedMovies, setSavedMovies } = useContext(AuthContext);
+  const { savedMovies, setSavedMovies } = useContext(CurrentUserContext);
   const initialSavedMoviesListState = {
     resultMovies: savedMovies || [],
     searchText: localStorage.getItem('searchSavedMoviesText') || '',

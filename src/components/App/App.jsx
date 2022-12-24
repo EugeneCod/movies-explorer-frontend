@@ -14,7 +14,7 @@ import {
   ProtectedRoute,
 } from '../';
 
-import { AuthContext } from '../../context/';
+import { CurrentUserContext } from '../../context/';
 import { ROUTES, AUTH_ERROR_MESSAGES, INFO_TOOLTIP_OPTIONS } from '../../utils/constants';
 import {
   register,
@@ -155,7 +155,7 @@ function App() {
   }
 
   return (
-    <AuthContext.Provider
+    <CurrentUserContext.Provider
       value={{
         loggedIn,
         setLoggedIn,
@@ -229,7 +229,7 @@ function App() {
           data={infoTooltipData}
         />
       </div>
-    </AuthContext.Provider>
+    </CurrentUserContext.Provider>
   );
 }
 

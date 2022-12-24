@@ -1,11 +1,11 @@
 import { useState, useEffect, useContext } from 'react';
 import classNames from 'classnames';
 
-import { AuthContext } from '../../context';
+import { CurrentUserContext } from '../../context';
 import { URL } from '../../utils/constants';
 
 function MoviesCard({ movie, wasSavedList, onMovieRemove, onMovieLike }) {
-  const { savedMovies } = useContext(AuthContext);
+  const { savedMovies } = useContext(CurrentUserContext);
   const [isLiked, setIsLiked] = useState(false);
   const [resDuration, setResDuration] = useState('');
   const [savedMovieId, setSavedMovieId] = useState('');

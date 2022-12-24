@@ -2,11 +2,10 @@ import { useState, useEffect, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 import { Logo } from '../';
-import { AuthContext } from '../../context';
+import { CurrentUserContext } from '../../context';
 
 function Navigation() {
-  const auth = useContext(AuthContext);
-  const { loggedIn } = auth;
+  const { loggedIn } = useContext(CurrentUserContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMenu, setIsMenu] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);

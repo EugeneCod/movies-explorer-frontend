@@ -1,13 +1,13 @@
 import { useReducer, useEffect, useContext } from 'react';
 
-import { AuthContext } from '../../context';
+import { CurrentUserContext } from '../../context';
 import { MoviesCardList } from '../';
 import { getMovies } from '../../utils/moviesApi';
 import { saveMovie, deleteMovie } from '../../utils/mainApi';
 import { generalFilter, prepareMovieForSaving } from '../../utils/functions';
 
 function Movies() {
-  const { setSavedMovies } = useContext(AuthContext);
+  const { setSavedMovies } = useContext(CurrentUserContext);
   const initialMoviesListState = {
     initialMovies: JSON.parse(localStorage.getItem('initialMovies')) || [],
     resultMovies: JSON.parse(localStorage.getItem('resultMovies')) || [],
