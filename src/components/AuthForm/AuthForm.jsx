@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import React from 'react';
 
 function AuthForm({ children, name, onSubmit, title, buttonText, isValid, className, notification }) {
   return (

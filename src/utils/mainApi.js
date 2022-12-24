@@ -1,9 +1,9 @@
-import { url } from '../utils/constants';
+import { URL } from '../utils/constants';
 
 /* -----------------Authorisation----------------- */
 
 export const register =  async (name, email, password) => {
-  const response = await fetch(`${url.mainApi}/signup`, {
+  const response = await fetch(`${URL.MAIN_API}/signup`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -15,7 +15,7 @@ export const register =  async (name, email, password) => {
 }
 
 export const login =  async (email, password) => {
-  const response = await fetch(`${url.mainApi}/signin`, {
+  const response = await fetch(`${URL.MAIN_API}/signin`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ export const login =  async (email, password) => {
 }
 
 export const logout =  async () => {
-  const response = await fetch(`${url.mainApi}/signout`, {
+  const response = await fetch(`${URL.MAIN_API}/signout`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ export const logout =  async () => {
 /* -----------------User----------------- */
 
 export const getUserInfo =  async () => {
-  const response = await fetch(`${url.mainApi}/users/me`, {
+  const response = await fetch(`${URL.MAIN_API}/users/me`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ export const getUserInfo =  async () => {
 }
 
 export const updateUserInfo =  async (name, email) => {
-  const response = await fetch(`${url.mainApi}/users/me`, {
+  const response = await fetch(`${URL.MAIN_API}/users/me`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ export const updateUserInfo =  async (name, email) => {
 /* -----------------Movies----------------- */
 
 export const getSavedMovies =  async () => {
-  const response = await fetch(`${url.mainApi}/movies`, {
+  const response = await fetch(`${URL.MAIN_API}/movies`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ export const getSavedMovies =  async () => {
 }
 
 export const saveMovie =  async (movieData) => {
-  const response = await fetch(`${url.mainApi}/movies`, {
+  const response = await fetch(`${URL.MAIN_API}/movies`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -96,7 +96,7 @@ export const saveMovie =  async (movieData) => {
 }
 
 export const deleteMovie =  async (movieId) => {
-  const response = await fetch(`${url.mainApi}/movies/${movieId}`, {
+  const response = await fetch(`${URL.MAIN_API}/movies/${movieId}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',

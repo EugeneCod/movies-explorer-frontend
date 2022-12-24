@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import classNames from 'classnames';
 
 import { AuthContext } from '../../context';
-import { url } from '../../utils/constants';
+import { URL } from '../../utils/constants';
 
 function MoviesCard({ movie, wasSavedList, onMovieRemove, onMovieLike }) {
   const { savedMovies } = useContext(AuthContext);
@@ -52,7 +52,7 @@ function MoviesCard({ movie, wasSavedList, onMovieRemove, onMovieLike }) {
           style={
             wasSavedList
               ? { backgroundImage: `url(${movie.image})` }
-              : { backgroundImage: `url(${url.serverApi}${movie.image.url})` }
+              : { backgroundImage: `url(${URL.MOVIES_API}${movie.image.url})` }
           }
         />
       </a>

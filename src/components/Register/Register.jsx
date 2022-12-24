@@ -1,8 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { Logo, AuthForm, AuthInput } from '../';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
-
-import {routes} from '../../utils/constants'
+import { ROUTES } from '../../utils/constants';
 
 function Register({ onRegistration, buttonText, registrationError }) {
   const { values, handleChange, hadleShiftFocus, errors, inputsValidity, isValid } =
@@ -64,7 +63,7 @@ function Register({ onRegistration, buttonText, registrationError }) {
         </AuthForm>
         <p className="register__redirection">
           Уже зарегистрированы?
-          <NavLink to={routes.signin} className="register__redirection-link">
+          <NavLink to={ROUTES.SIGNIN} className="register__redirection-link">
             Войти
           </NavLink>
         </p>

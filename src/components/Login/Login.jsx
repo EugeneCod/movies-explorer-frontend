@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { Logo, AuthForm, AuthInput } from '../';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
+import { ROUTES } from '../../utils/constants';
 
 function Login({ buttonText, onLogin, loginErrorMessage }) {
   const { values, handleChange, hadleShiftFocus, errors, inputsValidity, isValid } =
@@ -50,7 +51,7 @@ function Login({ buttonText, onLogin, loginErrorMessage }) {
         </AuthForm>
         <p className="login__redirection">
           Ещё не зарегистрированы?
-          <NavLink to="/signup" className="login__redirection-link">Регистрация</NavLink>
+          <NavLink to={ROUTES.SIGNUP} className="login__redirection-link">Регистрация</NavLink>
         </p>
       </div>
     </main>

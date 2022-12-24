@@ -1,7 +1,7 @@
-import { url } from './constants';
+import { URL } from './constants';
 
 export const getMovies = async () => {
-  const response = await fetch(url.moviesApi, {
+  const response = await fetch(`${URL.MOVIES_API}/beatfilm-movies`, {
     method: 'GET',
     headers: {
       Accept: 'application/json',

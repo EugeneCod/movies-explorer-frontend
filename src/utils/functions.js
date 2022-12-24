@@ -1,4 +1,4 @@
-import {moviesData, url} from './constants';
+import {moviesData, URL} from './constants';
 
 function generalFilter(moviesArray, searchText, filterShortMovies) {
   const isRusLang = checkRusLang(searchText);
@@ -35,9 +35,9 @@ function prepareMovieForSaving(data) {
     duration: data.duration,
     year: data.year,
     description: data.description,
-    image: `${url.serverApi}${data.image.url}`,
+    image: `${URL.MOVIES_API}${data.image.url}`,
     trailerLink: data.trailerLink,
-    thumbnail: `${url.serverApi}${data.image.formats.thumbnail.url}`,
+    thumbnail: `${URL.MOVIES_API}${data.image.formats.thumbnail.url}`,
     nameRU: data.nameRU,
     nameEN: data.nameEN,
     movieId: data.id,

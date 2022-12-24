@@ -15,7 +15,7 @@ import {
 } from '../';
 
 import { AuthContext } from '../../context/';
-import { routes, authErrorMessages, infoTooltpOptions } from '../../utils/constants';
+import { ROUTES, AUTH_ERROR_MESSAGES, INFO_TOOLTIP_OPTIONS } from '../../utils/constants';
 import {
   register,
   login,
@@ -41,8 +41,8 @@ function App() {
   const [currentUser, setCurrentUser] = useState({ email: '', name: '' });
 
   useEffect(() => {
-    const pathesWithHeaderAndFooter = [routes.main, routes.movies, routes.savedMovies];
-    const pathesWithHeaderWithoutFooter = [routes.profile];
+    const pathesWithHeaderAndFooter = [ROUTES.MAIN, ROUTES.MOVIES, ROUTES.SAVED_MOVIES];
+    const pathesWithHeaderWithoutFooter = [ROUTES.PROFILE];
     if (pathesWithHeaderAndFooter.includes(location.pathname)) {
       setPageWithHeader(true);
       setPageWithFooter(true);
@@ -83,11 +83,11 @@ function App() {
     updateUserInfo(name, email)
       .then((userData) => {
         setCurrentUser(userData);
-        setInfoTooltipData(infoTooltpOptions.profileСhanged);
+        setInfoTooltipData(INFO_TOOLTIP_OPTIONS.PROFILE_CHANGED);
         setIsInfoTooltipOpen(true);
       })
       .catch((err) => {
-        setInfoTooltipData(infoTooltpOptions.failure);
+        setInfoTooltipData(INFO_TOOLTIP_OPTIONS.PROFILE_CHANGED);
         setIsInfoTooltipOpen(true);
       })
       .finally(() => {
@@ -104,7 +104,7 @@ function App() {
       })
       .catch((err) => {
         setRegistrationErrorMessage(
-          err.code === 409 ? authErrorMessages.emailConflict : authErrorMessages.unidentified,
+          err.code === 409 ? AUTH_ERROR_MESSAGES.EMAIL_CONFLICT : AUTH_ERROR_MESSAGES.UNIDENTIFIED,
         );
         console.log(err);
       })
@@ -124,11 +124,11 @@ function App() {
           .catch((err) => console.log(`${err} при загрузке данных о текущем пользователе`));
         localStorage.setItem('preauthorization', JSON.stringify(true));
         setLoggedIn(true);
-        navigate(routes.movies);
+        navigate(ROUTES.MOVIES);
         setLogintionErrorMessage('');
       })
       .catch((err) => {
-        setLogintionErrorMessage(authErrorMessages.unidentified);
+        setLogintionErrorMessage(AUTH_ERROR_MESSAGES.UNIDENTIFIED);
         console.log(err);
       })
       .finally(() => {
@@ -149,7 +149,7 @@ function App() {
   function handleLogout() {
     logout().then((res) => {
       setLoggedIn(false);
-      navigate(routes.main);
+      navigate(ROUTES.MAIN);
       clearStorage();
     });
   }
@@ -167,9 +167,9 @@ function App() {
       <div className="app">
         {pageWithHeader && <Header />}
         <Routes>
-          <Route path={routes.main} exact element={<Main />} />
+          <Route path={ROUTES.MAIN} exact element={<Main />} />
           <Route
-            path={routes.movies}
+            path={ROUTES.MOVIES}
             element={
               <ProtectedRoute>
                 <Movies />
@@ -177,7 +177,7 @@ function App() {
             }
           />
           <Route
-            path={routes.savedMovies}
+            path={ROUTES.SAVED_MOVIES}
             element={
               <ProtectedRoute>
                 <SavedMovies />
@@ -185,7 +185,7 @@ function App() {
             }
           />
           <Route
-            path={routes.profile}
+            path={ROUTES.PROFILE}
             element={
               <ProtectedRoute>
                 <Profile onUpdateUser={handleUpdateUser} onLogout={handleLogout} />
@@ -193,10 +193,10 @@ function App() {
             }
           />
           <Route
-            path={routes.signup}
+            path={ROUTES.SIGNUP}
             element={
               loggedIn ? (
-                <Navigate to={routes.main} />
+                <Navigate to={ROUTES.MAIN} />
               ) : (
                 <Register
                   buttonText={!isLoading ? 'Зарегистрироваться' : 'Выполнение...'}
@@ -207,10 +207,10 @@ function App() {
             }
           />
           <Route
-            path={routes.signin}
+            path={ROUTES.SIGNIN}
             element={
               loggedIn ? (
-                <Navigate to={routes.main} />
+                <Navigate to={ROUTES.MAIN} />
               ) : (
                 <Login
                   buttonText={!isLoading ? 'Войти' : 'Выполнение...'}
@@ -220,7 +220,7 @@ function App() {
               )
             }
           />
-          <Route path={routes.unassigned} element={<ErrorPage />}></Route>
+          <Route path={ROUTES.UNASSIGNED} element={<ErrorPage />}></Route>
         </Routes>
         {pageWithFooter && <Footer />}
         <PopupWithInfoTooltip
