@@ -104,7 +104,7 @@ function App() {
       })
       .catch((err) => {
         setRegistrationErrorMessage(
-          err.code === 409 ? AUTH_ERROR_MESSAGES.EMAIL_CONFLICT : AUTH_ERROR_MESSAGES.UNIDENTIFIED,
+          err.status === 409 ? AUTH_ERROR_MESSAGES.EMAIL_CONFLICT : AUTH_ERROR_MESSAGES.UNIDENTIFIED,
         );
         console.log(err);
       })

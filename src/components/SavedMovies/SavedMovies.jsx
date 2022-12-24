@@ -40,7 +40,6 @@ function SavedMovies() {
     const resultMovies = generalFilter(savedMovies, searchValue, shortMoviesFilter);
     updateSavedMoviesListState({ resultMovies });
   }
-  console.log(savedMovies);
 
   function handleToggleFilter(currentState) {
     updateSavedMoviesListState({ shortMoviesFilter: !currentState });
