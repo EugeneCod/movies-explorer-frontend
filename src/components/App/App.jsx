@@ -11,11 +11,19 @@ import {
   Login,
   Footer,
   PopupWithInfoTooltip,
+  ProtectedRoute,
 } from '../';
 
 import { AuthContext } from '../../context/';
 import { routes, authErrorMessages, infoTooltpOptions } from '../../utils/constants';
-import { register, login, logout, getUserInfo, updateUserInfo, getSavedMovies } from '../../utils/mainApi';
+import {
+  register,
+  login,
+  logout,
+  getUserInfo,
+  updateUserInfo,
+  getSavedMovies,
+} from '../../utils/mainApi';
 
 function App() {
   const location = useLocation();
@@ -59,7 +67,7 @@ function App() {
           .then((moviesData) => {
             setSavedMovies(moviesData);
           })
-          .catch((err) => console.log(`${err} при загрузке сохраненных фильмов`))
+          .catch((err) => console.log(`${err} при загрузке сохраненных фильмов`));
       })
       .catch((err) => console.log(`${err} при получении информации о пользователе`));
   }, []);
@@ -71,18 +79,18 @@ function App() {
   function handleUpdateUser(name, email) {
     setIsLoading(true);
     updateUserInfo(name, email)
-      .then(userData => {
+      .then((userData) => {
         setCurrentUser(userData);
         setInfoTooltipData(infoTooltpOptions.profileСhanged);
         setIsInfoTooltipOpen(true);
       })
-      .catch(err => {
+      .catch((err) => {
         setInfoTooltipData(infoTooltpOptions.failure);
         setIsInfoTooltipOpen(true);
       })
       .finally(() => {
         setIsLoading(false);
-    })
+      });
   }
 
   function handleRegistration(name, email, password) {
@@ -137,12 +145,11 @@ function App() {
   }
 
   function handleLogout() {
-    logout()
-      .then((res) => {
-        setLoggedIn(false);
-        navigate(routes.main);
-        clearStorage();
-      })
+    logout().then((res) => {
+      setLoggedIn(false);
+      navigate(routes.main);
+      clearStorage();
+    });
   }
 
   return (
@@ -158,9 +165,30 @@ function App() {
         {pageWithHeader && <Header />}
         <Routes>
           <Route path={routes.main} exact element={<Main />} />
-          <Route path={routes.movies} element={<Movies />} />
-          <Route path={routes.savedMovies} element={<SavedMovies />} />
-          <Route path={routes.profile} element={<Profile onUpdateUser={handleUpdateUser} onLogout={handleLogout} />} />
+          <Route
+            path={routes.movies}
+            element={
+              <ProtectedRoute>
+                <Movies />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={routes.savedMovies}
+            element={
+              <ProtectedRoute>
+                <SavedMovies />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={routes.profile}
+            element={
+              <ProtectedRoute>
+                <Profile onUpdateUser={handleUpdateUser} onLogout={handleLogout} />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path={routes.signup}
             element={

@@ -33,9 +33,15 @@ function SavedMovies() {
     })
   }, [savedMovies, searchText, shortMoviesFilter]);
 
-  async function handleSearchSubmit(searchText) {
-    return;
+  function handleSearchSubmit(searchValue) {
+    if (savedMovies.length === 0) return;
+    updateSavedMoviesListState({ searchText: searchValue });
+    console.log(savedMoviesListState);
+    localStorage.setItem('searchSavedMoviesText', searchValue);
+    const resultMovies = generalFilter(savedMovies, searchValue, shortMoviesFilter);
+    updateSavedMoviesListState({ resultMovies });
   }
+  console.log(savedMovies);
 
   function handleToggleFilter(currentState) {
     updateSavedMoviesListState({ shortMoviesFilter: !currentState });

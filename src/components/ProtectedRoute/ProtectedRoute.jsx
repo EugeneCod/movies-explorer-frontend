@@ -1,9 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import { useContext } from 'react';
+import { Navigate } from 'react-router-dom';
+import { routes } from '../../utils/constants';
+import { AuthContext } from '../../context';
 
-
-function ProtectedRoute({ loggedIn, children, redirectLink }) {
-  const navigate = useNavigate();
-  return loggedIn ? children : navigate(redirectLink);
+function ProtectedRoute({ children }) {
+  const { loggedIn } = useContext(AuthContext);
+  return loggedIn ? children : <Navigate to={routes.main} />
 }
 
 export default ProtectedRoute;
