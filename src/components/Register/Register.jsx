@@ -34,7 +34,7 @@ function Register({ onRegistration, buttonText, registrationError }) {
             name="name"
             label="Имя"
             minLength="2"
-            maxLength="40"
+            maxLength="30"
             pattern="[а-яА-Яa-zA-ZёË\- ]{1,}"
           />
           <AuthInput

@@ -28,6 +28,7 @@
       color: $red;
     }
   }
+
   &__buttons-list {
     margin: 0;
     padding: 0;
@@ -36,6 +37,7 @@
     justify-items: center;
     row-gap: 6px;
   }
+
   &__buttons-list-item {
     font-size: 0;
   }
@@ -61,6 +63,8 @@
     line-height: 1.2104;
     text-align: center;
     margin: 0 0 120px;
+    word-break: break-word;
+
     @media (max-width: 768px) {
       margin-bottom: 94px;
     }
@@ -68,6 +72,7 @@
       margin-bottom: 78px;
     }
   }
+
   &__form {
     width: 100%;
     margin-bottom: 212px;
@@ -78,6 +83,7 @@
       margin-bottom: 372px;
     }
   }
+
   &__form-input {
     font-weight: 400;
     font-size: 11px;
@@ -85,19 +91,19 @@
     background-color: initial;
     border: none;
     color: $main-font-color;
-    flex: 0 0 75%;
     text-align: end;
   }
+
   &__form-label {
     font-weight: 500;
     font-size: 11px;
     line-height: 1.21;
-    flex: 0 0 20%;
   }
+
   &__form-row {
-    display: flex;
+    display: grid;
     justify-content: space-between;
-    padding-bottom: 15px;
+    grid-template-columns: 20% 78%;
     margin-bottom: 17px;
     border-bottom: 1px solid $dark-line-color;
     &:last-child {
@@ -105,5 +111,17 @@
       border-bottom: none;
       padding-bottom: 0;
     }
+  }
+
+  &__input-error {
+    grid-column: 1/3;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 1.21;
+    color: $red;
+    opacity: 1;
+    transition: opacity .4s;
+    min-height: 15px;
+    text-align: center;
   }
 }

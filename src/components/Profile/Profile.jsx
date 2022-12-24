@@ -7,7 +7,19 @@ function Profile({ onUpdateUser, onLogout }) {
   const auth = useContext(AuthContext);
   const { currentUser, isLoading } = auth;
   const [inputsСhanged, setInputsСhanged] = useState(false);
-  const { values, setValues, handleChange } = useFormAndValidation(false);
+  const {
+    values,
+    setValues,
+    handleChange,
+    hadleShiftFocus,
+    errors,
+    setErrors,
+    inputsValidity,
+    setInputsValidity,
+    isValid,
+    setIsValid,
+    resetForm,
+  } = useFormAndValidation(false);
 
   useEffect(() => {
     setValues({
@@ -17,7 +29,7 @@ function Profile({ onUpdateUser, onLogout }) {
   }, [currentUser]);
 
   useEffect(() => {
-    (values.name !== currentUser.name || values.email !== currentUser.email)
+    values.name !== currentUser.name || values.email !== currentUser.email
       ? setInputsСhanged(true)
       : setInputsСhanged(false);
   }, [setValues, currentUser, values]);
@@ -26,6 +38,9 @@ function Profile({ onUpdateUser, onLogout }) {
     evt.preventDefault();
     onUpdateUser(values.name, values.email);
   }
+  console.log(`данные изменены ${inputsСhanged}`);
+  console.log(`форма валидна ${isValid}`);
+  console.log(`должна быть неактивна ${!inputsСhanged || !isValid}`);
   
   return (
     <main className="profile">
@@ -42,12 +57,14 @@ function Profile({ onUpdateUser, onLogout }) {
               id="name"
               name="name"
               minLength="2"
-              maxLength="40"
+              maxLength="30"
               pattern="[а-яА-Яa-zA-ZёË\- ]{1,}"
               className="profile__form-input"
               value={values.name || ''}
               onChange={handleChange}
+              onBlur={hadleShiftFocus}
             />
+            <span className="profile__input-error">{errors.name || ''}</span>
           </div>
           <div className="profile__form-row">
             <label htmlFor="email" className="profile__form-label">
@@ -61,7 +78,9 @@ function Profile({ onUpdateUser, onLogout }) {
               className="profile__form-input"
               value={values.email || ''}
               onChange={handleChange}
+              onBlur={hadleShiftFocus}
             />
+            <span className="profile__input-error">{errors.email || ''}</span>
           </div>
         </form>
         <ul className="profile__buttons-list">
@@ -69,7 +88,7 @@ function Profile({ onUpdateUser, onLogout }) {
             <button
               form="profile"
               className={classNames('profile__button profile__button_function_edit', {
-                profile__button_inactive: !inputsСhanged || isLoading,
+                profile__button_inactive: !inputsСhanged || !isValid || isLoading,
               })}>
               {!isLoading ? 'Редактировать' : '...Выполнение'}
             </button>
