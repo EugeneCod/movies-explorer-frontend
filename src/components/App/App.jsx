@@ -31,19 +31,18 @@ function App() {
 
   const [pageWithHeader, setPageWithHeader] = useState(true);
   const [pageWithFooter, setPageWithFooter] = useState(true);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem('preauthorization')));
   const [isLoading, setIsLoading] = useState(false);
   const [registrationErrorMessage, setRegistrationErrorMessage] = useState('');
   const [loginErrorMessage, setLogintionErrorMessage] = useState('');
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [infoTooltipData, setInfoTooltipData] = useState({ text: '', imageName: '' });
   const [savedMovies, setSavedMovies] = useState([]);
-
   const [currentUser, setCurrentUser] = useState({ email: '', name: '' });
 
   useEffect(() => {
-    const pathesWithHeaderAndFooter = ['/', '/movies', '/saved-movies'];
-    const pathesWithHeaderWithoutFooter = ['/profile'];
+    const pathesWithHeaderAndFooter = [routes.main, routes.movies, routes.savedMovies];
+    const pathesWithHeaderWithoutFooter = [routes.profile];
     if (pathesWithHeaderAndFooter.includes(location.pathname)) {
       setPageWithHeader(true);
       setPageWithFooter(true);
@@ -61,6 +60,7 @@ function App() {
   useEffect(() => {
     getUserInfo()
       .then((userData) => {
+        
         setLoggedIn(true);
         setCurrentUser(userData);
         getSavedMovies()
@@ -69,9 +69,12 @@ function App() {
           })
           .catch((err) => console.log(`${err} при загрузке сохраненных фильмов`));
       })
-      .catch((err) => console.log(`${err} при получении информации о пользователе`));
+      .catch((err) => {
+        console.log(`${err} при получении информации о пользователе`);
+        setLoggedIn(false);
+      });
   }, []);
-
+  
   function closeInfoTooltip() {
     setIsInfoTooltipOpen(false);
   }
@@ -110,7 +113,7 @@ function App() {
         setIsLoading(false);
       });
   }
-
+  
   function handleLogin(email, password) {
     setIsLoading(true);
     login(email, password)
@@ -120,6 +123,7 @@ function App() {
             setCurrentUser(userData);
           })
           .catch((err) => console.log(`${err} при загрузке данных о текущем пользователе`));
+        localStorage.setItem('preauthorization', JSON.stringify(true));
         setLoggedIn(true);
         navigate(routes.movies);
         setLogintionErrorMessage('');
@@ -134,10 +138,9 @@ function App() {
   }
 
   function clearStorage() {
+    localStorage.removeItem('preauthorization');
     localStorage.removeItem('initialMovies');
     localStorage.removeItem('resultMovies');
-    // localStorage.removeItem('savedMovies');
-    // localStorage.removeItem('resultSavedMovies');
     localStorage.removeItem('searchText');
     localStorage.removeItem('searchSavedMoviesText');
     localStorage.removeItem('filterShortMovies');

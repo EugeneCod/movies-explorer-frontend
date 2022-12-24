@@ -13,14 +13,8 @@ function Profile({ onUpdateUser, onLogout }) {
     handleChange,
     hadleShiftFocus,
     errors,
-    setErrors,
-    inputsValidity,
-    setInputsValidity,
     isValid,
-    setIsValid,
-    resetForm,
   } = useFormAndValidation(false);
-  console.log(isLoading);
 
   useEffect(() => {
     setValues({
