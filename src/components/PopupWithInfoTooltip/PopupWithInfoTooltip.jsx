@@ -13,9 +13,9 @@ function PopupWithInfoTooltip({ isOpen, onClose, data }) {
       name = "info"
     >
       <div className="info-tooltip">
-          <img className="info-tooltip__image" src={images[data.imageName]} alt="Инфографика" />
+          <img className="info-tooltip__image" src={images[data.IMAGE_NAME]} alt="Инфографика" />
           <p className="info-tooltip__text">
-            {data.text}
+            {data.TEXT}
           </p>
         </div>
     </Popup>
