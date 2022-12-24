@@ -38,12 +38,12 @@ function MoviesCardList({ state, onSearchSubmit, onToggleFilter, onMovieLike, on
 
   useEffect(() => {
     if (!wasSaved) {
-      if (windowWidth <= mobileWidth) {
-        setMoviesQuantity(minNumberOfCards);
-      } else {
-        setMoviesQuantity(maxNumberOfCards);
-      }
-    }
+      window.addEventListener('resize', handleResize);
+
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    };
   }, []);
 
   function handleResize() {

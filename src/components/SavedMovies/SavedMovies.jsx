@@ -2,7 +2,7 @@ import { useReducer, useEffect, useContext } from 'react';
 
 import { AuthContext } from '../../context';
 import { MoviesCardList } from '../';
-import { deleteMovie, getSavedMovies } from '../../utils/mainApi';
+import { deleteMovie } from '../../utils/mainApi';
 import { generalFilter } from '../../utils/functions';
 
 function SavedMovies() {

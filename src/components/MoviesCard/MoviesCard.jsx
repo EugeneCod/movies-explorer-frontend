@@ -5,7 +5,7 @@ import { AuthContext } from '../../context';
 import { url } from '../../utils/constants';
 
 function MoviesCard({ movie, wasSavedList, onMovieRemove, onMovieLike }) {
-  const { savedMovies, setSavedMovies } = useContext(AuthContext);
+  const { savedMovies } = useContext(AuthContext);
   const [isLiked, setIsLiked] = useState(false);
   const [resDuration, setResDuration] = useState('');
   const [savedMovieId, setSavedMovieId] = useState('');

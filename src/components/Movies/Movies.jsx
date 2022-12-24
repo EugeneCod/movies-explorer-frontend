@@ -7,7 +7,7 @@ import { saveMovie, deleteMovie } from '../../utils/mainApi';
 import { generalFilter, prepareMovieForSaving } from '../../utils/functions';
 
 function Movies() {
-  const { savedMovies, setSavedMovies } = useContext(AuthContext);
+  const { setSavedMovies } = useContext(AuthContext);
   const initialMoviesListState = {
     initialMovies: JSON.parse(localStorage.getItem('initialMovies')) || [],
     resultMovies: JSON.parse(localStorage.getItem('resultMovies')) || [],
