@@ -31,7 +31,6 @@ function MoviesCard({ movie, wasSavedList, onMovieRemove, onMovieLike }) {
       setSavedMovieId('');
     }
   }, [wasSavedList, savedMovies, movie]);
-  console.log(isLiked);
 
   function handleLikeClick() {
     !isLiked ? onMovieLike(movie) : onMovieRemove(savedMovieId);

@@ -58,24 +58,12 @@ function Movies() {
       }
     }
     const resultMovies = generalFilter(foundMovies, searchValue, shortMoviesFilter);
-    updateMoviesListState({ resultMovies: resultMovies, isLoading: false });
+    updateMoviesListState({ resultMovies, isLoading: false });
 
     localStorage.setItem('resultMovies', JSON.stringify(resultMovies));
     resultMovies.length === 0
-      ? updateMoviesListState({
-          moviesLoadingStatus: {
-            ...moviesListState.moviesLoadingStatus,
-            successfully: false,
-            noResult: true,
-          },
-        })
-      : updateMoviesListState({
-          moviesLoadingStatus: {
-            ...moviesListState.moviesLoadingStatus,
-            successfully: true,
-            noResult: false,
-          },
-        });
+      ? updateMoviesListState({ successfully: false, noResult: true })
+      : updateMoviesListState({ successfully: true, noResult: false });
   }
 
   function handleToggleFilter(currentState) {

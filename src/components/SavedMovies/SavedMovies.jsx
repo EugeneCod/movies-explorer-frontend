@@ -43,11 +43,13 @@ function SavedMovies() {
   }
 
   function handleMovieRemove(movieId) {
-    console.log(movieId);
     deleteMovie(movieId)
       .then((removedMovie) => {
         updateSavedMoviesListState({
           resultMovies: savedMoviesListState.resultMovies.filter((movie) => movie._id !== movieId),
+        });
+        setSavedMovies((prev) => {
+          return prev.filter((movie) => movie._id !== movieId);
         });
       })
       .catch((err) => {

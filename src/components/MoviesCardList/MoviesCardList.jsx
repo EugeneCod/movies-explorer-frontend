@@ -17,21 +17,14 @@ function MoviesCardList({ state, onSearchSubmit, onToggleFilter, onMovieLike, on
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [moviesQuantity, setMoviesQuantity] = useState(maxNumberOfCards);
-  const [renderedMovies, setRenderedMovies] = useState(resultMovies);
+  const [renderedMovies, setRenderedMovies] = useState([]);
   let timeoutId = null;
-  
 
   useEffect(() => {
-    if (!wasSaved) {
-      window.addEventListener('resize', handleResize);
-
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
-    } else {
-      setRenderedMovies(resultMovies.slice(0).reverse());
-    }
-  }, [resultMovies]);
+    wasSaved
+      ? setRenderedMovies(resultMovies.slice(0).reverse())
+      : setRenderedMovies(resultMovies);
+  }, [resultMovies, wasSaved]);
 
   useEffect(() => {
     if (!wasSaved) {
@@ -42,6 +35,16 @@ function MoviesCardList({ state, onSearchSubmit, onToggleFilter, onMovieLike, on
       }
     }
   }, [wasSaved, windowWidth, maxNumberOfCards, minNumberOfCards, mobileWidth]);
+
+  useEffect(() => {
+    if (!wasSaved) {
+      if (windowWidth <= mobileWidth) {
+        setMoviesQuantity(minNumberOfCards);
+      } else {
+        setMoviesQuantity(maxNumberOfCards);
+      }
+    }
+  }, []);
 
   function handleResize() {
     clearTimeout(timeoutId);
@@ -89,7 +92,7 @@ function MoviesCardList({ state, onSearchSubmit, onToggleFilter, onMovieLike, on
                 />
               ))}
           </ul>
-          {(resultMovies.length > moviesQuantity || !wasSaved) && (
+          {(resultMovies.length > moviesQuantity && !wasSaved) && (
             <button onClick={displayMoreMovies} className="movies-card-list__button-more">
               Ещё
             </button>
