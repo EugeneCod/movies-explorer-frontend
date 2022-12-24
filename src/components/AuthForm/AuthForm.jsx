@@ -16,7 +16,8 @@ function AuthForm({ children, name, onSubmit, title, buttonText, isValid, classN
         <p className="auth-form__notification-block">{notification}</p>
         <button
           type="submit"
-          className={classNames('auth-form__button', { 'auth-form__button_inactive': !isValid })}>
+          className={classNames('auth-form__button', { 'auth-form__button_inactive': !isValid })}
+          disabled={!isValid}>
           {buttonText}
         </button>
       </fieldset>

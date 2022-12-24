@@ -160,6 +160,7 @@ function App() {
         currentUser,
         savedMovies,
         setSavedMovies,
+        isLoading,
       }}>
       <div className="app">
         {pageWithHeader && <Header />}

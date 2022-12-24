@@ -20,6 +20,7 @@ function Profile({ onUpdateUser, onLogout }) {
     setIsValid,
     resetForm,
   } = useFormAndValidation(false);
+  console.log(isLoading);
 
   useEffect(() => {
     setValues({
@@ -38,9 +39,6 @@ function Profile({ onUpdateUser, onLogout }) {
     evt.preventDefault();
     onUpdateUser(values.name, values.email);
   }
-  console.log(`данные изменены ${inputsСhanged}`);
-  console.log(`форма валидна ${isValid}`);
-  console.log(`должна быть неактивна ${!inputsСhanged || !isValid}`);
   
   return (
     <main className="profile">
@@ -89,7 +87,9 @@ function Profile({ onUpdateUser, onLogout }) {
               form="profile"
               className={classNames('profile__button profile__button_function_edit', {
                 profile__button_inactive: !inputsСhanged || !isValid || isLoading,
-              })}>
+              })}
+              disabled={!inputsСhanged || !isValid || isLoading}
+            >
               {!isLoading ? 'Редактировать' : '...Выполнение'}
             </button>
           </li>
