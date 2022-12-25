@@ -9,7 +9,7 @@ import { generalFilter, prepareMovieForSaving, clearStorage } from '../../utils/
 
 function Movies() {
   const navigate = useNavigate();
-  const { setSavedMovies, setLoggedIn } = useContext(CurrentUserContext);
+  const { setSavedMovies, setLoggedIn, isLoading, setIsLoading } = useContext(CurrentUserContext);
   const initialMoviesListState = {
     initialMovies: JSON.parse(localStorage.getItem('initialMovies')) || [],
     resultMovies: JSON.parse(localStorage.getItem('resultMovies')) || [],
@@ -74,6 +74,8 @@ function Movies() {
   }
 
   function handleMovieLike(movie) {
+    if (isLoading) return;
+    setIsLoading(true)
     saveMovie(prepareMovieForSaving(movie))
       .then((savedMovie) => {
         setSavedMovies((prev) => {
@@ -87,10 +89,15 @@ function Movies() {
           setLoggedIn(false);
           return;
         }
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 
   function handleMovieRemove(movieId) {
+    if (isLoading) return;
+    setIsLoading(true)
     deleteMovie(movieId)
       .then((removedMovie) => {
         setSavedMovies((prev) => {
@@ -104,6 +111,9 @@ function Movies() {
           setLoggedIn(false);
           return;
         }
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 

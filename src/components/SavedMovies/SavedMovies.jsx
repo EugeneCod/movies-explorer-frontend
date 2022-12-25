@@ -8,7 +8,7 @@ import { generalFilter, clearStorage } from '../../utils/functions';
 
 function SavedMovies() {
   const navigate = useNavigate();
-  const { savedMovies, setSavedMovies, setLoggedIn } = useContext(CurrentUserContext);
+  const { savedMovies, setSavedMovies, setLoggedIn, isLoading, setIsLoading } = useContext(CurrentUserContext);
   const initialSavedMoviesListState = {
     resultMovies: savedMovies || [],
     searchText: '',
@@ -47,6 +47,8 @@ function SavedMovies() {
   }
 
   function handleMovieRemove(movieId) {
+    if (isLoading) return;
+    setIsLoading(true)
     deleteMovie(movieId)
       .then((removedMovie) => {
         updateSavedMoviesListState({
@@ -63,6 +65,9 @@ function SavedMovies() {
           setLoggedIn(false);
           return;
         }
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 

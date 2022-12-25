@@ -175,6 +175,7 @@ function App() {
         savedMovies,
         setSavedMovies,
         isLoading,
+        setIsLoading,
       }}>
       <div className="app">
         {pageWithHeader && <Header />}
