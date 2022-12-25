@@ -12,6 +12,7 @@ export const SEARCH_FORM_ERROR_MESSAGES = {
 export const AUTH_ERROR_MESSAGES = {
   EMAIL_CONFLICT: 'Пользователь с таким email уже зарегистрирован',
   UNIDENTIFIED: 'В процессе авторизации произошла ошибка',
+  INCORRECT_EMAIL_OR_PASSWORD: 'Неправильные почта или пароль',
 }
 
 export const MOVIES_DATA = {

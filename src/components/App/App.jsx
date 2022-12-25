@@ -34,7 +34,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem('preauthorization')));
   const [isLoading, setIsLoading] = useState(false);
   const [registrationErrorMessage, setRegistrationErrorMessage] = useState('');
-  const [loginErrorMessage, setLogintionErrorMessage] = useState('');
+  const [loginErrorMessage, setLoginErrorMessage] = useState('');
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [infoTooltipData, setInfoTooltipData] = useState({ text: '', imageName: '' });
   const [savedMovies, setSavedMovies] = useState([]);
@@ -125,11 +125,12 @@ function App() {
         localStorage.setItem('preauthorization', JSON.stringify(true));
         setLoggedIn(true);
         navigate(ROUTES.MOVIES);
-        setLogintionErrorMessage('');
+        setLoginErrorMessage('');
       })
       .catch((err) => {
-        setLogintionErrorMessage(AUTH_ERROR_MESSAGES.UNIDENTIFIED);
-        console.log(err);
+        setLoginErrorMessage(
+          err.status === 401 ? AUTH_ERROR_MESSAGES.INCORRECT_EMAIL_OR_PASSWORD : AUTH_ERROR_MESSAGES.UNIDENTIFIED
+        );
       })
       .finally(() => {
         setIsLoading(false);
@@ -141,9 +142,7 @@ function App() {
     localStorage.removeItem('initialMovies');
     localStorage.removeItem('resultMovies');
     localStorage.removeItem('searchText');
-    // localStorage.removeItem('searchSavedMoviesText');
     localStorage.removeItem('filterShortMovies');
-    // localStorage.removeItem('filterShortSavedMovies');
   }
 
   function handleLogout() {
@@ -201,7 +200,7 @@ function App() {
                 <Register
                   buttonText={!isLoading ? 'Зарегистрироваться' : 'Выполнение...'}
                   onRegistration={handleRegistration}
-                  registrationError={registrationErrorMessage}
+                  errorMessage={registrationErrorMessage}
                 />
               )
             }
@@ -215,7 +214,7 @@ function App() {
                 <Login
                   buttonText={!isLoading ? 'Войти' : 'Выполнение...'}
                   onLogin={handleLogin}
-                  registrationError={loginErrorMessage}
+                  errorMessage={loginErrorMessage}
                 />
               )
             }

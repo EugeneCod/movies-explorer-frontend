@@ -3,7 +3,7 @@ import { Logo, AuthForm, AuthInput } from '../';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 import { ROUTES, REGEX } from '../../utils/constants';
 
-function Login({ buttonText, onLogin, loginErrorMessage }) {
+function Login({ buttonText, onLogin, errorMessage }) {
   const { values, handleChange, hadleShiftFocus, errors, inputsValidity, isValid } =
     useFormAndValidation(false);
 
@@ -23,7 +23,7 @@ function Login({ buttonText, onLogin, loginErrorMessage }) {
           title="Рады видеть!"
           buttonText={buttonText}
           isValid={isValid}
-          notification={loginErrorMessage}>
+          notification={errorMessage}>
           <AuthInput
             value={values.email || ''}
             error={errors.email || ''}
