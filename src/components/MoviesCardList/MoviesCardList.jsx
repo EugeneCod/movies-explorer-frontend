@@ -21,9 +21,12 @@ function MoviesCardList({ state, onSearchSubmit, onToggleFilter, onMovieLike, on
   let timeoutId = null;
 
   useEffect(() => {
-    wasSaved
-      ? setRenderedMovies(resultMovies.slice(0).reverse())
-      : setRenderedMovies(resultMovies);
+    if (wasSaved) {
+      setRenderedMovies(resultMovies.slice(0).reverse());
+      setMoviesQuantity(resultMovies.length);
+    } else {
+      setRenderedMovies(resultMovies);
+    }
   }, [resultMovies, wasSaved]);
 
   useEffect(() => {

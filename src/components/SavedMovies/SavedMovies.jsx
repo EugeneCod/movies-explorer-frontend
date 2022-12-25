@@ -26,8 +26,6 @@ function SavedMovies() {
 
   useEffect(() => {
     const filteredMovies = generalFilter(savedMovies, searchText, shortMoviesFilter);
-    console.log(savedMovies, searchText, shortMoviesFilter);
-    console.log(filteredMovies);
     updateSavedMoviesListState({
       resultMovies: generalFilter(filteredMovies, searchText, shortMoviesFilter),
       successfully: true,
