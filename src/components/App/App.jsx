@@ -94,8 +94,13 @@ function App() {
           setLoggedIn(false);
           return;
         }
-        setInfoTooltipData(INFO_TOOLTIP_OPTIONS.FAILURE);
-        setIsInfoTooltipOpen(true);
+        if (err.status === 409) {
+          setInfoTooltipData(INFO_TOOLTIP_OPTIONS.EMAIL_CONFLICT);
+          setIsInfoTooltipOpen(true);
+          return
+        }
+          setInfoTooltipData(INFO_TOOLTIP_OPTIONS.FAILURE);
+          setIsInfoTooltipOpen(true);
       })
       .finally(() => {
         setIsLoading(false);

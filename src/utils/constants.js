@@ -48,6 +48,10 @@ export const INFO_TOOLTIP_OPTIONS = {
     TEXT: 'Данные профиля успешно обновлены!',
     IMAGE_NAME: 'approval'
   },
+  EMAIL_CONFLICT: {
+    TEXT: AUTH_ERROR_MESSAGES.EMAIL_CONFLICT,
+    IMAGE_NAME: 'failure'
+  },
   FAILURE: {
     TEXT: 'Что-то пошло не так! Попробуйте ещё раз.',
     IMAGE_NAME: 'failure'
