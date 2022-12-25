@@ -1,4 +1,6 @@
+import { useContext } from 'react';
 import classNames from 'classnames';
+import { CurrentUserContext } from '../../context';
 
 function AuthInput({
   value,
@@ -13,6 +15,7 @@ function AuthInput({
   maxLength,
   pattern,
 }) {
+  const { isLoading } = useContext(CurrentUserContext);
 
   function handleChange(evt) {
     onChange(evt);
@@ -37,6 +40,7 @@ function AuthInput({
         minLength={minLength}
         maxLength={maxLength}
         pattern={pattern}
+        readOnly={isLoading}
         className={classNames('auth-input__input-line', {
           'auth-input__input-line_invalid': !isValid,
         })}

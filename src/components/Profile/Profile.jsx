@@ -55,6 +55,7 @@ function Profile({ onUpdateUser, onLogout }) {
               value={values.name || ''}
               onChange={handleChange}
               onBlur={hadleShiftFocus}
+              readOnly={isLoading}
             />
             <span className="profile__input-error">{errors.name || ''}</span>
           </div>
@@ -72,6 +73,7 @@ function Profile({ onUpdateUser, onLogout }) {
               onChange={handleChange}
               onBlur={hadleShiftFocus}
               pattern={REGEX.EMAIL}
+              readOnly={isLoading}
             />
             <span className="profile__input-error">{errors.email || ''}</span>
           </div>
