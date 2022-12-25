@@ -104,7 +104,9 @@ function App() {
       })
       .catch((err) => {
         setRegistrationErrorMessage(
-          err.status === 409 ? AUTH_ERROR_MESSAGES.EMAIL_CONFLICT : AUTH_ERROR_MESSAGES.UNIDENTIFIED,
+          err.status === 409
+            ? AUTH_ERROR_MESSAGES.EMAIL_CONFLICT
+            : AUTH_ERROR_MESSAGES.UNIDENTIFIED,
         );
         console.log(err);
       })
@@ -120,6 +122,11 @@ function App() {
         getUserInfo()
           .then((userData) => {
             setCurrentUser(userData);
+            getSavedMovies()
+              .then((moviesData) => {
+                setSavedMovies(moviesData);
+              })
+              .catch((err) => console.log(`${err} при загрузке сохраненных фильмов`));
           })
           .catch((err) => console.log(`${err} при загрузке данных о текущем пользователе`));
         localStorage.setItem('preauthorization', JSON.stringify(true));
@@ -129,7 +136,9 @@ function App() {
       })
       .catch((err) => {
         setLoginErrorMessage(
-          err.status === 401 ? AUTH_ERROR_MESSAGES.INCORRECT_EMAIL_OR_PASSWORD : AUTH_ERROR_MESSAGES.UNIDENTIFIED
+          err.status === 401
+            ? AUTH_ERROR_MESSAGES.INCORRECT_EMAIL_OR_PASSWORD
+            : AUTH_ERROR_MESSAGES.UNIDENTIFIED,
         );
       })
       .finally(() => {
