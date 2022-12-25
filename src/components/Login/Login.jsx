@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { Logo, AuthForm, AuthInput } from '../';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
-import { ROUTES } from '../../utils/constants';
+import { ROUTES, REGEX } from '../../utils/constants';
 
 function Login({ buttonText, onLogin, loginErrorMessage }) {
   const { values, handleChange, hadleShiftFocus, errors, inputsValidity, isValid } =
@@ -35,6 +35,7 @@ function Login({ buttonText, onLogin, loginErrorMessage }) {
             label="E-mail"
             minLength=""
             maxLength=""
+            pattern={REGEX.EMAIL}
           />
           <AuthInput
             value={values.password || ''}

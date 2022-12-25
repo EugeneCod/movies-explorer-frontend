@@ -1,9 +1,13 @@
 import { NavLink } from 'react-router-dom';
 import { Logo, AuthForm, AuthInput } from '../';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
-import { ROUTES } from '../../utils/constants';
+import { ROUTES, REGEX } from '../../utils/constants';
 
 function Register({ onRegistration, buttonText, registrationError }) {
+  function check() {
+    console.log(REGEX.EMAIL.test('joeblogs@email.com.su'));
+  }
+  
   const { values, handleChange, hadleShiftFocus, errors, inputsValidity, isValid } =
     useFormAndValidation(false);
 
@@ -13,6 +17,7 @@ function Register({ onRegistration, buttonText, registrationError }) {
   }
   return (
     <main className="register">
+      <button onClick={check}>НАЖМИ</button>
       <div className="register__container">
         <Logo className="register__logo" />
         <AuthForm
@@ -34,7 +39,7 @@ function Register({ onRegistration, buttonText, registrationError }) {
             label="Имя"
             minLength="2"
             maxLength="30"
-            pattern="[а-яА-Яa-zA-ZёË\- ]{1,}"
+            pattern={REGEX.NAME}
           />
           <AuthInput
             value={values.email || ''}
@@ -47,6 +52,7 @@ function Register({ onRegistration, buttonText, registrationError }) {
             label="E-mail"
             minLength=""
             maxLength=""
+            pattern={REGEX.EMAIL}
           />
           <AuthInput
             value={values.password || ''}

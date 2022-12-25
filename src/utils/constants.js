@@ -52,3 +52,8 @@ export const INFO_TOOLTIP_OPTIONS = {
     IMAGE_NAME: 'failure'
   }
 }
+
+export const REGEX = {
+  NAME: '[а-яА-Яa-zA-ZёË\\- ]{1,}',
+  EMAIL: '^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$',
+}
