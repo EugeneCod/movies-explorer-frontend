@@ -4,10 +4,6 @@ import useFormAndValidation from '../../hooks/useFormAndValidation';
 import { ROUTES, REGEX } from '../../utils/constants';
 
 function Register({ onRegistration, buttonText, registrationError }) {
-  function check() {
-    console.log(REGEX.EMAIL.test('joeblogs@email.com.su'));
-  }
-  
   const { values, handleChange, hadleShiftFocus, errors, inputsValidity, isValid } =
     useFormAndValidation(false);
 
@@ -17,7 +13,6 @@ function Register({ onRegistration, buttonText, registrationError }) {
   }
   return (
     <main className="register">
-      <button onClick={check}>НАЖМИ</button>
       <div className="register__container">
         <Logo className="register__logo" />
         <AuthForm
@@ -57,7 +52,7 @@ function Register({ onRegistration, buttonText, registrationError }) {
           <AuthInput
             value={values.password || ''}
             error={errors.password || ''}
-            isValid={inputsValidity.name || ''}
+            isValid={inputsValidity.password || ''}
             onChange={handleChange}
             onBlur={hadleShiftFocus}
             type="password"

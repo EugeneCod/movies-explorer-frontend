@@ -40,7 +40,7 @@ function Login({ buttonText, onLogin, loginErrorMessage }) {
           <AuthInput
             value={values.password || ''}
             error={errors.password || ''}
-            isValid={inputsValidity.name || ''}
+            isValid={inputsValidity.password || ''}
             onChange={handleChange}
             onBlur={hadleShiftFocus}
             type="password"
