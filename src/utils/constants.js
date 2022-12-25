@@ -1,6 +1,8 @@
 export const URL = {
-  MAIN_API: 'https://api.diplom.ekg.nomoredomains.club',
+  MAIN_API: 'http://localhost:3001',
   MOVIES_API: 'https://api.nomoreparties.co',
+  // https://api.diplom.ekg.nomoredomains.club
+  // http://localhost:3001
 }
 
 export const SEARCH_FORM_ERROR_MESSAGES = {

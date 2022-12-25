@@ -141,9 +141,9 @@ function App() {
     localStorage.removeItem('initialMovies');
     localStorage.removeItem('resultMovies');
     localStorage.removeItem('searchText');
-    localStorage.removeItem('searchSavedMoviesText');
+    // localStorage.removeItem('searchSavedMoviesText');
     localStorage.removeItem('filterShortMovies');
-    localStorage.removeItem('filterShortSavedMovies');
+    // localStorage.removeItem('filterShortSavedMovies');
   }
 
   function handleLogout() {

@@ -3,7 +3,6 @@ import {MOVIES_DATA, URL} from './constants';
 function generalFilter(moviesArray, searchText, filterShortMovies) {
   const isRusLang = checkRusLang(searchText);
   const foundMovies = filterTheArrayByKeyString(moviesArray, searchText, isRusLang);
-
   const resultMovies =
     filterShortMovies === true
       ? filterTheArrayByDuration(foundMovies, MOVIES_DATA.SHORT_MOVIE_DURATION)

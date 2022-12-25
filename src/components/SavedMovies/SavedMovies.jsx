@@ -8,8 +8,8 @@ function SavedMovies() {
   const { savedMovies, setSavedMovies } = useContext(CurrentUserContext);
   const initialSavedMoviesListState = {
     resultMovies: savedMovies || [],
-    searchText: localStorage.getItem('searchSavedMoviesText') || '',
-    shortMoviesFilter: JSON.parse(localStorage.getItem('filterShortSavedMovies')) || false,
+    searchText: '',
+    shortMoviesFilter: false,
     wasSaved: true,
     isLoading: false,
     isLoadingError: false,
@@ -26,6 +26,8 @@ function SavedMovies() {
 
   useEffect(() => {
     const filteredMovies = generalFilter(savedMovies, searchText, shortMoviesFilter);
+    console.log(savedMovies, searchText, shortMoviesFilter);
+    console.log(filteredMovies);
     updateSavedMoviesListState({
       resultMovies: generalFilter(filteredMovies, searchText, shortMoviesFilter),
       successfully: true,
@@ -35,15 +37,12 @@ function SavedMovies() {
   function handleSearchSubmit(searchValue) {
     if (savedMovies.length === 0) return;
     updateSavedMoviesListState({ searchText: searchValue });
-    console.log(savedMoviesListState);
-    localStorage.setItem('searchSavedMoviesText', searchValue);
     const resultMovies = generalFilter(savedMovies, searchValue, shortMoviesFilter);
     updateSavedMoviesListState({ resultMovies });
   }
 
   function handleToggleFilter(currentState) {
     updateSavedMoviesListState({ shortMoviesFilter: !currentState });
-    localStorage.setItem('filterShortMovies', JSON.stringify(!currentState));
   }
 
   function handleMovieRemove(movieId) {
