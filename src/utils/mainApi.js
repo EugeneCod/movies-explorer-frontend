@@ -64,7 +64,7 @@ export const updateUserInfo =  async (name, email) => {
     credentials: 'include',
   });
   const json = await response.json();
-  return response.ok ? json : Promise.reject(json.message);
+  return response.ok ? json : Promise.reject(response);
 }
 
 
@@ -92,7 +92,7 @@ export const saveMovie =  async (movieData) => {
     credentials: 'include',
   });
   const json = await response.json();
-  return response.ok ? json : Promise.reject(json.message);
+  return response.ok ? json : Promise.reject(response);
 }
 
 export const deleteMovie =  async (movieId) => {
@@ -104,5 +104,5 @@ export const deleteMovie =  async (movieId) => {
     credentials: 'include',
   });
   const json = await response.json();
-  return response.ok ? json : Promise.reject(json.message);
+  return response.ok ? json : Promise.reject(response);
 }

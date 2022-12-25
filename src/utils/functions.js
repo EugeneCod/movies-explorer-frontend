@@ -44,4 +44,12 @@ function prepareMovieForSaving(data) {
   return result;
 }
 
-export {generalFilter, prepareMovieForSaving}
+function clearStorage() {
+  localStorage.removeItem('preauthorization');
+  localStorage.removeItem('initialMovies');
+  localStorage.removeItem('resultMovies');
+  localStorage.removeItem('searchText');
+  localStorage.removeItem('filterShortMovies');
+}
+
+export {generalFilter, prepareMovieForSaving, clearStorage}

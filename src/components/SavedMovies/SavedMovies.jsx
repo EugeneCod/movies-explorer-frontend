@@ -1,11 +1,14 @@
 import { useReducer, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../context';
 import { MoviesCardList } from '../';
 import { deleteMovie } from '../../utils/mainApi';
-import { generalFilter } from '../../utils/functions';
+import { ROUTES } from '../../utils/constants';
+import { generalFilter, clearStorage } from '../../utils/functions';
 
 function SavedMovies() {
-  const { savedMovies, setSavedMovies } = useContext(CurrentUserContext);
+  const navigate = useNavigate();
+  const { savedMovies, setSavedMovies, setLoggedIn } = useContext(CurrentUserContext);
   const initialSavedMoviesListState = {
     resultMovies: savedMovies || [],
     searchText: '',
@@ -54,7 +57,12 @@ function SavedMovies() {
         });
       })
       .catch((err) => {
-        console.log(err);
+        if (err.status === 401) {
+          navigate(ROUTES.MAIN);
+          clearStorage();
+          setLoggedIn(false);
+          return;
+        }
       });
   }
 

@@ -1,13 +1,15 @@
 import { useReducer, useEffect, useContext } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../context';
 import { MoviesCardList } from '../';
 import { getMovies } from '../../utils/moviesApi';
 import { saveMovie, deleteMovie } from '../../utils/mainApi';
-import { generalFilter, prepareMovieForSaving } from '../../utils/functions';
+import { ROUTES } from '../../utils/constants';
+import { generalFilter, prepareMovieForSaving, clearStorage } from '../../utils/functions';
 
 function Movies() {
-  const { setSavedMovies } = useContext(CurrentUserContext);
+  const navigate = useNavigate();
+  const { setSavedMovies, setLoggedIn } = useContext(CurrentUserContext);
   const initialMoviesListState = {
     initialMovies: JSON.parse(localStorage.getItem('initialMovies')) || [],
     resultMovies: JSON.parse(localStorage.getItem('resultMovies')) || [],
@@ -79,7 +81,12 @@ function Movies() {
         });
       })
       .catch((err) => {
-        console.log(err);
+        if (err.status === 401) {
+          navigate(ROUTES.MAIN);
+          clearStorage();
+          setLoggedIn(false);
+          return;
+        }
       });
   }
 
@@ -91,7 +98,12 @@ function Movies() {
         });
       })
       .catch((err) => {
-        console.log(err);
+        if (err.status === 401) {
+          navigate(ROUTES.MAIN);
+          clearStorage();
+          setLoggedIn(false);
+          return;
+        }
       });
   }
 

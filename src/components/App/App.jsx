@@ -15,6 +15,7 @@ import {
 } from '../';
 
 import { CurrentUserContext } from '../../context/';
+import { clearStorage } from '../../utils/functions'
 import { ROUTES, AUTH_ERROR_MESSAGES, INFO_TOOLTIP_OPTIONS } from '../../utils/constants';
 import {
   register,
@@ -87,7 +88,13 @@ function App() {
         setIsInfoTooltipOpen(true);
       })
       .catch((err) => {
-        setInfoTooltipData(INFO_TOOLTIP_OPTIONS.PROFILE_CHANGED);
+        if (err.status === 401) {
+          navigate(ROUTES.MAIN);
+          clearStorage();
+          setLoggedIn(false);
+          return;
+        }
+        setInfoTooltipData(INFO_TOOLTIP_OPTIONS.FAILURE);
         setIsInfoTooltipOpen(true);
       })
       .finally(() => {
@@ -146,19 +153,11 @@ function App() {
       });
   }
 
-  function clearStorage() {
-    localStorage.removeItem('preauthorization');
-    localStorage.removeItem('initialMovies');
-    localStorage.removeItem('resultMovies');
-    localStorage.removeItem('searchText');
-    localStorage.removeItem('filterShortMovies');
-  }
-
   function handleLogout() {
     logout().then((res) => {
-      setLoggedIn(false);
       navigate(ROUTES.MAIN);
       clearStorage();
+      setLoggedIn(false);
     });
   }
 
