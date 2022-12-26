@@ -1,9 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import classNames from 'classnames';
 
-function MoviesCard({ wasSaved, movie, onMovieRemove, onMovieLike }) {
+import { CurrentUserContext } from '../../context';
+import { URL } from '../../utils/constants';
+
+function MoviesCard({ movie, wasSavedList, onMovieRemove, onMovieLike }) {
+  const { savedMovies } = useContext(CurrentUserContext);
   const [isLiked, setIsLiked] = useState(false);
   const [resDuration, setResDuration] = useState('');
+  const [savedMovieId, setSavedMovieId] = useState('');
 
   useEffect(() => {
     function calculateDuration() {
@@ -15,25 +20,51 @@ function MoviesCard({ wasSaved, movie, onMovieRemove, onMovieLike }) {
     setResDuration(calculateDuration());
   }, [movie.duration]);
 
+  useEffect(() => {
+    if (wasSavedList) return;
+    const savedMovie = savedMovies.find((item) => item.movieId === movie.id);
+    if (savedMovie) {
+      setIsLiked(true);
+      setSavedMovieId(savedMovie._id);
+    } else {
+      setIsLiked(false);
+      setSavedMovieId('');
+    }
+  }, [wasSavedList, savedMovies, movie]);
+
   function handleLikeClick() {
-    setIsLiked(!isLiked);
+    !isLiked ? onMovieLike(movie) : onMovieRemove(savedMovieId);
   }
 
   function handleRemoveClick() {
-    return;
+    onMovieRemove(movie._id);
   }
 
   return (
     <li className="movies-card">
-      <div
-        className="movies-card__image-container"
-        style={{ backgroundImage: `url(${movie.image.url})` }}
-      />
+      <a
+        href={movie.trailerLink}
+        target="_blank"
+        rel="noreferrer"
+        className="movies-card__trailer-link">
+        <div
+          className="movies-card__image-container"
+          style={
+            wasSavedList
+              ? { backgroundImage: `url(${movie.image})` }
+              : { backgroundImage: `url(${URL.MOVIES_API}${movie.image.url})` }
+          }
+        />
+      </a>
       <div className="movies-card__text-container">
         <p className="movies-card__name">{movie.nameRU}</p>
         <p className="movies-card__duration">{resDuration}</p>
-        {wasSaved ? (
-          <button type="button" className="movies-card__button movies-card__button-remove" onClick={handleRemoveClick} />
+        {wasSavedList ? (
+          <button
+            type="button"
+            className="movies-card__button movies-card__button-remove"
+            onClick={handleRemoveClick}
+          />
         ) : (
           <button
             type="button"

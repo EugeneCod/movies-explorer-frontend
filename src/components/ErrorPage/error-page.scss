@@ -29,6 +29,8 @@
     background-color: initial;
     border: none;
     color: $blue;
+    cursor: pointer;
+    @extend %link-effects;
     @media (max-width: 420px) {
       font-size: 12px;
     }

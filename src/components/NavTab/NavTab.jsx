@@ -1,6 +1,3 @@
-import React from 'react'
-
-
 function NavTab() {
   return (
     <nav className='nav-tab'>

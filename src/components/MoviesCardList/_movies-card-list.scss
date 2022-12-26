@@ -14,7 +14,7 @@
     padding: 81px 0 0;
     margin: 0;
     list-style: none;
-    border-top: 1px solid $dark-line-color;
+    // border-top: 1px solid $dark-line-color;
     @media (max-width: 768px) {
       padding-top: 70px;
       row-gap: 40px;
@@ -23,7 +23,6 @@
       padding-top: 50px;
       row-gap: 21px;
     }
-
   }
 
   &__button-more {
@@ -62,14 +61,26 @@
       margin-top: 72px;
     }
   }
+
   &__filter-checkbox {
-    margin-bottom: 69px;
+    border-bottom: 1px solid white;
+    padding-bottom: 69px;
+    border-bottom: 1px solid $dark-line-color;
     @media (max-width: 768px) {
-      margin-bottom: 50px;
+      padding-bottom: 50px;
     }
   }
+
+  &__notification {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.2857;
+    color: $main-font-color;
+    text-align: center;
+  }
+
   &__search-form {
-    margin-bottom: 41px;
+    margin-bottom: 20px;
     @media (max-width: 420px) {
       margin-right: 5px;
       margin-left: 5px;

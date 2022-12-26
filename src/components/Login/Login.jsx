@@ -1,13 +1,15 @@
 import { NavLink } from 'react-router-dom';
 import { Logo, AuthForm, AuthInput } from '../';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
+import { ROUTES, REGEX } from '../../utils/constants';
 
-function Login() {
+function Login({ buttonText, onLogin, errorMessage }) {
   const { values, handleChange, hadleShiftFocus, errors, inputsValidity, isValid } =
     useFormAndValidation(false);
 
   function handleSubmit(evt) {
     evt.preventDefault();
+    onLogin(values.email, values.password);
   }
 
   return (
@@ -19,8 +21,9 @@ function Login() {
           name="login"
           onSubmit={handleSubmit}
           title="Рады видеть!"
-          buttonText="Войти"
-          isValid={isValid}>
+          buttonText={buttonText}
+          isValid={isValid}
+          notification={errorMessage}>
           <AuthInput
             value={values.email || ''}
             error={errors.email || ''}
@@ -32,11 +35,12 @@ function Login() {
             label="E-mail"
             minLength=""
             maxLength=""
+            pattern={REGEX.EMAIL}
           />
           <AuthInput
             value={values.password || ''}
             error={errors.password || ''}
-            isValid={inputsValidity.name || ''}
+            isValid={inputsValidity.password || ''}
             onChange={handleChange}
             onBlur={hadleShiftFocus}
             type="password"
@@ -48,7 +52,7 @@ function Login() {
         </AuthForm>
         <p className="login__redirection">
           Ещё не зарегистрированы?
-          <NavLink to="/signup" className="login__redirection-link">Регистрация</NavLink>
+          <NavLink to={ROUTES.SIGNUP} className="login__redirection-link">Регистрация</NavLink>
         </p>
       </div>
     </main>

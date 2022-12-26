@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { useState, useEffect, useContext } from 'react';
+import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 import { Logo } from '../';
+import { CurrentUserContext } from '../../context';
 
 function Navigation() {
-  const location = useLocation().pathname;
+  const { loggedIn } = useContext(CurrentUserContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMenu, setIsMenu] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -46,10 +47,10 @@ function Navigation() {
   return (
     <nav
       className={classNames('navigation', {
-        navigation_main: location === '/',
+        navigation_main: !loggedIn,
         'navigation_is-menu-open': isMenuOpen,
       })}>
-      {location === '/' ? (
+      {!loggedIn ? (
         <>
           <Logo className="navigation__logo" />
           <ul className="navigation__list navigation__list_auth">
@@ -90,25 +91,26 @@ function Navigation() {
             <ul className="navigation__list navigation__list_movies">
               {isMenu && (
                 <li className="navigation__list-item">
-                  <NavLink to="/" className=" navigation__link navigation__link_movies">
+                  <NavLink to="/" onClick={toggleMenuOpen} className="navigation__link navigation__link_movies">
                     Главная
                   </NavLink>
                 </li>
               )}
               <li className="navigation__list-item">
-                <NavLink to="/movies" className=" navigation__link navigation__link_movies">
+                <NavLink to="/movies" onClick={toggleMenuOpen} className=" navigation__link navigation__link_movies">
                   Фильмы
                 </NavLink>
               </li>
               <li className="navigation__list-item">
                 <NavLink
                   to="/saved-movies"
+                  onClick={toggleMenuOpen}
                   className="navigation__link navigation__link_movies navigation__link_saved-movies">
                   Сохранённые фильмы
                 </NavLink>
               </li>
             </ul>
-            <NavLink to="/profile" className="navigation__link navigation__link_profile">
+            <NavLink to="/profile" onClick={toggleMenuOpen} className="navigation__link navigation__link_profile">
               <p className="navigation__profile-text">Аккаунт</p>
               <div className="navigation__profile-icon" />
             </NavLink>

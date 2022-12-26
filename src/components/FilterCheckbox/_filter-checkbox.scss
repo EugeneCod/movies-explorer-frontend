@@ -29,6 +29,8 @@
     justify-content: start;
     border: none;
     position: relative;
+    transition: filter 0.5s ease;
+    filter:grayscale(50%) invert(100%);
     cursor: pointer;
     &::before {
       content: '';
@@ -39,7 +41,10 @@
       height: 8px;
       border-radius: 50%;
       background-color: $main-font-color;
-      transition: left 0.2s ease;
+      transition: left 0.5s ease;
+    }
+    &_active {
+      filter:grayscale(0);
     }
     &_active::before {
       left: 22px;

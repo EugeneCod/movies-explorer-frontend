@@ -50,6 +50,17 @@
     }
   }
 
+  &__input-error {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.3076;
+    color: $red;
+    transition: opacity .4s;
+    text-align: center;
+    min-height: 17px;
+    padding-top: 4px;
+  }
+
   &__fieldset {
     flex: 1 1 auto;
     padding: 0;

@@ -1,11 +1,9 @@
-import { useState } from 'react';
 import classNames from 'classnames';
 
-function FilterCheckbox({ className, description }) {
-  const [isActive, setIsActive] = useState(true);
+function FilterCheckbox({ className, description, filterIsActive, onToggleFilter }) {
 
   function handleSwitch() {
-    setIsActive(!isActive);
+    onToggleFilter(filterIsActive);
   }
 
   return (
@@ -14,7 +12,7 @@ function FilterCheckbox({ className, description }) {
         onClick={handleSwitch}
         type="button"
         className={classNames('filter-checkbox__switcher', {
-          'filter-checkbox__switcher_active': isActive,
+          'filter-checkbox__switcher_active': filterIsActive,
         })}></button>
       <p className="filter-checkbox__description">{description}</p>
     </div>

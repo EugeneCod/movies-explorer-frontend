@@ -1,15 +1,16 @@
 import { NavLink } from 'react-router-dom';
 import { Logo, AuthForm, AuthInput } from '../';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
+import { ROUTES, REGEX } from '../../utils/constants';
 
-function Register() {
+function Register({ onRegistration, buttonText, errorMessage }) {
   const { values, handleChange, hadleShiftFocus, errors, inputsValidity, isValid } =
     useFormAndValidation(false);
 
   function handleSubmit(evt) {
     evt.preventDefault();
+    onRegistration(values.name, values.email, values.password);
   }
-
   return (
     <main className="register">
       <div className="register__container">
@@ -19,8 +20,9 @@ function Register() {
           name="register"
           onSubmit={handleSubmit}
           title="Добро пожаловать!"
-          buttonText="Зарегистрироваться"
-          isValid={isValid}>
+          buttonText={buttonText}
+          isValid={isValid}
+          notification={errorMessage}>
           <AuthInput
             value={values.name || ''}
             error={errors.name || ''}
@@ -31,7 +33,8 @@ function Register() {
             name="name"
             label="Имя"
             minLength="2"
-            maxLength="40"
+            maxLength="30"
+            pattern={REGEX.NAME}
           />
           <AuthInput
             value={values.email || ''}
@@ -44,11 +47,12 @@ function Register() {
             label="E-mail"
             minLength=""
             maxLength=""
+            pattern={REGEX.EMAIL}
           />
           <AuthInput
             value={values.password || ''}
             error={errors.password || ''}
-            isValid={inputsValidity.name || ''}
+            isValid={inputsValidity.password || ''}
             onChange={handleChange}
             onBlur={hadleShiftFocus}
             type="password"
@@ -60,7 +64,9 @@ function Register() {
         </AuthForm>
         <p className="register__redirection">
           Уже зарегистрированы?
-          <NavLink to="/signin" className="register__redirection-link">Войти</NavLink>
+          <NavLink to={ROUTES.SIGNIN} className="register__redirection-link">
+            Войти
+          </NavLink>
         </p>
       </div>
     </main>

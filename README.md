@@ -4,5 +4,5 @@
 IP 158.160.37.116 
 https://diplom.ekg.nomoredomains.club
 
-Ссылка на макет
-https://disk.yandex.ru/d/OrjX3bKtRAFJ1g
+Ссылка на пул реквест
+https://github.com/EugeneCod/movies-explorer-frontend/pull/2

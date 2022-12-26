@@ -20,13 +20,17 @@
     @media (max-width: 420px) {
       font-size: 12px;
     }
-    // &_inactive {}
+    &_inactive {
+      background-color: $dark-line-color;
+      opacity: 0.5;
+      pointer-events: none;
+    }
   }
 
   &__inputs-stack {
-    min-height: 335px;
+    min-height: 286px;
     @media (max-width: 420px) {
-      min-height: 424px;
+      min-height: 375px;
     }
   }
   &__fieldset {
@@ -44,6 +48,24 @@
     @media (max-width: 420px) {
       text-align: center;
       margin-bottom: 80px;
+    }
+  }
+  &__notification-block {
+    color: $red;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.21;
+    margin: 0;
+    padding-bottom: 15px;
+    opacity: 1;
+    transition: opacity, 0.3s ease;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    box-sizing: border-box;
+    min-height: 49px;
+    @media (max-width: 420px) {
+      font-size: 10px;;
     }
   }
 }

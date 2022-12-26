@@ -1,14 +1,41 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
+import { SEARCH_FORM_ERROR_MESSAGES } from '../../utils/constants';
+import useFormAndValidation from '../../hooks/useFormAndValidation';
 
-function SearchForm({ className }) {
-  const [value, setValue] = useState('');
+function SearchForm({ className, onSubmit, searchText }) {
+  const { values, setValues, handleChange, errors, setErrors, isValid, setIsValid } = useFormAndValidation(false);
+
+  useEffect(() => {
+    setValues({
+      search: searchText || '',
+    })
+    searchText && setIsValid(true);
+  }, [setValues, searchText, setIsValid])
 
   function handleSubmit(evt) {
     evt.preventDefault();
+    if (!isValid) {
+      setErrors({ ...errors, [evt.target.name]: SEARCH_FORM_ERROR_MESSAGES.INPUT_IS_REQUIRED });
+      return;
+    }
+    onSubmit(values.search);
+    // resetForm();
+    return;
+  }
+
+  function handleInput(evt) {
+    handleChange(evt);
+    // onInput(evt.target.value);
   }
 
   return (
-    <form className={`search-form ${className}`} name="search" id="search" method="get" onSubmit={handleSubmit}>
+    <form
+      className={`search-form ${className}`}
+      name="search"
+      id="search"
+      method="get"
+      onSubmit={handleSubmit}
+      noValidate>
       <fieldset className="search-form__fieldset" form="search">
         <input
           required
@@ -16,11 +43,10 @@ function SearchForm({ className }) {
           type="text"
           name="search"
           placeholder="Фильм"
-          value={value}
-          onChange={(evt) => {
-            setValue(evt.value);
-          }}
+          value={values.search || ''}
+          onChange={handleInput}
         />
+        <span className="search-form__input-error">{errors.search}</span>
         <button type="submit" className="search-form__button">
           Найти
         </button>
