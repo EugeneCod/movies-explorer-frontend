@@ -1,3 +1,6 @@
+# Movies-explorer
+[Ознакомительная ссылка](https://diplom.ekg.nomoredomains.club/)
+
 ## :scroll: Описание
 * Это фронтенд приложения Movies-exploer, являющегося дипломной работой курса обучения по __WEB-разработке__  
 в [Яндекс Практикуме](https://practicum.yandex.ru/).
